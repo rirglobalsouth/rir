@@ -1,0 +1,2845 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RIR — Instituciones aliadas (versión en español)</title>
+  <meta name="description" content="Instituciones aliadas de la Red Interseccional de Resiliencia (RIR ALC), proyecto ALERTA-INTERSEC. Redes temáticas de investigación en ciencia, género, discapacidad y territorio para la reducción del riesgo de desastres.">
+  
+  <meta name="robots" content="noindex, nofollow">
+  <!-- TODO: eliminar noindex y publicar _headers sin X-Robots-Tag al lanzar -->
+
+  <!-- TODO: sustituir por URL absoluta al lanzar -->
+  <link rel="alternate" hreflang="pt-BR" href="../instituicoes.html">
+  <link rel="alternate" hreflang="en" href="../en/instituicoes.html">
+  <link rel="alternate" hreflang="es" href="instituicoes.html">
+  <link rel="alternate" hreflang="x-default" href="../instituicoes.html">
+  <link rel="canonical" href="instituicoes.html">
+
+  <style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Tokens, utilities and components (basecoat 1.0 markup, no CDN); artifacts
+   override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+  --success: #0a7a35;
+  --danger: #c0262d;
+  --warning: #8a5300;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --success: #4ade80;
+    --danger: #f87171;
+    --warning: #fbbf24;
+  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --success: #4ade80;
+  --danger: #f87171;
+  --warning: #fbbf24;
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+/* Pages generated before the shell had its own components still link the
+   basecoat CDN, which reads its own tokens and switches theme only on a
+   .dark class. Bridged to the shell's, whatever of it those pages use takes
+   the page's accent and follows the declared theme. Its --accent token is a
+   hover tint, renamed in its theme as --color-accent; the shell's --accent is
+   the brand colour, so the tint is derived from it here. */
+:root {
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-contrast);
+  --secondary: color-mix(in srgb, var(--text) 7%, var(--surface));
+  --secondary-foreground: var(--text);
+  --muted: color-mix(in srgb, var(--text) 5%, var(--surface));
+  --muted-foreground: var(--text-muted);
+  --color-accent: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --color-accent-foreground: var(--text);
+  --destructive: var(--danger);
+  --input: var(--border);
+  --ring: var(--accent);
+}
+* { box-sizing: border-box; }
+/* The reset the pages were written against: they all linked basecoat, which
+   ships Tailwind's. Its components now live here, so the reset does too. */
+*, ::before, ::after, ::backdrop { margin: 0; padding: 0; border: 0 solid; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+a { color: inherit; text-decoration: inherit; }
+b, strong { font-weight: bolder; }
+ol, ul, menu { list-style: none; }
+svg, video, canvas, iframe { display: block; vertical-align: middle; }
+button, input, select, textarea { color: inherit; background-color: transparent; border-radius: 0; }
+table { border-collapse: collapse; }
+hr { height: 0; color: inherit; border-top-width: 1px; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: 28px; font-weight: 650; line-height: 1.1; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: var(--success); }
+.kpi .kpi-delta.down { color: var(--danger); }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+/* Layout and type utilities: what the pages kept spelling in style="".
+   Spacing and type sizes follow Tailwind's scale; there is no Tailwind. */
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.stack { display: flex; flex-direction: column; gap: var(--space); }
+.between { justify-content: space-between; }
+.grow { flex: 1 1 0; min-width: 0; }
+.cols-2, .cols-3, .cols-4 { display: grid; gap: var(--space); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) {
+  .cols-2, .cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) { .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; }
+.m-0 { margin: 0; }
+.mt-1 { margin-top: 4px; } .mt-2 { margin-top: 8px; } .mt-3 { margin-top: 12px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mb-1 { margin-bottom: 4px; } .mb-2 { margin-bottom: 8px; } .mb-3 { margin-bottom: 12px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; }
+.p-2 { padding: 8px; } .p-3 { padding: 12px; } .p-4 { padding: 16px; } .p-6 { padding: 24px; }
+.text-xs { font-size: 12px; } .text-sm { font-size: 14px; } .text-base { font-size: 16px; }
+.text-lg { font-size: 18px; } .text-xl { font-size: 20px; line-height: 1.35; }
+.text-2xl { font-size: 24px; line-height: 1.25; } .text-3xl { font-size: 30px; line-height: 1.2; }
+.font-medium { font-weight: 500; } .font-semibold { font-weight: 600; } .font-bold { font-weight: 700; }
+.text-right { text-align: right; } .text-center { text-align: center; }
+.nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.w-full { width: 100%; }
+.text-success { color: var(--success); } .text-danger { color: var(--danger); } .text-warning { color: var(--warning); }
+
+/* Components, with basecoat 1.0 markup (variants and sizes are data
+   attributes) and the shell tokens, so a page needs neither component CSS
+   nor a CSS framework. An older page that also links basecoat gets these
+   rules after it, over the same properties. */
+button, input, select, textarea { font: inherit; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 0 14px; border: 1px solid transparent; border-radius: calc(var(--radius) - 2px);
+  background: var(--accent); color: var(--accent-contrast);
+  font-size: 14px; font-weight: 500; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 86%, #000); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.btn[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.btn[data-variant="secondary"]:hover { background: color-mix(in srgb, var(--text) 14%, var(--surface)); }
+.btn[data-variant="outline"] { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn[data-variant="ghost"] { background: transparent; color: var(--text); }
+.btn[data-variant="outline"]:hover, .btn[data-variant="ghost"]:hover { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.btn[data-variant="destructive"] { background: var(--danger); color: var(--bg); }
+.btn[data-variant="destructive"]:hover { background: color-mix(in srgb, var(--danger) 86%, var(--text)); }
+.btn[data-variant="link"] { height: auto; padding: 0; background: none; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.btn[data-size="sm"] { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn[data-size="lg"] { height: 42px; padding: 0 20px; font-size: 15px; }
+.btn[data-size="icon"] { width: 36px; padding: 0; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px;
+  border: 1px solid transparent; border-radius: 999px; background: var(--accent); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 600; line-height: 1.5; white-space: nowrap;
+}
+.badge[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.badge[data-variant="outline"] { background: transparent; color: var(--text); border-color: var(--border); }
+.badge[data-variant="destructive"] { background: color-mix(in srgb, var(--danger) 14%, var(--surface)); color: var(--danger); }
+
+.alert {
+  display: grid; gap: 4px; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+.alert h2, .alert h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.alert p, .alert section { margin: 0; color: var(--text-muted); }
+.alert[data-variant="destructive"] { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); background: color-mix(in srgb, var(--danger) 7%, var(--surface)); color: var(--danger); }
+
+.card {
+  display: flex; flex-direction: column; gap: 16px; padding: 20px 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 2px);
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+}
+.card > header, .card > section, .card > footer { padding: 0 20px; }
+.card > header { display: grid; gap: 4px; }
+.card > header h2, .card > header h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.card > header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+.card > footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.input {
+  width: 100%; min-height: 36px; padding: 6px 12px; border: 1px solid var(--border); border-radius: calc(var(--radius) - 2px);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+textarea.input { min-height: 84px; resize: vertical; }
+.input::placeholder { color: var(--text-muted); }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 14px; font-weight: 500; }
+.field [role="alert"] { color: var(--danger); font-size: 13px; }
+
+dialog.dialog {
+  width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; padding: 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  background: var(--surface); color: var(--text); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+dialog.dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+dialog.dialog > div { display: grid; gap: 16px; padding: 24px; }
+dialog.dialog header { display: grid; gap: 4px; }
+dialog.dialog header h2 { margin: 0; font-size: 18px; font-weight: 600; }
+dialog.dialog header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+dialog.dialog footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+.tabs { display: grid; gap: 12px; }
+.tabs > [role="tablist"] {
+  display: inline-flex; gap: 4px; width: fit-content; max-width: 100%; padding: 4px; overflow-x: auto;
+  border-radius: var(--radius); background: color-mix(in srgb, var(--text) 6%, var(--surface));
+}
+.tabs [role="tab"] {
+  padding: 6px 12px; border: 0; border-radius: calc(var(--radius) - 4px); background: transparent;
+  color: var(--text-muted); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer;
+}
+.tabs [role="tab"][aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.tabs [role="tabpanel"][hidden] { display: none; }
+
+.accordion > details { border-bottom: 1px solid var(--border); }
+.accordion > details > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0; font-weight: 500; list-style: none; cursor: pointer;
+}
+.accordion > details > summary::-webkit-details-marker { display: none; }
+.accordion > details > summary::after { content: "+"; color: var(--text-muted); font-size: 18px; line-height: 1; }
+.accordion > details[open] > summary::after { content: "\2212"; }
+.accordion > details > :not(summary) { margin: 0 0 14px; color: var(--text-muted); }
+
+.toaster {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-direction: column-reverse; gap: 8px;
+  width: min(360px, calc(100vw - 32px)); pointer-events: none;
+}
+.toaster .toast { pointer-events: auto; transition: opacity 200ms ease, transform 200ms ease; }
+.toaster .toast[aria-hidden="true"] { opacity: 0; transform: translateY(8px); }
+.toaster .toast-content {
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); font-size: 13px;
+}
+.toaster .toast-content h2 { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
+.toaster .toast-content p { margin: 0; color: var(--text-muted); }
+
+/* skipUI building blocks. */
+.skip-table-search { max-width: 320px; margin-bottom: 12px; }
+.skip-table-wrap { overflow-x: auto; }
+table.shell-table th[data-sort] { cursor: pointer; user-select: none; }
+table.shell-table th[aria-sort="ascending"]::after { content: " \25B2"; font-size: 9px; }
+table.shell-table th[aria-sort="descending"]::after { content: " \25BC"; font-size: 9px; }
+table.shell-table td.skip-table-empty { color: var(--text-muted); text-align: center; padding: 24px 0; }
+.skip-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 13px; color: var(--text-muted); }
+.toaster .toast[data-type="success"] .toast-content { border-left: 3px solid var(--success); }
+.toaster .toast[data-type="error"] .toast-content { border-left: 3px solid var(--danger); }
+
+</style>
+  <script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
+
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisFmt keeps axis tick labels short (compact notation) so long values
+  // (e.g. full BRL amounts) never clip against the plot edge.
+  function axisFmt(v) {
+    return fmt.num(v, { notation: "compact", maximumFractionDigits: 1 });
+  }
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  function coerceFormat(spec) {
+    if (typeof spec === "function") return spec;
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el = resolve(el);
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 12, plotH = H - padT - padB;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 12, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (v / max) * plotH);
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      var tx = svgEl("text", { x: x + bw / 2, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // line(el, {labels:[], values:[], color?, format?}) — single-series line.
+  function line(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 16, plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 16, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    var pts = cfg.values.map(function (v, i) {
+      var x = padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+      var y = padT + plotH - (v / max) * plotH;
+      return [x, y];
+    });
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    pts.forEach(function (p, i) {
+      var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(cfg.values[i]);
+      c.appendChild(t);
+      svg.appendChild(c);
+      var tx = svgEl("text", { x: p[0], y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // donut(el, {labels:[], values:[], colors?}) — donut with center total.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    // At 100% of a wide container the donut outgrows the height pages give
+    // the box and spills over the next section: keep it at its own size.
+    svg.style.maxWidth = W + "px";
+    svg.style.margin = "0 auto";
+    var total = cfg.values.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var palette = cfg.colors || [accent(), "#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4"];
+    var a0 = -Math.PI / 2;
+    cfg.values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + fmt.num(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    var center = svgEl("text", { x: cx, y: cy + 5, "text-anchor": "middle", "font-size": 20, "font-weight": 650, fill: "currentColor" });
+    center.textContent = fmt.num(total);
+    svg.appendChild(center);
+  }
+
+  // ---- Page building blocks: what dashboards and small systems kept
+  // re-implementing — a searchable sortable table, a KPI row, tabs, toasts,
+  // dialogs, saved state and mock data. Every call is opt-in, so a page that
+  // brings its own versions keeps them.
+
+  function resolve(target) {
+    return typeof target === "string" ? document.querySelector(target) : target;
+  }
+
+  function node(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function isNumberColumn(col) {
+    return col.align === "right" || col.format === "num" || col.format === "brl" || col.format === "pct";
+  }
+
+  function cellText(col, row) {
+    var value = row[col.key];
+    if (value == null) return "";
+    return col.format ? coerceFormat(col.format)(value) : String(value);
+  }
+
+  function compareValues(a, b) {
+    if (typeof a === "number" && typeof b === "number") return a - b;
+    return String(a == null ? "" : a).localeCompare(String(b == null ? "" : b), "pt-BR", { numeric: true });
+  }
+
+  // table(el, {columns, rows, search?, pageSize?, empty?, onRowClick?}) — a
+  // table.shell-table with sortable headers, an optional search box and
+  // pager. A column is {key, label, format?, align?, sortable? (true),
+  // render?(value, row) returning a Node or an HTML string — the page writes
+  // its cell templates as markup}. Plain values are always set as text.
+  // Returns {setRows, rows}.
+  function table(target, cfg) {
+    var root = resolve(target);
+    var cols = cfg.columns || [];
+    var pageSize = cfg.pageSize || 0;
+    var state = { rows: (cfg.rows || []).slice(), query: "", key: null, dir: 1, page: 0 };
+    root.innerHTML = "";
+    if (cfg.search) {
+      var search = node("input", "input skip-table-search");
+      search.type = "search";
+      search.placeholder = typeof cfg.search === "string" ? cfg.search : "Buscar…";
+      search.setAttribute("aria-label", search.placeholder);
+      search.addEventListener("input", function () {
+        state.query = search.value.trim().toLowerCase();
+        state.page = 0;
+        draw();
+      });
+      root.appendChild(search);
+    }
+    var tableEl = node("table", "shell-table");
+    var headRow = node("tr");
+    var heads = cols.map(function (col) {
+      var th = node("th", isNumberColumn(col) ? "num" : "", col.label == null ? col.key : col.label);
+      th.scope = "col";
+      if (col.sortable !== false) {
+        var toggle = function () {
+          state.dir = state.key === col.key ? -state.dir : 1;
+          state.key = col.key;
+          draw();
+        };
+        th.setAttribute("data-sort", col.key);
+        th.tabIndex = 0;
+        th.addEventListener("click", toggle);
+        th.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+        });
+      }
+      headRow.appendChild(th);
+      return th;
+    });
+    var thead = node("thead");
+    var tbody = node("tbody");
+    var wrap = node("div", "skip-table-wrap");
+    var pager = node("div", "skip-pager");
+    thead.appendChild(headRow);
+    tableEl.appendChild(thead);
+    tableEl.appendChild(tbody);
+    wrap.appendChild(tableEl);
+    root.appendChild(wrap);
+    if (pageSize) root.appendChild(pager);
+
+    function visibleRows() {
+      var rows = state.rows;
+      if (state.query) {
+        rows = rows.filter(function (row) {
+          return cols.some(function (col) { return cellText(col, row).toLowerCase().indexOf(state.query) >= 0; });
+        });
+      }
+      if (state.key) {
+        var key = state.key, dir = state.dir;
+        rows = rows.slice().sort(function (a, b) { return dir * compareValues(a[key], b[key]); });
+      }
+      return rows;
+    }
+
+    function drawRow(row) {
+      var tr = node("tr");
+      cols.forEach(function (col) {
+        var td = node("td", isNumberColumn(col) ? "num" : "");
+        if (!col.render) {
+          td.textContent = cellText(col, row);
+        } else {
+          var content = col.render(row[col.key], row);
+          if (content instanceof Node) td.appendChild(content);
+          else td.innerHTML = content == null ? "" : String(content);
+        }
+        tr.appendChild(td);
+      });
+      // The row stays a row (no role) and takes focus, so a keyboard reaches
+      // the same action; keys pressed on a control inside a cell are its own.
+      if (cfg.onRowClick) {
+        tr.style.cursor = "pointer";
+        tr.tabIndex = 0;
+        tr.addEventListener("click", function () { cfg.onRowClick(row); });
+        tr.addEventListener("keydown", function (e) {
+          if (e.target !== tr || (e.key !== "Enter" && e.key !== " ")) return;
+          e.preventDefault();
+          cfg.onRowClick(row);
+        });
+      }
+      return tr;
+    }
+
+    function pagerButton(label, disabled, step) {
+      var button = node("button", "btn", label);
+      button.type = "button";
+      button.setAttribute("data-variant", "outline");
+      button.setAttribute("data-size", "sm");
+      button.disabled = disabled;
+      button.addEventListener("click", function () { state.page += step; draw(); });
+      return button;
+    }
+
+    function draw() {
+      var rows = visibleRows();
+      heads.forEach(function (th, i) {
+        if (cols[i].key === state.key) th.setAttribute("aria-sort", state.dir > 0 ? "ascending" : "descending");
+        else th.removeAttribute("aria-sort");
+      });
+      var pages = pageSize ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1;
+      state.page = Math.min(state.page, pages - 1);
+      var shown = pageSize ? rows.slice(state.page * pageSize, (state.page + 1) * pageSize) : rows;
+      tbody.innerHTML = "";
+      if (!shown.length) {
+        var empty = node("td", "skip-table-empty", cfg.empty || "Nenhum registro encontrado.");
+        empty.colSpan = cols.length;
+        tbody.appendChild(node("tr")).appendChild(empty);
+      }
+      shown.forEach(function (row) { tbody.appendChild(drawRow(row)); });
+      if (!pageSize) return;
+      pager.innerHTML = "";
+      var from = rows.length ? state.page * pageSize + 1 : 0;
+      pager.appendChild(node("span", "", from + "–" + Math.min(rows.length, (state.page + 1) * pageSize) + " de " + rows.length));
+      var nav = node("div", "row gap-2");
+      nav.appendChild(pagerButton("Anterior", state.page === 0, -1));
+      nav.appendChild(pagerButton("Próxima", state.page >= pages - 1, 1));
+      pager.appendChild(nav);
+    }
+
+    draw();
+    return {
+      setRows: function (rows) { state.rows = rows.slice(); draw(); },
+      rows: visibleRows
+    };
+  }
+
+  // kpis(el, [{label, value, format?, delta?, hint?}]) — KPI cards in a
+  // responsive grid; delta is a fraction (0.12 renders as ▲ 12%).
+  function kpis(target, items) {
+    var root = resolve(target);
+    root.innerHTML = "";
+    root.classList.add("shell-grid");
+    items.forEach(function (item) {
+      var card = node("div", "panel kpi");
+      card.appendChild(node("span", "kpi-label", item.label));
+      card.appendChild(node("span", "kpi-value", item.format ? coerceFormat(item.format)(item.value) : String(item.value)));
+      if (typeof item.delta === "number") {
+        var up = item.delta >= 0;
+        card.appendChild(node("span", "kpi-delta " + (up ? "up" : "down"), (up ? "▲ " : "▼ ") + fmt.pct(Math.abs(item.delta))));
+      }
+      if (item.hint) card.appendChild(node("span", "kpi-label", item.hint));
+      root.appendChild(card);
+    });
+  }
+
+  // badge(text, variant?) — a .badge node for table cells and lists;
+  // variant is "secondary" | "outline" | "destructive" (default: primary).
+  function badge(text, variant) {
+    var el = node("span", "badge", text);
+    if (variant) el.setAttribute("data-variant", variant);
+    return el;
+  }
+
+  // tabs(el) — wires one .tabs block: [role=tab] buttons inside
+  // [role=tablist], each with aria-controls naming its [role=tabpanel].
+  function tabs(target) {
+    var root = resolve(target);
+    var buttons = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(chosen) {
+      buttons.forEach(function (b) {
+        var on = b === chosen;
+        b.setAttribute("aria-selected", on ? "true" : "false");
+        b.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(b.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    buttons.forEach(function (b, i) {
+      b.addEventListener("click", function () { select(b); });
+      b.addEventListener("keydown", function (e) {
+        var step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        var next = buttons[(i + step + buttons.length) % buttons.length];
+        next.focus();
+        select(next);
+      });
+    });
+    select(buttons.filter(function (b) { return b.getAttribute("aria-selected") === "true"; })[0] || buttons[0]);
+  }
+
+  // toast(message, {type?: "success" | "error", title?, duration?}) — a
+  // .toast in a shared .toaster at the bottom of the page.
+  function toast(message, opts) {
+    opts = opts || {};
+    var toaster = document.querySelector(".toaster") || document.body.appendChild(node("div", "toaster"));
+    var item = node("div", "toast");
+    item.setAttribute("role", opts.type === "error" ? "alert" : "status");
+    item.setAttribute("aria-hidden", "true");
+    if (opts.type) item.setAttribute("data-type", opts.type);
+    var content = node("div", "toast-content");
+    var section = node("section");
+    if (opts.title) section.appendChild(node("h2", "", opts.title));
+    section.appendChild(node("p", "", message));
+    content.appendChild(section);
+    item.appendChild(content);
+    toaster.appendChild(item);
+    requestAnimationFrame(function () { item.setAttribute("aria-hidden", "false"); });
+    setTimeout(function () {
+      item.setAttribute("aria-hidden", "true");
+      setTimeout(function () { item.remove(); }, 400);
+    }, opts.duration || 3000);
+  }
+
+  // Dialogs are native <dialog class="dialog">: a [data-dialog-open="id"]
+  // anywhere opens one, a [data-dialog-close] inside closes it, and a click on
+  // its backdrop closes it too. Plain dialog.showModal()/close() still work.
+  document.addEventListener("click", function (e) {
+    var target = e.target;
+    if (!(target instanceof Element)) return;
+    var opener = target.closest("[data-dialog-open]");
+    if (opener) {
+      var dialog = document.getElementById(opener.getAttribute("data-dialog-open"));
+      if (dialog && dialog.showModal && !dialog.open) dialog.showModal();
+      return;
+    }
+    var closer = target.closest("[data-dialog-close]");
+    if (closer && closer.closest("dialog")) {
+      closer.closest("dialog").close();
+      return;
+    }
+    if (target.tagName === "DIALOG" && target.classList.contains("dialog") && target.open) target.close();
+  });
+
+  // store(key, fallback) — JSON state in localStorage that never throws (a
+  // private window or a full quota falls back to memory): {get, set, update}.
+  function store(key, fallback) {
+    var memory;
+    // Set while the last write did not reach localStorage: what is stored
+    // there is older than memory until a write goes through again.
+    var unsaved = false;
+    var initial = function () { return fallback === undefined ? undefined : JSON.parse(JSON.stringify(fallback)); };
+    function get() {
+      if (!unsaved) {
+        try {
+          var raw = localStorage.getItem(key);
+          if (raw != null) return JSON.parse(raw);
+        } catch (e) { /* storage unavailable: memory below */ }
+      }
+      return memory !== undefined ? memory : initial();
+    }
+    function set(value) {
+      memory = value;
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        unsaved = false;
+      } catch (e) {
+        unsaved = true;
+      }
+      return value;
+    }
+    return { get: get, set: set, update: function (fn) { return set(fn(get())); } };
+  }
+
+  // mock — seeded random data, so a page asks for 90 days of numbers in one
+  // line instead of writing them out; the same seed gives the same data.
+  var FIRST = ["Ana", "Bruno", "Carla", "Diego", "Eduarda", "Felipe", "Gabriela", "Henrique", "Isabela", "João",
+    "Larissa", "Marcos", "Natália", "Otávio", "Paula", "Rafael", "Sofia", "Thiago", "Vanessa", "Lucas"];
+  var LAST = ["Silva", "Santos", "Oliveira", "Souza", "Pereira", "Costa", "Rodrigues", "Almeida", "Nascimento", "Lima",
+    "Araújo", "Fernandes", "Carvalho", "Gomes", "Martins", "Rocha", "Ribeiro", "Barbosa"];
+  var CITIES = ["São Paulo, SP", "Rio de Janeiro, RJ", "Belo Horizonte, MG", "Curitiba, PR", "Porto Alegre, RS",
+    "Salvador, BA", "Recife, PE", "Fortaleza, CE", "Brasília, DF", "Goiânia, GO", "Campinas, SP", "Florianópolis, SC",
+    "Manaus, AM", "Belém, PA", "Vitória, ES", "Natal, RN"];
+
+  function createMock(seed) {
+    var state = seed >>> 0;
+    function random() {
+      state = (state + 0x6d2b79f5) >>> 0;
+      var t = state;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    function int(min, max) { return min + Math.floor(random() * (max - min + 1)); }
+    function pick(list) { return list[Math.floor(random() * list.length)]; }
+    var mock = {
+      seed: function (value) { state = value >>> 0; return mock; },
+      random: random,
+      int: int,
+      float: function (min, max, decimals) {
+        var factor = Math.pow(10, decimals == null ? 2 : decimals);
+        return Math.round((min + random() * (max - min)) * factor) / factor;
+      },
+      pick: pick,
+      chance: function (p) { return random() < p; },
+      name: function () { return pick(FIRST) + " " + pick(LAST); },
+      city: function () { return pick(CITIES); },
+      // series(n, {start, trend, noise, min, decimals}) — a walk: each value
+      // moves by trend (fraction per step) plus up to ±noise of itself.
+      series: function (n, opts) {
+        opts = opts || {};
+        var value = opts.start == null ? 100 : opts.start;
+        var factor = Math.pow(10, opts.decimals || 0);
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          out.push(Math.max(opts.min == null ? 0 : opts.min, Math.round(value * factor) / factor));
+          value = value * (1 + (opts.trend || 0)) * (1 + (random() * 2 - 1) * (opts.noise == null ? 0.08 : opts.noise));
+        }
+        return out;
+      },
+      // dates(n, {end?, step?: "day" | "week" | "month"}) — ISO dates
+      // (YYYY-MM-DD), oldest first, ending at end (default: today).
+      dates: function (n, opts) {
+        opts = opts || {};
+        var end = opts.end ? new Date(opts.end) : new Date();
+        var out = [];
+        for (var i = n - 1; i >= 0; i--) {
+          var d = new Date(end.getTime());
+          if (opts.step === "month") d.setMonth(d.getMonth() - i);
+          else d.setDate(d.getDate() - i * (opts.step === "week" ? 7 : 1));
+          out.push(d.toISOString().slice(0, 10));
+        }
+        return out;
+      },
+      // rows(n, spec) — n objects; each spec value is a function(i), a list
+      // to pick from, or a constant.
+      rows: function (n, spec) {
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          var row = {};
+          for (var key in spec) {
+            var value = spec[key];
+            row[key] = typeof value === "function" ? value(i) : Array.isArray(value) ? pick(value) : value;
+          }
+          out.push(row);
+        }
+        return out;
+      }
+    };
+    return mock;
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+  window.skipUI = { table: table, kpis: kpis, badge: badge, tabs: tabs, toast: toast };
+  window.skipStore = store;
+  window.skipMock = createMock(20261022);
+})();
+
+</script>
+
+  <style>
+    :root {
+      --primary: #0B4F4A;
+      --accent: #B85C38;
+      --accent-text: #8E3A1C;
+      --accent-contrast: #FFFFFF;
+      --ocre: #D9A44B;
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --text: #1A1A1A;
+      --text-muted: #4A4A4A;
+      --border: #E2DBD0;
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, .font-serif {
+      font-family: var(--font-serif);
+      color: var(--primary);
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+    a:hover {
+      color: var(--accent);
+    }
+    a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--accent) !important;
+      outline-offset: 2px;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -9999px;
+      left: 1rem;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.75rem 1.25rem;
+      z-index: 10000;
+      font-weight: 600;
+      border-radius: 0 0 6px 6px;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    /* Dev Banner */
+    .dev-banner {
+      background-color: #2D3748;
+      color: #F7FAFC;
+      text-align: center;
+      padding: 0.45rem 1rem;
+      font-size: 0.8125rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Header & Nav */
+    .site-header {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 900;
+    }
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-wrap:hover {
+      text-decoration: none;
+    }
+    .brand-logo-svg {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+    .brand-text-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+    .brand-text-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.25;
+      display: block;
+      max-width: 320px;
+    }
+
+    .nav-and-lang {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+    }
+    .main-nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.4rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .main-nav a:hover {
+      background: #EFEBE4;
+      color: var(--primary);
+    }
+    .main-nav a[aria-current="page"] {
+      background: var(--primary);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #F4EFEB;
+      padding: 2px;
+    }
+    .lang-btn {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .lang-btn:hover {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .lang-btn[aria-current="true"] {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb-nav {
+      max-width: 1200px;
+      margin: 1rem auto 0;
+      padding: 0 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .breadcrumb-nav ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .breadcrumb-nav li + li::before {
+      content: "›";
+      margin-right: 0.5rem;
+      color: #8C867D;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    /* Page Hero */
+    .page-hero {
+      margin-bottom: 2rem;
+    }
+    .page-hero h1 {
+      font-size: 2.3rem;
+      margin: 0 0 0.5rem 0;
+      letter-spacing: -0.01em;
+    }
+    .page-hero p.lead {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Status Banner / Card */
+    .status-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .status-label {
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent-text);
+      margin-bottom: 0.35rem;
+    }
+    .status-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .status-seal {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    .status-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Indicators */
+    .indicators-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.25rem;
+    }
+    .kpi-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .kpi-num {
+      display: block;
+      font-size: 2.25rem;
+      font-weight: 700;
+      font-family: var(--font-serif);
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .kpi-lbl {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Intro text */
+    .intro-block {
+      background: #FAF5EE;
+      border: 1px solid #ECE3D7;
+      border-radius: 8px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      color: #2D2D2D;
+      line-height: 1.7;
+    }
+
+    /* Axes Block */
+    .axes-section {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .axes-section h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .axes-intro-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+    .axes-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .axis-item {
+      border: 1px solid var(--border);
+      background: #FAF8F5;
+      border-radius: 6px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .axis-num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: bold;
+      font-size: 0.82rem;
+      margin-bottom: 0.2rem;
+    }
+    .axis-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: var(--primary);
+    }
+    .axis-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Filter Controls */
+    .filter-section {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      margin-bottom: 2.5rem;
+    }
+    .filter-heading {
+      font-size: 1.15rem;
+      margin: 0 0 1rem 0;
+      color: var(--primary);
+    }
+    .filter-group {
+      margin-bottom: 1rem;
+    }
+    .filter-group-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+    }
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .filter-btn {
+      background: #F4EFEB;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.35rem 0.65rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .filter-btn:hover {
+      background: #E8DFD5;
+      border-color: #BDB2A4;
+    }
+    .filter-btn[aria-pressed="true"] {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+    .filter-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.75rem;
+    }
+    .reset-filters-btn {
+      background: transparent;
+      border: 1px solid #C4B9AA;
+      color: var(--text);
+      padding: 0.4rem 0.8rem;
+      font-size: 0.84rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .reset-filters-btn:hover {
+      background: #EFEBE4;
+      border-color: #9C8E7D;
+    }
+    .filter-status-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Country Sections */
+    .country-section {
+      margin-bottom: 3rem;
+    }
+    .country-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+      gap: 1rem;
+    }
+    .country-header h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: var(--primary);
+    }
+    .country-count-tag {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.35rem;
+    }
+
+    .inst-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      position: relative;
+    }
+    .inst-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+      border-color: #C7BDB1;
+    }
+    .inst-card.hidden {
+      display: none !important;
+    }
+
+    .inst-card h3 {
+      font-size: 1.15rem;
+      line-height: 1.3;
+      margin: 0 0 0.5rem 0;
+      color: var(--primary);
+    }
+    .inst-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.65rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #F0EAE1;
+      line-height: 1.4;
+    }
+    .inst-role {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent-text);
+      margin-bottom: 0.85rem;
+    }
+
+    /* Ejes row in card */
+    .inst-ejes-block {
+      margin-bottom: 0.85rem;
+    }
+    .inst-ejes-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+    .inst-ejes-pills {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .axis-pill {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      border: 1px solid #D1C7BA;
+      background: #F4EFEB;
+      color: #71695F;
+    }
+    .axis-pill.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .inst-investigators {
+      margin-bottom: 0.95rem;
+      font-size: 0.85rem;
+    }
+    .inst-inv-count {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+    .inst-inv-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 0.5rem;
+      font-size: 0.84rem;
+    }
+    .inst-inv-list li::after {
+      content: "·";
+      margin-left: 0.5rem;
+      color: #A39B90;
+    }
+    .inst-inv-list li:last-child::after {
+      content: "";
+      margin: 0;
+    }
+
+    .inst-units {
+      font-size: 0.8rem;
+      color: #555;
+      background: #FAF8F5;
+      padding: 0.5rem 0.65rem;
+      border-radius: 4px;
+      margin-bottom: 0.85rem;
+      border-left: 3px solid #D9A44B;
+    }
+
+    .inst-contrib {
+      margin-top: auto;
+      font-size: 0.86rem;
+      color: #2D2D2D;
+      line-height: 1.5;
+      background: #FAF8F5;
+      padding: 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #ECE4DA;
+    }
+    .inst-contrib strong {
+      color: var(--primary);
+    }
+
+    /* Notes Blocks */
+    .notes-container {
+      margin-top: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .note-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .note-card strong {
+      color: var(--primary);
+    }
+
+    /* Continuity Nav */
+    .continuity-nav {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #FAF5EE;
+      border: 1px solid #ECE3D7;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .continuity-nav h2 {
+      font-size: 1.35rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .continuity-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .continuity-btn {
+      display: inline-block;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      padding: 0.65rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .continuity-btn:hover {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+      text-decoration: none;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: #FFFFFF;
+      border-top: 1px solid var(--border);
+      padding: 3rem 1rem 2rem;
+      margin-top: 4rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .footer-nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+    }
+    .footer-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-nav a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-and-lang {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .page-hero h1 {
+        font-size: 1.85rem;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .dev-banner, .site-header, .filter-section, .continuity-nav, .lang-switcher {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+      }
+      .inst-card {
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#contenido" class="skip-link">Ir al contenido principal</a>
+
+  <!-- Franja discreta superior de desarrollo -->
+  <aside class="dev-banner" aria-label="Aviso de desarrollo">
+    Versión de desarrollo — no indexada hasta el lanzamiento
+  </aside>
+
+  <!-- Encabezado del sitio -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="brand-wrap" aria-label="Red Interseccional de Resiliencia - Portada">
+        <!-- SVG inline de red con nodos conectados -->
+        <svg class="brand-logo-svg" viewBox="0 0 48 48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="10" r="5" fill="#0B4F4A" />
+          <circle cx="10" cy="34" r="5" fill="#0B4F4A" />
+          <circle cx="38" cy="34" r="5" fill="#0B4F4A" />
+          <circle cx="24" cy="25" r="4" fill="#B85C38" />
+          <line x1="24" y1="10" x2="24" y2="25" stroke="#0B4F4A" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="10" y1="34" x2="24" y2="25" stroke="#0B4F4A" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="38" y1="34" x2="24" y2="25" stroke="#0B4F4A" stroke-width="2.2" stroke-linecap="round" />
+          <line x1="10" y1="34" x2="38" y2="34" stroke="#D9A44B" stroke-width="1.8" stroke-dasharray="3 3" />
+        </svg>
+        <div>
+          <span class="brand-text-title">Red Interseccional de Resiliencia (<abbr title="Red Interseccional de Resiliencia América Latina y el Caribe">RIR</abbr>)</span>
+          <span class="brand-text-sub">Ciencia, género, discapacidad y territorio en la reducción del riesgo de desastres</span>
+        </div>
+      </a>
+
+      <div class="nav-and-lang">
+        <nav class="main-nav" aria-label="Menú principal">
+          <ul>
+            <li><a href="../index.html#sobre">Acerca de</a></li>
+            <li><a href="../index.html#eixos">Ejes metodológicos</a></li>
+            <li><a href="rede.html">La Red</a></li>
+            <li><a href="instituicoes.html" aria-current="page">Instituciones</a></li>
+            <li><a href="../index.html#projeto">Proyecto</a></li>
+            <li><a href="../index.html#producao">Producción</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+
+        <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
+          <a href="../instituicoes.html" class="lang-btn" hreflang="pt-BR">PT</a>
+          <a href="../en/instituicoes.html" class="lang-btn" hreflang="en">EN</a>
+          <a href="instituicoes.html" class="lang-btn" aria-current="true" hreflang="es">ES</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Ruta de navegación -->
+  <nav class="breadcrumb-nav" aria-label="Ruta de navegación">
+    <ol>
+      <li><a href="index.html">Inicio</a></li>
+      <li aria-current="page">Instituciones</li>
+    </ol>
+  </nav>
+
+  <main id="contenido" class="container">
+    
+    <!-- Título principal -->
+    <header class="page-hero">
+      <h1>Instituciones</h1>
+      <p class="lead">Instituciones aliadas de la Red Interseccional de Resiliencia</p>
+    </header>
+
+    <!-- Bloque de estado del proyecto -->
+    <section class="status-card" aria-label="Estado del proyecto">
+      <div class="status-label">Primer proyecto de la Red</div>
+      <div class="status-title">Proyecto presentado al <abbr title="Conselho Nacional de Desenvolvimento Científico e Tecnológico">CNPq</abbr> en mayo de 2026 — Proceso 445280/2026-3</div>
+      <div class="status-seal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>Aprobado en octubre de 2026</span>
+      </div>
+      <p class="status-desc">
+        Convocatoria <abbr title="Ministério da Ciência, Tecnologia e Inovação">MCTI</abbr>/CNPq n.º 02/2026 — Programa PROSUL Pepe Mujica, Franja B (Redes Temáticas de Investigación Emergentes).
+      </p>
+    </section>
+
+    <!-- Franja de indicadores destacados -->
+    <section class="indicators-strip" aria-label="Cifras de la red">
+      <div class="kpi-card">
+        <span class="kpi-num" id="kpi-instituciones">22</span>
+        <span class="kpi-lbl">instituciones aliadas</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-num">44</span>
+        <span class="kpi-lbl">investigadores e investigadoras</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-num">9</span>
+        <span class="kpi-lbl">países representados</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-num">12</span>
+        <span class="kpi-lbl">instituciones internacionales</span>
+      </div>
+    </section>
+
+    <!-- Párrafo introductorio -->
+    <div class="intro-block">
+      <p>
+        La <abbr title="Red Interseccional de Resiliencia América Latina y el Caribe">RIR ALC</abbr> articula Instituciones Científicas y Tecnológicas (<abbr title="Instituição Científica, Tecnológica e de Inovação">ICT</abbr>), universidades, órganos de gobierno, organizaciones de la sociedad civil y empresas de ingeniería en torno a un objetivo común: integrar género, raza, discapacidad y territorio al monitoreo de extremos hidrometeorológicos. La arquitectura institucional combina monitoreo operacional, estadística sociodemográfica, ingeniería estructural y políticas de equidad, atendiendo al requisito de transnacionalidad de la Franja B. Los vínculos, unidades y contribuciones a continuación reproducen el Anexo 1 de la propuesta aprobada, aprobada en octubre de 2026.
+      </p>
+    </div>
+
+    <!-- Bloque de definición de los ejes metodológicos -->
+    <section class="axes-section" aria-labelledby="ejes-titulo">
+      <h2 id="ejes-titulo">Ejes metodológicos</h2>
+      <p class="axes-intro-sub">Los cinco ejes que organizan la ejecución del proyecto:</p>
+      <ul class="axes-list">
+        <li class="axis-item">
+          <span class="axis-num-badge" aria-hidden="true">1</span>
+          <span class="axis-title">1. Armonización y microdatos</span>
+          <p class="axis-desc">Construcción de la base BATER-ALC e integración de microdatos censales de Brasil, Ecuador y Perú.</p>
+        </li>
+        <li class="axis-item">
+          <span class="axis-num-badge" aria-hidden="true">2</span>
+          <span class="axis-title">2. Modelación y dinámica de riesgo</span>
+          <p class="axis-desc">Validación del modelo de pronóstico basado en impactos (<abbr title="Impact-based Forecasting">IbF</abbr>) en cuencas piloto, integrando variables físicas y el índice <abbr title="Social Vulnerability Index - Intersectional Latin America and Caribbean">SoVI-I ALC</abbr>.</p>
+        </li>
+        <li class="axis-item">
+          <span class="axis-num-badge" aria-hidden="true">3</span>
+          <span class="axis-title">3. Análisis interseccional y RRD</span>
+          <p class="axis-desc">Aplicación del Índice de Inclusión Interseccional (<abbr title="Índice de Inclusión Interseccional">III</abbr>) y de protocolos de género en los territorios críticos para la <abbr title="Reducción del Riesgo de Desastres">RRD</abbr>.</p>
+        </li>
+        <li class="axis-item">
+          <span class="axis-num-badge" aria-hidden="true">4</span>
+          <span class="axis-title">4. Innovación y tecnologías sociales</span>
+          <p class="axis-desc">Implementación de alertas de pronóstico basado en impactos en el sistema SALVAR, con interfaz multilingüe y protocolos decoloniales.</p>
+        </li>
+        <li class="axis-item">
+          <span class="axis-num-badge" aria-hidden="true">5</span>
+          <span class="axis-title">5. Extensión y gobernanza regional</span>
+          <p class="axis-desc">Formación de multiplicadores territoriales e institucionalización de la red regional con el Comité Gestor Interinstitucional (<abbr title="Comité Gestor Interinstitucional">CGI</abbr>).</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Bloque de filtros accesibles -->
+    <section class="filter-section" aria-labelledby="filtros-titulo">
+      <h2 id="filtros-titulo" class="filter-heading">Filtros de instituciones</h2>
+      
+      <div class="filter-group">
+        <div class="filter-group-title">Filtrar por país</div>
+        <div class="filter-buttons" role="group" aria-label="Filtrar por país" id="grupo-filtro-pais">
+          <button type="button" class="filter-btn" data-filter-pais="todos" aria-pressed="true">Todos (22)</button>
+          <button type="button" class="filter-btn" data-filter-pais="brasil" aria-pressed="false">Brasil (10)</button>
+          <button type="button" class="filter-btn" data-filter-pais="argentina" aria-pressed="false">Argentina (1)</button>
+          <button type="button" class="filter-btn" data-filter-pais="chile" aria-pressed="false">Chile (2)</button>
+          <button type="button" class="filter-btn" data-filter-pais="colombia" aria-pressed="false">Colombia (5)</button>
+          <button type="button" class="filter-btn" data-filter-pais="costa-rica" aria-pressed="false">Costa Rica (1)</button>
+          <button type="button" class="filter-btn" data-filter-pais="ecuador" aria-pressed="false">Ecuador (1)</button>
+          <button type="button" class="filter-btn" data-filter-pais="panama" aria-pressed="false">Panamá (1)</button>
+          <button type="button" class="filter-btn" data-filter-pais="peru" aria-pressed="false">Perú (1)</button>
+          <button type="button" class="filter-btn" data-filter-pais="uruguay" aria-pressed="false">Uruguay (1)</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-group-title">Filtrar por eje metodológico</div>
+        <div class="filter-buttons" role="group" aria-label="Filtrar por eje metodológico" id="grupo-filtro-eixo">
+          <button type="button" class="filter-btn" data-filter-eixo="todos" aria-pressed="true">Todos los ejes</button>
+          <button type="button" class="filter-btn" data-filter-eixo="1" aria-pressed="false">Eje 1: Microdatos</button>
+          <button type="button" class="filter-btn" data-filter-eixo="2" aria-pressed="false">Eje 2: Modelación</button>
+          <button type="button" class="filter-btn" data-filter-eixo="3" aria-pressed="false">Eje 3: Interseccional</button>
+          <button type="button" class="filter-btn" data-filter-eixo="4" aria-pressed="false">Eje 4: Tecnologías</button>
+          <button type="button" class="filter-btn" data-filter-eixo="5" aria-pressed="false">Eje 5: Gobernanza</button>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <div role="status" aria-live="polite" id="filtro-status" class="filter-status-text">
+          22 instituciones mostradas
+        </div>
+        <button type="button" id="btn-limpiar-filtros" class="reset-filters-btn">
+          Limpiar filtros
+        </button>
+      </div>
+    </section>
+
+    <!-- LISTADO DE INSTITUCIONES POR PAÍS -->
+    <div id="contenedor-instituciones">
+
+      <!-- BRASIL -->
+      <section class="country-section" id="brasil" aria-labelledby="h2-brasil">
+        <div class="country-header">
+          <h2 id="h2-brasil">Brasil</h2>
+          <span class="country-count-tag">10 instituciones · 23 investigadores</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 1. Cemaden/MCTI -->
+          <article class="inst-card" data-pais="brasil" data-eixos="1,2,3,4,5">
+            <h3><abbr title="Centro Nacional de Monitoramento e Alertas de Desastres Naturais">Cemaden</abbr>/<abbr title="Ministério da Ciência, Tecnologia e Inovação">MCTI</abbr> — Centro Nacional de Monitoreo y Alertas de Desastres Naturales</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> <abbr title="Instituição Científica, Tecnológica e de Inovação">ICT</abbr> federal, vinculada al Ministerio de Ciencia, Tecnología e Innovación</span>
+            </div>
+            <div class="inst-role">Papel: coordinación general de la red</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill active">Eje 1 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 3 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 4 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 5 <span class="sr-only">(atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-units">
+              <strong>Unidades de vínculo:</strong> Coordinación General de Investigación y Desarrollo (CGPD); Coordinación General de Operaciones y Modelado (CGOM); Coordinación General de Operaciones y Sala de Situación (CGOP); División de Relaciones Institucionales e Investigación; Programa Cemaden Educación.
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">13 investigadores e investigadoras vinculados:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#brasil">Adriana Cuartas</a></li>
+                <li><a href="rede.html#brasil">Allan Yu Iwama</a></li>
+                <li><a href="rede.html#brasil">Ana Paula Martins do Amaral Cunha</a></li>
+                <li><a href="rede.html#brasil">Andrezza Mafer</a></li>
+                <li><a href="rede.html#brasil">Elisabete Weber Reckziegel</a></li>
+                <li><a href="rede.html#brasil">Felipe Augusto Santos</a></li>
+                <li><a href="rede.html#brasil">Gisele dos Santos Zepka Saraiva</a></li>
+                <li><a href="rede.html#brasil">Graziela Scofield</a></li>
+                <li><a href="rede.html#brasil">Luciana R. Londe</a></li>
+                <li><a href="rede.html#brasil">Regla Somoza</a></li>
+                <li><a href="rede.html#brasil">Rodrigo Silva da Conceição</a></li>
+                <li><a href="rede.html#brasil">Silvia Saito</a></li>
+                <li><a href="rede.html#brasil">Viviana Aguilar-Muñoz</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Coordina la red y responde por el liderazgo estratégico, técnico y administrativo. Opera la Sala de Situación en régimen 24/7, desarrolla la modelación del <abbr title="Social Vulnerability Index - Intersectional Latin America and Caribbean">SoVI-I ALC</abbr>, conduce la transición hacia alertas basados en impactos (<abbr title="Impact-based Forecasting">IbF</abbr>) en el sistema SALVAR y preside el Comité Gestor Interinstitucional (<abbr title="Comité Gestor Interinstitucional">CGI</abbr>).
+            </p>
+          </article>
+
+          <!-- 2. ENAP -->
+          <article class="inst-card" data-pais="brasil" data-eixos="1,3">
+            <h3><abbr title="Escola Nacional de Administração Pública">ENAP</abbr> — Escuela Nacional de Administración Pública</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> escuela de gobierno</span>
+            </div>
+            <div class="inst-role">Papel: gobernanza y políticas públicas</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill active">Eje 1 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 3 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#uruguay">Raquel Dinorah Lejtreger Goldstein</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Aporta análisis de políticas públicas y equidad, coautoría del Índice de Inclusión Interseccional (<abbr title="Índice de Inclusión Interseccional">III</abbr>) y validación del índice para la gestión federal y regional.
+            </p>
+          </article>
+
+          <!-- 3. IBGE -->
+          <article class="inst-card" data-pais="brasil" data-eixos="1">
+            <h3><abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</abbr> — Instituto Brasileño de Geografía y Estadística</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> instituto nacional de estadística</span>
+            </div>
+            <div class="inst-role">Papel: base de datos y microdatos</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill active">Eje 1 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#brasil">Rosinadja B. Morato</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Provee los microdatos del Censo 2022, el procesamiento computacional en <abbr title="Sistemas de Información Geográfica">SIG</abbr> y la cartografía del racismo ambiental que sustenta la calibración del SoVI-I ALC.
+            </p>
+          </article>
+
+          <!-- 4. UNESPAR / CEPED-PR -->
+          <article class="inst-card" data-pais="brasil" data-eixos="5">
+            <h3><abbr title="Universidade Estadual do Paraná">UNESPAR</abbr> / <abbr title="Centro de Estudos e Pesquisas sobre Desastres do Paraná">CEPED-PR</abbr> — Centro de Estudios e Investigaciones sobre Desastres de Paraná</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> universidad estatal y centro de estudios</span>
+            </div>
+            <div class="inst-role">Papel: gobernanza y articulación con la Defensa Civil</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 5 <span class="sr-only">(atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#brasil">Danyelle Stringari</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Referencia de gobernanza de la red, con la experiencia de REDESASTRE y el amparo legal de la Ley Estatal n.º 21.352/2023 para integrar academia, Defensa Civil y gestión pública.
+            </p>
+          </article>
+
+          <!-- 5. UFPE -->
+          <article class="inst-card" data-pais="brasil" data-eixos="2">
+            <h3><abbr title="Universidade Federal de Pernambuco">UFPE</abbr> — Universidad Federal de Pernambuco</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> universidad federal</span>
+            </div>
+            <div class="inst-role">Papel: aliada técnica en recursos hídricos</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#brasil">Suzana Maria Gico Lima Montenegro</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Hidrología, seguridad hídrica y caracterización hidrológica avanzada de cuencas andinas y costeras en la modelación física de la red.
+            </p>
+          </article>
+
+          <!-- 6. UFRN -->
+          <article class="inst-card" data-pais="brasil" data-eixos="1,2">
+            <h3><abbr title="Universidade Federal do Rio Grande do Norte">UFRN</abbr> — Universidad Federal de Rio Grande do Norte</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> universidad federal</span>
+            </div>
+            <div class="inst-role">Papel: aliada técnica en climatología y educación</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill active">Eje 1 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">2 investigadores vinculados:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#ecuador">Natividad García Troncoso</a></li>
+                <li><a href="rede.html#ecuador">Ruth Elena Ayala Carabajo</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Análisis estadístico de series hidrometeorológicas del semiárido, modelación en SIG de vulnerabilidad social, geomorfología y formación de docentes con alfabetización climática.
+            </p>
+          </article>
+
+          <!-- 7. UFOPA -->
+          <article class="inst-card" data-pais="brasil" data-eixos="2,5">
+            <h3><abbr title="Universidade Federal do Oeste do Pará">UFOPA</abbr> — Universidad Federal del Oeste de Pará</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> universidad federal</span>
+            </div>
+            <div class="inst-role">Papel: capilaridad territorial en la Amazonía</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 5 <span class="sr-only">(atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#brasil">Cintya Azambuja Martins</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Recursos hídricos de la Amazonía Oriental, modelación microclimática en Santarém y metodologías de educación intercultural indígena.
+            </p>
+          </article>
+
+          <!-- 8. UNESP -->
+          <article class="inst-card" data-pais="brasil" data-eixos="3,5">
+            <h3><abbr title="Universidade Estadual Paulista">UNESP</abbr> — Universidad Estadual Paulista</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> universidad estatal</span>
+            </div>
+            <div class="inst-role">Papel: aliada técnica en comunicación e historia de desastres</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 3 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 5 <span class="sr-only">(atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#brasil">Leda Nardi</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Procesos sociohistóricos de construcción del riesgo en Brasil, comunicación de riesgo preventiva y alfabetización intercultural con comunidades tradicionales.
+            </p>
+          </article>
+
+          <!-- 9. Ministério da Saúde -->
+          <article class="inst-card" data-pais="brasil" data-eixos="5">
+            <h3>Ministerio de Salud — SVSA/DVSAT/CGClima</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> órgano de gobierno federal</span>
+            </div>
+            <div class="inst-role">Papel: interfaz clima-salud</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 5 <span class="sr-only">(atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#brasil">Vanessa de Souza Hacon</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Vigilancia en salud ambiental, modelación de indicadores de impacto climático en la salud pública y validación teórica del Índice de Inclusión Interseccional.
+            </p>
+          </article>
+
+          <!-- 10. TJNS -->
+          <article class="inst-card" data-pais="brasil" data-eixos="4,5">
+            <h3>Instituto Todos Juntos Ninguém Sozinho (<abbr title="Instituto Todos Juntos Ninguém Sozinho">TJNS</abbr>)</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Brasil</span> · 
+              <span><strong>Tipo:</strong> organización de la sociedad civil, con vínculo a la UFRJ</span>
+            </div>
+            <div class="inst-role">Papel: extensión comunitaria y respuesta humanitaria</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 4 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 5 <span class="sr-only">(atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#brasil">Pamela Mércia Pinto Gomes</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Movilización social y adaptación climática en la Región Serrana de Río de Janeiro, con investigación sobre salud mental posdesastre bajo recortes de género y raza.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ARGENTINA -->
+      <section class="country-section" id="argentina" aria-labelledby="h2-argentina">
+        <div class="country-header">
+          <h2 id="h2-argentina">Argentina</h2>
+          <span class="country-count-tag">1 institución · 1 investigadora</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 11. XUMEK -->
+          <article class="inst-card" data-pais="argentina" data-eixos="3">
+            <h3>XUMEK / Observatorio de Justicia Sanitaria y Climática</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Argentina</span> · 
+              <span><strong>Tipo:</strong> organización de la sociedad civil y observatorio</span>
+            </div>
+            <div class="inst-role">Papel: gobernanza y derechos</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 3 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#argentina">María Natalia Echegoyemberry</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Introduce la dimensión de derechos humanos al proyecto, con investigación comparativa de marcos legales de <abbr title="Reducción del Riesgo de Desastres">RRD</abbr> en América Latina y datos sobre poblaciones invisibilizadas, incluidas personas privadas de libertad, alineados al Sistema Interamericano y a la CEDAW.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- CHILE -->
+      <section class="country-section" id="chile" aria-labelledby="h2-chile">
+        <div class="country-header">
+          <h2 id="h2-chile">Chile</h2>
+          <span class="country-count-tag">2 instituciones · 5 investigadores</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 12. UTEM -->
+          <article class="inst-card" data-pais="chile" data-eixos="2,3">
+            <h3><abbr title="Universidad Tecnológica Metropolitana">UTEM</abbr> — Universidad Tecnológica Metropolitana</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Chile</span> · 
+              <span><strong>Tipo:</strong> universidad</span>
+            </div>
+            <div class="inst-role">Papel: coordinación nacional en Chile</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 3 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-units">
+              <strong>Unidades:</strong> PRISMA Lab — Riesgos, Sociedad y Medio Ambiente (DGC y DPR); Departamento de Industria y Laboratorio de Suelos y Medio Ambiente.
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">4 investigadores e investigadoras vinculados:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#chile">Ana Isabel Huaico</a></li>
+                <li><a href="rede.html#chile">Drielly Naamma Fonseca da Silva</a></li>
+                <li><a href="rede.html#chile">Keyla Manuela Alencar da Silva Alves</a></li>
+                <li><a href="rede.html#chile">Rayana Santos Araújo Palharini</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Coordina la articulación técnico-operativa de los ejes científicos en Chile, con modelación numérica de extremos de precipitación, modelación física 3D de laderas y geodinámica de contaminación en cuencas expuestas a peligros climáticos.
+            </p>
+          </article>
+
+          <!-- 13. GRID Chile -->
+          <article class="inst-card" data-pais="chile" data-eixos="3">
+            <h3><abbr title="Corporación Gestión de Riesgos y Desastres">GRID</abbr> Chile — Corporación Gestión de Riesgos y Desastres</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Chile</span> · 
+              <span><strong>Tipo:</strong> organización técnica en gestión de riesgos</span>
+            </div>
+            <div class="inst-role">Papel: referente técnico de género</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 3 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#chile">Claudia C. Becerra</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Aporta el estado del arte en la transversalización de género en <abbr title="Reducción del Riesgo de Desastres">RRD</abbr>, con coautoría de la guía metodológica de género del <abbr title="Servicio Nacional de Prevención y Respuesta ante Desastres">SENAPRED</abbr> (2024), adoptada como referencia para los protocolos decoloniales de la red.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- COLOMBIA -->
+      <section class="country-section" id="colombia" aria-labelledby="h2-colombia">
+        <div class="country-header">
+          <h2 id="h2-colombia">Colombia</h2>
+          <span class="country-count-tag">4 instituciones y 1 bloque independiente · 8 investigadores</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 14. Universidad de Medellín -->
+          <article class="inst-card" data-pais="colombia" data-eixos="2,3">
+            <h3>Universidad de Medellín</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Colombia</span> · 
+              <span><strong>Tipo:</strong> universidad</span>
+            </div>
+            <div class="inst-role">Papel: coordinación técnica en Colombia</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 3 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">3 investigadores vinculados:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#colombia">Daniel López de Mesa Aguilar</a></li>
+                <li><a href="rede.html#colombia">Johnny Alexander Vega Gutiérrez</a></li>
+                <li><a href="rede.html#colombia">Paula Andrea Valencia Londoño</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Ingeniería hidráulica y modelación de inundaciones andinas, geoprocesamiento probabilístico de deslizamientos y modelación cuantitativa de resiliencia familiar (escala <abbr title="Family Resilience Assessment Scale">FRAS</abbr>) y de gestión de desastres basada en la comunidad (<abbr title="Community-Based Disaster Management">CBDM</abbr>).
+            </p>
+          </article>
+
+          <!-- 15. Universidad de San Buenaventura -->
+          <article class="inst-card" data-pais="colombia" data-eixos="3">
+            <h3>Universidad de San Buenaventura</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Colombia</span> · 
+              <span><strong>Tipo:</strong> universidad</span>
+            </div>
+            <div class="inst-role">Papel: aliada técnica en planeación urbana</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 3 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- Enlace a la versión en español de La Red -->
+                <li><a href="rede.html#colombia">Diana Elizabeth Valencia Londoño</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Planeación urbana y resiliencia, con mapeo físico de peligros por movimientos en masa en laderas urbanas y cartografía SIG de vulnerabilidades desagregadas por género y raza.
+            </p>
+          </article>
+
+          <!-- 16. Colegio Mayor de Antioquia -->
+          <article class="inst-card" data-pais="colombia" data-eixos="4">
+            <h3>Colegio Mayor de Antioquia</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Colombia</span> · 
+              <span><strong>Tipo:</strong> institución universitaria</span>
+            </div>
+            <div class="inst-role">Papel: aliada técnica en resiliencia territorial</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 4 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- TODO: enlazar a es/rede.html cuando exista -->
+                <li><a href="../rede.html#colombia">Natalia María Posada Pérez</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Resiliencia territorial y modelación espacial de cuencas de abastecimiento expuestas a avalanchas, con enfoque en habitabilidad y en grupos desplazados por conflictos y desastres.
+            </p>
+          </article>
+
+          <!-- 17. OPI4 -->
+          <article class="inst-card" data-pais="colombia" data-eixos="4">
+            <h3><abbr title="Oficina de Proyectos de Ingeniería">OPI4</abbr> — Oficina de Proyectos de Ingeniería S.A.S.</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Colombia</span> · 
+              <span><strong>Tipo:</strong> sector privado de ingeniería</span>
+            </div>
+            <div class="inst-role">Papel: innovación y tecnologías sociales</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 4 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- TODO: enlazar a es/rede.html cuando exista -->
+                <li><a href="../rede.html#colombia">Sara Andrea Giraldo Arias</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Indicadores físicos de resistencia estructural y diseño de soluciones preventivas de protección a poblaciones infantiles, asegurando que los protocolos de alerta lleguen al nivel local del sistema.
+            </p>
+          </article>
+
+          <!-- 18. Investigadoras independientes -->
+          <article class="inst-card" data-pais="colombia" data-eixos="1,2">
+            <h3>Investigadoras independientes (Colombia)</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Colombia</span> · 
+              <span><strong>Tipo:</strong> investigadoras independientes</span>
+            </div>
+            <div class="inst-role">Papel: contribución técnica especializada</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill active">Eje 1 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">2 investigadoras vinculadas:</div>
+              <ul class="inst-inv-list">
+                <!-- TODO: enlazar a es/rede.html cuando exista -->
+                <li><a href="../rede.html#colombia">Diana Patricia Mendoza Gonzalez</a></li>
+                <li><a href="../rede.html#colombia">Janet Barco</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Procesamiento de datos territoriales y finanzas públicas de adaptación climática, con manuales nacionales de rotulación presupuestaria social; e hidrología de crecidas con aplicación de métodos estadísticos y ciencia de datos a la validación de modelos.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- COSTA RICA -->
+      <section class="country-section" id="costa-rica" aria-labelledby="h2-costa-rica">
+        <div class="country-header">
+          <h2 id="h2-costa-rica">Costa Rica</h2>
+          <span class="country-count-tag">1 institución · 2 investigadoras</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 19. CeNAT / LANBA -->
+          <article class="inst-card" data-pais="costa-rica" data-eixos="1,5">
+            <h3><abbr title="Centro Nacional de Alta Tecnología">CeNAT</abbr> / <abbr title="Laboratorio Nacional de Bioeconomía y Ambiente">LANBA</abbr> — Centro Nacional de Alta Tecnología</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Costa Rica</span> · 
+              <span><strong>Tipo:</strong> centro nacional de alta tecnología</span>
+            </div>
+            <div class="inst-role">Papel: integración ciencia-territorio</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill active">Eje 1 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 5 <span class="sr-only">(atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">2 investigadoras vinculadas:</div>
+              <ul class="inst-inv-list">
+                <!-- TODO: enlazar a es/rede.html cuando exista -->
+                <li><a href="../rede.html#costa-rica">Jazmín Calderón Quirós</a></li>
+                <li><a href="../rede.html#costa-rica">Jeannette Arauz Muñoz</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Climatología social, mapas de percepción de riesgo y salvaguardas territoriales de comunidades indígenas, con la plataforma <abbr title="Plataforma de Información Ambiental y Climática Territorial">PIACT</abbr> y los proyectos COPAGUAR y ACTIVA; capacitación de niños, jóvenes y adultos en comunidades vulnerables y gamificación aplicada al clima.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ECUADOR -->
+      <section class="country-section" id="ecuador" aria-labelledby="h2-ecuador">
+        <div class="country-header">
+          <h2 id="h2-ecuador">Ecuador</h2>
+          <span class="country-count-tag">1 institución · 2 investigadores</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 20. ESPOL -->
+          <article class="inst-card" data-pais="ecuador" data-eixos="1,2">
+            <h3><abbr title="Escuela Superior Politécnica del Litoral">ESPOL</abbr> — Escuela Superior Politécnica del Litoral</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Ecuador</span> · 
+              <span><strong>Tipo:</strong> universidad politécnica</span>
+            </div>
+            <div class="inst-role">Papel: aliada técnica en ingeniería y datos</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill active">Eje 1 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">2 investigadores vinculados:</div>
+              <ul class="inst-inv-list">
+                <!-- TODO: enlazar a es/rede.html cuando exista -->
+                <li><a href="../rede.html#ecuador">Natividad García Troncoso</a></li>
+                <li><a href="../rede.html#ecuador">Ruth Elena Ayala Carabajo</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Evaluación de desempeño y vulnerabilidad estructural de infraestructuras críticas en zonas costeras, articulación técnica de género en el GT del Pacífico y geoprocesamiento hidrológico de cuencas andinas, integrando los datos censales del <abbr title="Instituto Nacional de Estadística y Censos">INEC</abbr>.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- PANAMÁ -->
+      <section class="country-section" id="panama" aria-labelledby="h2-panama">
+        <div class="country-header">
+          <h2 id="h2-panama">Panamá</h2>
+          <span class="country-count-tag">1 institución · 1 investigador</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 21. UTP -->
+          <article class="inst-card" data-pais="panama" data-eixos="2">
+            <h3><abbr title="Universidad Tecnológica de Panamá">UTP</abbr> — Universidad Tecnológica de Panamá</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Panamá</span> · 
+              <span><strong>Tipo:</strong> universidad tecnológica</span>
+            </div>
+            <div class="inst-role">Papel: aliada técnica en ingeniería civil</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 2 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 4 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigador vinculado:</div>
+              <ul class="inst-inv-list">
+                <!-- TODO: enlazar a es/rede.html cuando exista -->
+                <li><a href="../rede.html#panama">Edgar Abdiel Cedeño Jimenez</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Desempeño mecánico y fragilidad de estructuras públicas expuestas a lluvias tropicales intensas, con caracterización de estructuras vulnerables bajo marcadores de raza y género en el GT del Pacífico.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- PERÚ -->
+      <section class="country-section" id="peru" aria-labelledby="h2-peru">
+        <div class="country-header">
+          <h2 id="h2-peru">Perú</h2>
+          <span class="country-count-tag">1 institución · 1 investigadora</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 22. CISMID-UNI -->
+          <article class="inst-card" data-pais="peru" data-eixos="4">
+            <h3><abbr title="Centro Peruano Japonés de Investigaciones Sísmicas y Mitigación de Desastres">CISMID-UNI</abbr> — Centro Peruano Japonés de Investigaciones Sísmicas y Mitigación de Desastres</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Perú</span> · 
+              <span><strong>Tipo:</strong> centro de investigación</span>
+            </div>
+            <div class="inst-role">Papel: innovación y tecnologías sociales</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 4 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- TODO: enlazar a es/rede.html cuando exista -->
+                <li><a href="../rede.html#peru">Erika Nora Flores Terreros</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Ingeniería sísmica y mitigación estructural de sismos y tsunamis en el marco del Proyecto SATREPS, con algoritmos de simulación de evacuación peatonal basados en agentes.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- URUGUAY -->
+      <section class="country-section" id="uruguay" aria-labelledby="h2-uruguay">
+        <div class="country-header">
+          <h2 id="h2-uruguay">Uruguay</h2>
+          <span class="country-count-tag">1 institución · 1 investigadora</span>
+        </div>
+        <div class="cards-grid">
+
+          <!-- 23. Udelar -->
+          <article class="inst-card" data-pais="uruguay" data-eixos="4">
+            <h3><abbr title="Universidad de la República">Udelar</abbr> — Universidad de la República</h3>
+            <div class="inst-meta">
+              <span><strong>País:</strong> Uruguay</span> · 
+              <span><strong>Tipo:</strong> universidad pública</span>
+            </div>
+            <div class="inst-role">Papel: innovación y tecnologías sociales</div>
+            
+            <div class="inst-ejes-block">
+              <span class="inst-ejes-label">Ejes metodológicos:</span>
+              <div class="inst-ejes-pills">
+                <span class="axis-pill">Eje 1 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 2 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill">Eje 3 <span class="sr-only">(no atiende)</span></span>
+                <span class="axis-pill active">Eje 4 <span class="sr-only">(atiende)</span></span>
+                <span class="axis-pill">Eje 5 <span class="sr-only">(no atiende)</span></span>
+              </div>
+            </div>
+
+            <div class="inst-investigators">
+              <div class="inst-inv-count">1 investigadora vinculada:</div>
+              <ul class="inst-inv-list">
+                <!-- TODO: enlazar a es/rede.html cuando exista -->
+                <li><a href="../rede.html#uruguay">Raquel Dinorah Lejtreger Goldstein</a></li>
+              </ul>
+            </div>
+
+            <p class="inst-contrib">
+              <strong>Contribución:</strong> Macroplaneación urbano-territorial, políticas habitacionales preventivas y gobernanza climática, con liderazgo en el desarrollo de redes y en la capacitación de mujeres indígenas para la prevención de riesgos.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- BLOQUES DE NOTAS -->
+    <div class="notes-container">
+      <div class="note-card">
+        <strong>Nota sobre los ejes:</strong> La indicación de actuación por eje metodológico sigue la Matriz de Ejes Metodológicos de la propuesta aprobada. Donde el documento no atribuye el eje de forma explícita, la clasificación deriva de la experiencia declarada en el Anexo 1. Los ajustes deben remitirse por el canal institucional de contacto.
+      </div>
+      <div class="note-card">
+        <strong>Nota metodológica:</strong> El listado reproduce los vínculos institucionales del Anexo 1 — Matriz de Investigadores e Instituciones Aliadas. Los detalles de unidad de vínculo, grado académico y dedicación semanal constan en la página <a href="rede.html">La Red</a> (ya disponible también en español), organizada por investigador o investigadora.
+      </div>
+      <div class="note-card">
+        <strong>Nota de protección de datos:</strong> Los datos publicados son de naturaleza académico-profesional (nombre, vínculo institucional, unidad e identificadores públicos). No se divulgan correos personales, teléfonos ni datos sensibles, en los términos de la Ley n.º 13.709/2018 (LGPD). Para más información, consulte la <a href="privacidade.html">Política de Privacidad</a>.
+      </div>
+    </div>
+
+    <!-- NAVEGACIÓN DE CONTINUIDAD -->
+    <section class="continuity-nav" aria-label="Navegación de continuidad">
+      <h2>Explore más sobre la Red</h2>
+      <div class="continuity-links">
+        <a href="rede.html" class="continuity-btn">Conozca a las personas de la Red</a>
+        <a href="../index.html#projeto" class="continuity-btn">Conozca el proyecto fundador</a>
+        <a href="index.html#contacto" class="continuity-btn">Participe en la Red</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <svg class="brand-logo-svg" viewBox="0 0 48 48" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="10" r="5" fill="#0B4F4A" />
+            <circle cx="10" cy="34" r="5" fill="#0B4F4A" />
+            <circle cx="38" cy="34" r="5" fill="#0B4F4A" />
+            <circle cx="24" cy="25" r="4" fill="#B85C38" />
+            <line x1="24" y1="10" x2="24" y2="25" stroke="#0B4F4A" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="10" y1="34" x2="24" y2="25" stroke="#0B4F4A" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="38" y1="34" x2="24" y2="25" stroke="#0B4F4A" stroke-width="2.2" stroke-linecap="round" />
+            <line x1="10" y1="34" x2="38" y2="34" stroke="#D9A44B" stroke-width="1.8" stroke-dasharray="3 3" />
+          </svg>
+          <div>
+            <strong>Red Interseccional de Resiliencia (<abbr title="Red Interseccional de Resiliencia América Latina y el Caribe">RIR ALC</abbr>)</strong>
+            <div style="font-size: 0.8rem; color: #666;">Proyecto ALERTA-INTERSEC · MCTI/CNPq</div>
+          </div>
+        </div>
+
+        <nav class="footer-nav" aria-label="Menú pie de página">
+          <ul>
+            <li><a href="../index.html#sobre">Acerca de</a></li>
+            <li><a href="../index.html#eixos">Ejes metodológicos</a></li>
+            <li><a href="rede.html">La Red</a></li>
+            <li><a href="instituicoes.html">Instituciones</a></li>
+            <li><a href="../index.html#projeto">Proyecto</a></li>
+            <li><a href="../index.html#producao">Producción</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          Red Interseccional de Resiliencia — creada en mayo de 2026. Contenido bajo licencia Creative Commons CC BY 4.0.
+        </div>
+        <div>
+          Versión de desarrollo · 2026 · <a href="privacidade.html">Política de privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script accesible con mejora progresiva para filtros -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const paisButtons = document.querySelectorAll('#grupo-filtro-pais button');
+      const eixoButtons = document.querySelectorAll('#grupo-filtro-eixo button');
+      const resetBtn = document.getElementById('btn-limpiar-filtros');
+      const statusEl = document.getElementById('filtro-status');
+      const cards = document.querySelectorAll('.inst-card');
+      const countrySections = document.querySelectorAll('.country-section');
+
+      let currentPais = 'todos';
+      let currentEixo = 'todos';
+
+      function applyFilters() {
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const cardPais = card.getAttribute('data-pais');
+          const cardEixos = (card.getAttribute('data-eixos') || '').split(',');
+
+          const matchPais = (currentPais === 'todos' || cardPais === currentPais);
+          const matchEixo = (currentEixo === 'todos' || cardEixos.includes(currentEixo));
+
+          if (matchPais && matchEixo) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        // Hide or show empty country sections
+        countrySections.forEach(section => {
+          const visibleCardsInSection = section.querySelectorAll('.inst-card:not(.hidden)');
+          if (visibleCardsInSection.length === 0) {
+            section.style.display = 'none';
+          } else {
+            section.style.display = '';
+          }
+        });
+
+        // Anunciar cambios para lectores de pantalla
+        const instText = visibleCount === 1 ? 'institución mostrada' : 'instituciones mostradas';
+        statusEl.textContent = `${visibleCount} ${instText}`;
+      }
+
+      paisButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          paisButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+          btn.setAttribute('aria-pressed', 'true');
+          currentPais = btn.getAttribute('data-filter-pais');
+          applyFilters();
+        });
+      });
+
+      eixoButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          eixoButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+          btn.setAttribute('aria-pressed', 'true');
+          currentEixo = btn.getAttribute('data-filter-eixo');
+          applyFilters();
+        });
+      });
+
+      resetBtn.addEventListener('click', () => {
+        paisButtons.forEach(b => b.setAttribute('aria-pressed', b.getAttribute('data-filter-pais') === 'todos' ? 'true' : 'false'));
+        eixoButtons.forEach(b => b.setAttribute('aria-pressed', b.getAttribute('data-filter-eixo') === 'todos' ? 'true' : 'false'));
+        currentPais = 'todos';
+        currentEixo = 'todos';
+        applyFilters();
+      });
+    });
+  </script>
+
+  <!--
+    CONFIGURACIÓN RECOMENDADA PARA CLOUDFLARE PAGES (_headers):
+    /*
+      X-Robots-Tag: noindex, nofollow
+      X-Content-Type-Options: nosniff
+      Referrer-Policy: strict-origin-when-cross-origin
+      Permissions-Policy: geolocation=(), camera=(), microphone=()
+  -->
+</body>
+</html>

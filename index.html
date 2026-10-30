@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIR — Página inicial (versão de desenvolvimento)</title>
+
+  <!-- Bloqueio de indexação para ambiente de homologação/desenvolvimento -->
+  <meta name="robots" content="noindex, nofollow">
+  <!--
+    INSTRUÇÕES DE LANÇAMENTO (Cloudflare Pages / Produção):
+    1. Remover a tag meta robots acima.
+    2. Adicionar o arquivo public/_headers na raiz com os cabeçalhos de segurança (ver comentário no rodapé).
+    3. Substituir os links canonical e hreflang abaixo pelos equivalentes com URLs absolutas oficiais (ex: https://redeinterseccional.org/).
+    4. Conectar o formulário de contato (#contato) a um endpoint funcional (Formspree, Cloudflare Worker ou similar).
+  -->
+
+  <!-- hreflang trilíngue relativo para desenvolvimento -->
+  <!-- TODO: substituir por URL absoluta no lançamento -->
+  <!-- TODO: criar en/index.html e es/index.html -->
+  <link rel="alternate" hreflang="pt-BR" href="index.html">
+  <link rel="alternate" hreflang="en" href="en/index.html">
+  <link rel="alternate" hreflang="es" href="es/index.html">
+  <link rel="alternate" hreflang="x-default" href="index.html">
+  <link rel="canonical" href="index.html">
+
+  <style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Tokens, utilities and components (basecoat 1.0 markup, no CDN); artifacts
+   override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+  --success: #0a7a35;
+  --danger: #c0262d;
+  --warning: #8a5300;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --success: #4ade80;
+    --danger: #f87171;
+    --warning: #fbbf24;
+  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --success: #4ade80;
+  --danger: #f87171;
+  --warning: #fbbf24;
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+/* Pages generated before the shell had its own components still link the
+   basecoat CDN, which reads its own tokens and switches theme only on a
+   .dark class. Bridged to the shell's, whatever of it those pages use takes
+   the page's accent and follows the declared theme. Its --accent token is a
+   hover tint, renamed in its theme as --color-accent; the shell's --accent is
+   the brand colour, so the tint is derived from it here. */
+:root {
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-contrast);
+  --secondary: color-mix(in srgb, var(--text) 7%, var(--surface));
+  --secondary-foreground: var(--text);
+  --muted: color-mix(in srgb, var(--text) 5%, var(--surface));
+  --muted-foreground: var(--text-muted);
+  --color-accent: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --color-accent-foreground: var(--text);
+  --destructive: var(--danger);
+  --input: var(--border);
+  --ring: var(--accent);
+}
+* { box-sizing: border-box; }
+/* The reset the pages were written against: they all linked basecoat, which
+   ships Tailwind's. Its components now live here, so the reset does too. */
+*, ::before, ::after, ::backdrop { margin: 0; padding: 0; border: 0 solid; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+a { color: inherit; text-decoration: inherit; }
+b, strong { font-weight: bolder; }
+ol, ul, menu { list-style: none; }
+svg, video, canvas, iframe { display: block; vertical-align: middle; }
+button, input, select, textarea { color: inherit; background-color: transparent; border-radius: 0; }
+table { border-collapse: collapse; }
+hr { height: 0; color: inherit; border-top-width: 1px; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: 28px; font-weight: 650; line-height: 1.1; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: var(--success); }
+.kpi .kpi-delta.down { color: var(--danger); }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+/* Layout and type utilities: what the pages kept spelling in style="".
+   Spacing and type sizes follow Tailwind's scale; there is no Tailwind. */
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.stack { display: flex; flex-direction: column; gap: var(--space); }
+.between { justify-content: space-between; }
+.grow { flex: 1 1 0; min-width: 0; }
+.cols-2, .cols-3, .cols-4 { display: grid; gap: var(--space); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) {
+  .cols-2, .cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) { .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; }
+.m-0 { margin: 0; }
+.mt-1 { margin-top: 4px; } .mt-2 { margin-top: 8px; } .mt-3 { margin-top: 12px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mb-1 { margin-bottom: 4px; } .mb-2 { margin-bottom: 8px; } .mb-3 { margin-bottom: 12px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; }
+.p-2 { padding: 8px; } .p-3 { padding: 12px; } .p-4 { padding: 16px; } .p-6 { padding: 24px; }
+.text-xs { font-size: 12px; } .text-sm { font-size: 14px; } .text-base { font-size: 16px; }
+.text-lg { font-size: 18px; } .text-xl { font-size: 20px; line-height: 1.35; }
+.text-2xl { font-size: 24px; line-height: 1.25; } .text-3xl { font-size: 30px; line-height: 1.2; }
+.font-medium { font-weight: 500; } .font-semibold { font-weight: 600; } .font-bold { font-weight: 700; }
+.text-right { text-align: right; } .text-center { text-align: center; }
+.nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.w-full { width: 100%; }
+.text-success { color: var(--success); } .text-danger { color: var(--danger); } .text-warning { color: var(--warning); }
+
+/* Components, with basecoat 1.0 markup (variants and sizes are data
+   attributes) and the shell tokens, so a page needs neither component CSS
+   nor a CSS framework. An older page that also links basecoat gets these
+   rules after it, over the same properties. */
+button, input, select, textarea { font: inherit; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 0 14px; border: 1px solid transparent; border-radius: calc(var(--radius) - 2px);
+  background: var(--accent); color: var(--accent-contrast);
+  font-size: 14px; font-weight: 500; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 86%, #000); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.btn[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.btn[data-variant="secondary"]:hover { background: color-mix(in srgb, var(--text) 14%, var(--surface)); }
+.btn[data-variant="outline"] { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn[data-variant="ghost"] { background: transparent; color: var(--text); }
+.btn[data-variant="outline"]:hover, .btn[data-variant="ghost"]:hover { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.btn[data-variant="destructive"] { background: var(--danger); color: var(--bg); }
+.btn[data-variant="destructive"]:hover { background: color-mix(in srgb, var(--danger) 86%, var(--text)); }
+.btn[data-variant="link"] { height: auto; padding: 0; background: none; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.btn[data-size="sm"] { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn[data-size="lg"] { height: 42px; padding: 0 20px; font-size: 15px; }
+.btn[data-size="icon"] { width: 36px; padding: 0; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px;
+  border: 1px solid transparent; border-radius: 999px; background: var(--accent); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 600; line-height: 1.5; white-space: nowrap;
+}
+.badge[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.badge[data-variant="outline"] { background: transparent; color: var(--text); border-color: var(--border); }
+.badge[data-variant="destructive"] { background: color-mix(in srgb, var(--danger) 14%, var(--surface)); color: var(--danger); }
+
+.alert {
+  display: grid; gap: 4px; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+.alert h2, .alert h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.alert p, .alert section { margin: 0; color: var(--text-muted); }
+.alert[data-variant="destructive"] { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); background: color-mix(in srgb, var(--danger) 7%, var(--surface)); color: var(--danger); }
+
+.card {
+  display: flex; flex-direction: column; gap: 16px; padding: 20px 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 2px);
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+}
+.card > header, .card > section, .card > footer { padding: 0 20px; }
+.card > header { display: grid; gap: 4px; }
+.card > header h2, .card > header h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.card > header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+.card > footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.input {
+  width: 100%; min-height: 36px; padding: 6px 12px; border: 1px solid var(--border); border-radius: calc(var(--radius) - 2px);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+textarea.input { min-height: 84px; resize: vertical; }
+.input::placeholder { color: var(--text-muted); }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 14px; font-weight: 500; }
+.field [role="alert"] { color: var(--danger); font-size: 13px; }
+
+dialog.dialog {
+  width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; padding: 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  background: var(--surface); color: var(--text); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+dialog.dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+dialog.dialog > div { display: grid; gap: 16px; padding: 24px; }
+dialog.dialog header { display: grid; gap: 4px; }
+dialog.dialog header h2 { margin: 0; font-size: 18px; font-weight: 600; }
+dialog.dialog header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+dialog.dialog footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+.tabs { display: grid; gap: 12px; }
+.tabs > [role="tablist"] {
+  display: inline-flex; gap: 4px; width: fit-content; max-width: 100%; padding: 4px; overflow-x: auto;
+  border-radius: var(--radius); background: color-mix(in srgb, var(--text) 6%, var(--surface));
+}
+.tabs [role="tab"] {
+  padding: 6px 12px; border: 0; border-radius: calc(var(--radius) - 4px); background: transparent;
+  color: var(--text-muted); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer;
+}
+.tabs [role="tab"][aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.tabs [role="tabpanel"][hidden] { display: none; }
+
+.accordion > details { border-bottom: 1px solid var(--border); }
+.accordion > details > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0; font-weight: 500; list-style: none; cursor: pointer;
+}
+.accordion > details > summary::-webkit-details-marker { display: none; }
+.accordion > details > summary::after { content: "+"; color: var(--text-muted); font-size: 18px; line-height: 1; }
+.accordion > details[open] > summary::after { content: "\2212"; }
+.accordion > details > :not(summary) { margin: 0 0 14px; color: var(--text-muted); }
+
+.toaster {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-direction: column-reverse; gap: 8px;
+  width: min(360px, calc(100vw - 32px)); pointer-events: none;
+}
+.toaster .toast { pointer-events: auto; transition: opacity 200ms ease, transform 200ms ease; }
+.toaster .toast[aria-hidden="true"] { opacity: 0; transform: translateY(8px); }
+.toaster .toast-content {
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); font-size: 13px;
+}
+.toaster .toast-content h2 { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
+.toaster .toast-content p { margin: 0; color: var(--text-muted); }
+
+/* skipUI building blocks. */
+.skip-table-search { max-width: 320px; margin-bottom: 12px; }
+.skip-table-wrap { overflow-x: auto; }
+table.shell-table th[data-sort] { cursor: pointer; user-select: none; }
+table.shell-table th[aria-sort="ascending"]::after { content: " \25B2"; font-size: 9px; }
+table.shell-table th[aria-sort="descending"]::after { content: " \25BC"; font-size: 9px; }
+table.shell-table td.skip-table-empty { color: var(--text-muted); text-align: center; padding: 24px 0; }
+.skip-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 13px; color: var(--text-muted); }
+.toaster .toast[data-type="success"] .toast-content { border-left: 3px solid var(--success); }
+.toaster .toast[data-type="error"] .toast-content { border-left: 3px solid var(--danger); }
+
+</style>
+  <script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
+
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisFmt keeps axis tick labels short (compact notation) so long values
+  // (e.g. full BRL amounts) never clip against the plot edge.
+  function axisFmt(v) {
+    return fmt.num(v, { notation: "compact", maximumFractionDigits: 1 });
+  }
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  function coerceFormat(spec) {
+    if (typeof spec === "function") return spec;
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el = resolve(el);
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 12, plotH = H - padT - padB;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 12, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (v / max) * plotH);
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      var tx = svgEl("text", { x: x + bw / 2, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // line(el, {labels:[], values:[], color?, format?}) — single-series line.
+  function line(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 16, plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 16, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    var pts = cfg.values.map(function (v, i) {
+      var x = padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+      var y = padT + plotH - (v / max) * plotH;
+      return [x, y];
+    });
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    pts.forEach(function (p, i) {
+      var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(cfg.values[i]);
+      c.appendChild(t);
+      svg.appendChild(c);
+      var tx = svgEl("text", { x: p[0], y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // donut(el, {labels:[], values:[], colors?}) — donut with center total.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    // At 100% of a wide container the donut outgrows the height pages give
+    // the box and spills over the next section: keep it at its own size.
+    svg.style.maxWidth = W + "px";
+    svg.style.margin = "0 auto";
+    var total = cfg.values.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var palette = cfg.colors || [accent(), "#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4"];
+    var a0 = -Math.PI / 2;
+    cfg.values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + fmt.num(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    var center = svgEl("text", { x: cx, y: cy + 5, "text-anchor": "middle", "font-size": 20, "font-weight": 650, fill: "currentColor" });
+    center.textContent = fmt.num(total);
+    svg.appendChild(center);
+  }
+
+  // ---- Page building blocks: what dashboards and small systems kept
+  // re-implementing — a searchable sortable table, a KPI row, tabs, toasts,
+  // dialogs, saved state and mock data. Every call is opt-in, so a page that
+  // brings its own versions keeps them.
+
+  function resolve(target) {
+    return typeof target === "string" ? document.querySelector(target) : target;
+  }
+
+  function node(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function isNumberColumn(col) {
+    return col.align === "right" || col.format === "num" || col.format === "brl" || col.format === "pct";
+  }
+
+  function cellText(col, row) {
+    var value = row[col.key];
+    if (value == null) return "";
+    return col.format ? coerceFormat(col.format)(value) : String(value);
+  }
+
+  function compareValues(a, b) {
+    if (typeof a === "number" && typeof b === "number") return a - b;
+    return String(a == null ? "" : a).localeCompare(String(b == null ? "" : b), "pt-BR", { numeric: true });
+  }
+
+  // table(el, {columns, rows, search?, pageSize?, empty?, onRowClick?}) — a
+  // table.shell-table with sortable headers, an optional search box and
+  // pager. A column is {key, label, format?, align?, sortable? (true),
+  // render?(value, row) returning a Node or an HTML string — the page writes
+  // its cell templates as markup}. Plain values are always set as text.
+  // Returns {setRows, rows}.
+  function table(target, cfg) {
+    var root = resolve(target);
+    var cols = cfg.columns || [];
+    var pageSize = cfg.pageSize || 0;
+    var state = { rows: (cfg.rows || []).slice(), query: "", key: null, dir: 1, page: 0 };
+    root.innerHTML = "";
+    if (cfg.search) {
+      var search = node("input", "input skip-table-search");
+      search.type = "search";
+      search.placeholder = typeof cfg.search === "string" ? cfg.search : "Buscar…";
+      search.setAttribute("aria-label", search.placeholder);
+      search.addEventListener("input", function () {
+        state.query = search.value.trim().toLowerCase();
+        state.page = 0;
+        draw();
+      });
+      root.appendChild(search);
+    }
+    var tableEl = node("table", "shell-table");
+    var headRow = node("tr");
+    var heads = cols.map(function (col) {
+      var th = node("th", isNumberColumn(col) ? "num" : "", col.label == null ? col.key : col.label);
+      th.scope = "col";
+      if (col.sortable !== false) {
+        var toggle = function () {
+          state.dir = state.key === col.key ? -state.dir : 1;
+          state.key = col.key;
+          draw();
+        };
+        th.setAttribute("data-sort", col.key);
+        th.tabIndex = 0;
+        th.addEventListener("click", toggle);
+        th.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+        });
+      }
+      headRow.appendChild(th);
+      return th;
+    });
+    var thead = node("thead");
+    var tbody = node("tbody");
+    var wrap = node("div", "skip-table-wrap");
+    var pager = node("div", "skip-pager");
+    thead.appendChild(headRow);
+    tableEl.appendChild(thead);
+    tableEl.appendChild(tbody);
+    wrap.appendChild(tableEl);
+    root.appendChild(wrap);
+    if (pageSize) root.appendChild(pager);
+
+    function visibleRows() {
+      var rows = state.rows;
+      if (state.query) {
+        rows = rows.filter(function (row) {
+          return cols.some(function (col) { return cellText(col, row).toLowerCase().indexOf(state.query) >= 0; });
+        });
+      }
+      if (state.key) {
+        var key = state.key, dir = state.dir;
+        rows = rows.slice().sort(function (a, b) { return dir * compareValues(a[key], b[key]); });
+      }
+      return rows;
+    }
+
+    function drawRow(row) {
+      var tr = node("tr");
+      cols.forEach(function (col) {
+        var td = node("td", isNumberColumn(col) ? "num" : "");
+        if (!col.render) {
+          td.textContent = cellText(col, row);
+        } else {
+          var content = col.render(row[col.key], row);
+          if (content instanceof Node) td.appendChild(content);
+          else td.innerHTML = content == null ? "" : String(content);
+        }
+        tr.appendChild(td);
+      });
+      // The row stays a row (no role) and takes focus, so a keyboard reaches
+      // the same action; keys pressed on a control inside a cell are its own.
+      if (cfg.onRowClick) {
+        tr.style.cursor = "pointer";
+        tr.tabIndex = 0;
+        tr.addEventListener("click", function () { cfg.onRowClick(row); });
+        tr.addEventListener("keydown", function (e) {
+          if (e.target !== tr || (e.key !== "Enter" && e.key !== " ")) return;
+          e.preventDefault();
+          cfg.onRowClick(row);
+        });
+      }
+      return tr;
+    }
+
+    function pagerButton(label, disabled, step) {
+      var button = node("button", "btn", label);
+      button.type = "button";
+      button.setAttribute("data-variant", "outline");
+      button.setAttribute("data-size", "sm");
+      button.disabled = disabled;
+      button.addEventListener("click", function () { state.page += step; draw(); });
+      return button;
+    }
+
+    function draw() {
+      var rows = visibleRows();
+      heads.forEach(function (th, i) {
+        if (cols[i].key === state.key) th.setAttribute("aria-sort", state.dir > 0 ? "ascending" : "descending");
+        else th.removeAttribute("aria-sort");
+      });
+      var pages = pageSize ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1;
+      state.page = Math.min(state.page, pages - 1);
+      var shown = pageSize ? rows.slice(state.page * pageSize, (state.page + 1) * pageSize) : rows;
+      tbody.innerHTML = "";
+      if (!shown.length) {
+        var empty = node("td", "skip-table-empty", cfg.empty || "Nenhum registro encontrado.");
+        empty.colSpan = cols.length;
+        tbody.appendChild(node("tr")).appendChild(empty);
+      }
+      shown.forEach(function (row) { tbody.appendChild(drawRow(row)); });
+      if (!pageSize) return;
+      pager.innerHTML = "";
+      var from = rows.length ? state.page * pageSize + 1 : 0;
+      pager.appendChild(node("span", "", from + "–" + Math.min(rows.length, (state.page + 1) * pageSize) + " de " + rows.length));
+      var nav = node("div", "row gap-2");
+      nav.appendChild(pagerButton("Anterior", state.page === 0, -1));
+      nav.appendChild(pagerButton("Próxima", state.page >= pages - 1, 1));
+      pager.appendChild(nav);
+    }
+
+    draw();
+    return {
+      setRows: function (rows) { state.rows = rows.slice(); draw(); },
+      rows: visibleRows
+    };
+  }
+
+  // kpis(el, [{label, value, format?, delta?, hint?}]) — KPI cards in a
+  // responsive grid; delta is a fraction (0.12 renders as ▲ 12%).
+  function kpis(target, items) {
+    var root = resolve(target);
+    root.innerHTML = "";
+    root.classList.add("shell-grid");
+    items.forEach(function (item) {
+      var card = node("div", "panel kpi");
+      card.appendChild(node("span", "kpi-label", item.label));
+      card.appendChild(node("span", "kpi-value", item.format ? coerceFormat(item.format)(item.value) : String(item.value)));
+      if (typeof item.delta === "number") {
+        var up = item.delta >= 0;
+        card.appendChild(node("span", "kpi-delta " + (up ? "up" : "down"), (up ? "▲ " : "▼ ") + fmt.pct(Math.abs(item.delta))));
+      }
+      if (item.hint) card.appendChild(node("span", "kpi-label", item.hint));
+      root.appendChild(card);
+    });
+  }
+
+  // badge(text, variant?) — a .badge node for table cells and lists;
+  // variant is "secondary" | "outline" | "destructive" (default: primary).
+  function badge(text, variant) {
+    var el = node("span", "badge", text);
+    if (variant) el.setAttribute("data-variant", variant);
+    return el;
+  }
+
+  // tabs(el) — wires one .tabs block: [role=tab] buttons inside
+  // [role=tablist], each with aria-controls naming its [role=tabpanel].
+  function tabs(target) {
+    var root = resolve(target);
+    var buttons = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(chosen) {
+      buttons.forEach(function (b) {
+        var on = b === chosen;
+        b.setAttribute("aria-selected", on ? "true" : "false");
+        b.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(b.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    buttons.forEach(function (b, i) {
+      b.addEventListener("click", function () { select(b); });
+      b.addEventListener("keydown", function (e) {
+        var step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        var next = buttons[(i + step + buttons.length) % buttons.length];
+        next.focus();
+        select(next);
+      });
+    });
+    select(buttons.filter(function (b) { return b.getAttribute("aria-selected") === "true"; })[0] || buttons[0]);
+  }
+
+  // toast(message, {type?: "success" | "error", title?, duration?}) — a
+  // .toast in a shared .toaster at the bottom of the page.
+  function toast(message, opts) {
+    opts = opts || {};
+    var toaster = document.querySelector(".toaster") || document.body.appendChild(node("div", "toaster"));
+    var item = node("div", "toast");
+    item.setAttribute("role", opts.type === "error" ? "alert" : "status");
+    item.setAttribute("aria-hidden", "true");
+    if (opts.type) item.setAttribute("data-type", opts.type);
+    var content = node("div", "toast-content");
+    var section = node("section");
+    if (opts.title) section.appendChild(node("h2", "", opts.title));
+    section.appendChild(node("p", "", message));
+    content.appendChild(section);
+    item.appendChild(content);
+    toaster.appendChild(item);
+    requestAnimationFrame(function () { item.setAttribute("aria-hidden", "false"); });
+    setTimeout(function () {
+      item.setAttribute("aria-hidden", "true");
+      setTimeout(function () { item.remove(); }, 400);
+    }, opts.duration || 3000);
+  }
+
+  // Dialogs are native <dialog class="dialog">: a [data-dialog-open="id"]
+  // anywhere opens one, a [data-dialog-close] inside closes it, and a click on
+  // its backdrop closes it too. Plain dialog.showModal()/close() still work.
+  document.addEventListener("click", function (e) {
+    var target = e.target;
+    if (!(target instanceof Element)) return;
+    var opener = target.closest("[data-dialog-open]");
+    if (opener) {
+      var dialog = document.getElementById(opener.getAttribute("data-dialog-open"));
+      if (dialog && dialog.showModal && !dialog.open) dialog.showModal();
+      return;
+    }
+    var closer = target.closest("[data-dialog-close]");
+    if (closer && closer.closest("dialog")) {
+      closer.closest("dialog").close();
+      return;
+    }
+    if (target.tagName === "DIALOG" && target.classList.contains("dialog") && target.open) target.close();
+  });
+
+  // store(key, fallback) — JSON state in localStorage that never throws (a
+  // private window or a full quota falls back to memory): {get, set, update}.
+  function store(key, fallback) {
+    var memory;
+    // Set while the last write did not reach localStorage: what is stored
+    // there is older than memory until a write goes through again.
+    var unsaved = false;
+    var initial = function () { return fallback === undefined ? undefined : JSON.parse(JSON.stringify(fallback)); };
+    function get() {
+      if (!unsaved) {
+        try {
+          var raw = localStorage.getItem(key);
+          if (raw != null) return JSON.parse(raw);
+        } catch (e) { /* storage unavailable: memory below */ }
+      }
+      return memory !== undefined ? memory : initial();
+    }
+    function set(value) {
+      memory = value;
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        unsaved = false;
+      } catch (e) {
+        unsaved = true;
+      }
+      return value;
+    }
+    return { get: get, set: set, update: function (fn) { return set(fn(get())); } };
+  }
+
+  // mock — seeded random data, so a page asks for 90 days of numbers in one
+  // line instead of writing them out; the same seed gives the same data.
+  var FIRST = ["Ana", "Bruno", "Carla", "Diego", "Eduarda", "Felipe", "Gabriela", "Henrique", "Isabela", "João",
+    "Larissa", "Marcos", "Natália", "Otávio", "Paula", "Rafael", "Sofia", "Thiago", "Vanessa", "Lucas"];
+  var LAST = ["Silva", "Santos", "Oliveira", "Souza", "Pereira", "Costa", "Rodrigues", "Almeida", "Nascimento", "Lima",
+    "Araújo", "Fernandes", "Carvalho", "Gomes", "Martins", "Rocha", "Ribeiro", "Barbosa"];
+  var CITIES = ["São Paulo, SP", "Rio de Janeiro, RJ", "Belo Horizonte, MG", "Curitiba, PR", "Porto Alegre, RS",
+    "Salvador, BA", "Recife, PE", "Fortaleza, CE", "Brasília, DF", "Goiânia, GO", "Campinas, SP", "Florianópolis, SC",
+    "Manaus, AM", "Belém, PA", "Vitória, ES", "Natal, RN"];
+
+  function createMock(seed) {
+    var state = seed >>> 0;
+    function random() {
+      state = (state + 0x6d2b79f5) >>> 0;
+      var t = state;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    function int(min, max) { return min + Math.floor(random() * (max - min + 1)); }
+    function pick(list) { return list[Math.floor(random() * list.length)]; }
+    var mock = {
+      seed: function (value) { state = value >>> 0; return mock; },
+      random: random,
+      int: int,
+      float: function (min, max, decimals) {
+        var factor = Math.pow(10, decimals == null ? 2 : decimals);
+        return Math.round((min + random() * (max - min)) * factor) / factor;
+      },
+      pick: pick,
+      chance: function (p) { return random() < p; },
+      name: function () { return pick(FIRST) + " " + pick(LAST); },
+      city: function () { return pick(CITIES); },
+      // series(n, {start, trend, noise, min, decimals}) — a walk: each value
+      // moves by trend (fraction per step) plus up to ±noise of itself.
+      series: function (n, opts) {
+        opts = opts || {};
+        var value = opts.start == null ? 100 : opts.start;
+        var factor = Math.pow(10, opts.decimals || 0);
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          out.push(Math.max(opts.min == null ? 0 : opts.min, Math.round(value * factor) / factor));
+          value = value * (1 + (opts.trend || 0)) * (1 + (random() * 2 - 1) * (opts.noise == null ? 0.08 : opts.noise));
+        }
+        return out;
+      },
+      // dates(n, {end?, step?: "day" | "week" | "month"}) — ISO dates
+      // (YYYY-MM-DD), oldest first, ending at end (default: today).
+      dates: function (n, opts) {
+        opts = opts || {};
+        var end = opts.end ? new Date(opts.end) : new Date();
+        var out = [];
+        for (var i = n - 1; i >= 0; i--) {
+          var d = new Date(end.getTime());
+          if (opts.step === "month") d.setMonth(d.getMonth() - i);
+          else d.setDate(d.getDate() - i * (opts.step === "week" ? 7 : 1));
+          out.push(d.toISOString().slice(0, 10));
+        }
+        return out;
+      },
+      // rows(n, spec) — n objects; each spec value is a function(i), a list
+      // to pick from, or a constant.
+      rows: function (n, spec) {
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          var row = {};
+          for (var key in spec) {
+            var value = spec[key];
+            row[key] = typeof value === "function" ? value(i) : Array.isArray(value) ? pick(value) : value;
+          }
+          out.push(row);
+        }
+        return out;
+      }
+    };
+    return mock;
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+  window.skipUI = { table: table, kpis: kpis, badge: badge, tabs: tabs, toast: toast };
+  window.skipStore = store;
+  window.skipMock = createMock(20261022);
+})();
+
+</script>
+
+  <style>
+    :root {
+      --accent: #0B4F4A;
+      --accent-contrast: #FFFFFF;
+      --accent-text: #083A36;
+      --terracotta: #B85C38;
+      --terracotta-hover: #9E4B2B;
+      --terracotta-contrast: #FFFFFF;
+      --ochre: #D9A44B;
+      --ochre-dark: #8C6212;
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --text: #1A1A1A;
+      --text-muted: #4A4A4A;
+      --border: #E5DFD5;
+      --radius: 0.5rem;
+      --font-serif: Georgia, 'Times New Roman', Cambria, serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .serif-heading {
+      font-family: var(--font-serif);
+      color: var(--accent-text);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-top: 0;
+    }
+
+    /* Acessibilidade: Salto para o Conteúdo Principal (eMAG / WCAG) */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      background: var(--terracotta);
+      color: var(--terracotta-contrast);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius);
+      z-index: 9999;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: top 0.2s ease-in-out;
+    }
+    .skip-link:focus {
+      top: 1rem;
+      outline: 3px solid #1A1A1A;
+      outline-offset: 2px;
+    }
+
+    /* Foco global bem visível */
+    :focus-visible {
+      outline: 3px solid var(--terracotta) !important;
+      outline-offset: 3px !important;
+    }
+
+    /* Barra de aviso de desenvolvimento */
+    .dev-banner {
+      background-color: #2D2319;
+      color: #FAF8F5;
+      padding: 0.5rem 1rem;
+      font-size: 0.8125rem;
+      text-align: center;
+      border-bottom: 2px solid var(--ochre);
+    }
+    .dev-banner p {
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dev-banner .dev-tag {
+      background-color: var(--ochre);
+      color: #1A1A1A;
+      font-weight: 700;
+      font-size: 0.6875rem;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Cabeçalho */
+    .site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-logo-svg {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+    }
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.15;
+    }
+    .brand-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.25;
+      margin-top: 0.125rem;
+    }
+
+    /* Navegação */
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .main-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .main-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      padding: 0.375rem 0.5rem;
+      border-radius: var(--radius);
+      transition: color 0.15s, background-color 0.15s;
+    }
+    .main-nav a:hover {
+      color: var(--accent);
+      background: rgba(11, 79, 74, 0.05);
+    }
+    .main-nav a[aria-current="page"] {
+      color: var(--accent);
+      font-weight: 700;
+      border-bottom: 2px solid var(--accent);
+      border-radius: 0;
+    }
+
+    /* Seletor de Idioma */
+    .lang-switcher {
+      display: inline-flex;
+      align-items: center;
+      background: #F0EDE8;
+      border-radius: 9999px;
+      padding: 0.1875rem;
+      border: 1px solid var(--border);
+    }
+    .lang-switcher a {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: background-color 0.15s, color 0.15s;
+    }
+    .lang-switcher a[aria-current="true"] {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+    .lang-switcher a:hover:not([aria-current="true"]) {
+      color: var(--text);
+    }
+
+    /* Menu mobile toggle */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.5rem;
+      cursor: pointer;
+      color: var(--accent);
+    }
+    .menu-toggle:hover {
+      background: rgba(11, 79, 74, 0.05);
+    }
+
+    /* Faixa de Status do Projeto */
+    .status-card-wrap {
+      max-width: 1200px;
+      margin: -2rem auto 2.5rem;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .status-card {
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 4px 14px rgba(11, 79, 74, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    .status-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .status-card-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      background: rgba(11, 79, 74, 0.08);
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+    }
+    .badge-terracotta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      background-color: var(--terracotta);
+      color: var(--terracotta-contrast);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      padding: 0.3125rem 0.75rem;
+      border-radius: 9999px;
+    }
+    .status-card-title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+      margin: 0;
+    }
+    .status-card-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(180deg, rgba(11, 79, 74, 0.06) 0%, rgba(250, 248, 245, 1) 100%);
+      padding: 3.5rem 1rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(184, 92, 56, 0.12);
+      color: #8F3E1E;
+      font-weight: 700;
+      font-size: 0.8125rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      margin-bottom: 1rem;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+    .hero-subtitle {
+      font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 1.25rem;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 2rem;
+    }
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-terracotta {
+      background-color: var(--terracotta);
+      color: var(--terracotta-contrast);
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid transparent;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .btn-terracotta:hover {
+      background-color: var(--terracotta-hover);
+      color: var(--terracotta-contrast);
+    }
+    .btn-outline-accent {
+      background-color: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      font-weight: 600;
+      padding: 0.6875rem 1.5rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .btn-outline-accent:hover {
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    /* Seções genéricas */
+    .section-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4.5rem 1rem;
+    }
+    .section-header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .section-header h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+      margin-bottom: 0.5rem;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.0625rem;
+      margin: 0;
+    }
+
+    /* Cards Sobre */
+    .about-lead {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--text);
+      max-width: 860px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+    .about-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .card-custom {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+    }
+    .card-custom h3 {
+      font-size: 1.375rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    .card-custom p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+    .card-icon {
+      color: var(--terracotta);
+      flex-shrink: 0;
+    }
+    .about-obj-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .about-obj-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+    .about-obj-card p {
+      margin: 0;
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      color: var(--text);
+    }
+    .valores-section-title {
+      text-align: center;
+      margin: 3.5rem 0 1.5rem;
+      font-size: 1.5rem;
+      color: var(--accent-text);
+    }
+    .valores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    .valor-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--ochre-dark);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .valor-card strong {
+      display: block;
+      font-size: 1.0625rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-serif);
+    }
+    .valor-card p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Eixos */
+    .eixos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .eixo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      position: relative;
+    }
+    .eixo-num {
+      flex-shrink: 0;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      background: rgba(11, 79, 74, 0.08);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .eixo-body h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.375rem;
+      color: var(--accent-text);
+    }
+    .eixo-body p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    /* A Rede em números */
+    .stats-section {
+      background: #F2EFE9;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      padding: 1.75rem;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--terracotta);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .stat-val {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .stat-lbl {
+      color: var(--text);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .rede-callout {
+      background: var(--surface);
+      border: 1px dashed var(--ochre-dark);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+    }
+
+    /* Projeto */
+    .projeto-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+    }
+    .projeto-tag {
+      display: inline-block;
+      background: rgba(11, 79, 74, 0.1);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.8125rem;
+      padding: 0.25rem 0.625rem;
+      border-radius: 0.25rem;
+      margin-bottom: 0.875rem;
+    }
+    .projeto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.75rem;
+    }
+    .projeto-col {
+      background: #FAF8F5;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .projeto-col h3 {
+      font-size: 1.125rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+    .projeto-col p, .projeto-col ul {
+      margin: 0;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .projeto-col ul {
+      padding-left: 1.25rem;
+    }
+    .projeto-col li {
+      margin-bottom: 0.375rem;
+    }
+
+    /* Produção */
+    .producao-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 860px;
+      margin: 0 auto 1.5rem;
+    }
+    .producao-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .item-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.375rem;
+    }
+    .tag-tipo {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      background: #EBE7DF;
+      color: #333;
+    }
+    .item-ano {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+    .item-titulo {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .btn-disabled-placeholder {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      background: #F0EDE8;
+      padding: 0.375rem 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      cursor: not-allowed;
+    }
+    .producao-footnote {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Contato e formulário */
+    .contato-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .form-alert {
+      background-color: #FEF3C7;
+      border-left: 4px solid var(--ochre-dark);
+      color: #78350F;
+      padding: 0.875rem 1rem;
+      font-size: 0.875rem;
+      border-radius: 0.25rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.45;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.375rem;
+    }
+    .form-group label .req {
+      color: var(--terracotta);
+      margin-left: 0.2rem;
+    }
+    .form-help {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0.6875rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--accent);
+      background: #FFFFFF;
+    }
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.625rem;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .checkbox-group input[type="checkbox"] {
+      margin-top: 0.25rem;
+      width: 1.125rem;
+      height: 1.125rem;
+      accent-color: var(--accent);
+    }
+    .checkbox-group label {
+      font-size: 0.875rem;
+      line-height: 1.45;
+      color: var(--text);
+    }
+    .form-submit-row {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* Rodapé */
+    .site-footer {
+      background: #192624;
+      color: #E2E8E7;
+      padding: 4rem 1rem 2rem;
+      border-top: 4px solid var(--terracotta);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .footer-col h3 {
+      font-size: 1.125rem;
+      color: #FAF8F5;
+      margin-bottom: 1rem;
+    }
+    .footer-col p {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: #C0C8C7;
+      margin: 0 0 1rem;
+    }
+    .footer-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-nav li {
+      margin-bottom: 0.5rem;
+    }
+    .footer-nav a {
+      color: #E2E8E7;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: color 0.15s;
+    }
+    .footer-nav a:hover {
+      color: var(--ochre);
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.8125rem;
+      color: #9AA6A4;
+    }
+    .footer-bottom a {
+      color: #FAF8F5;
+      text-decoration: underline;
+    }
+    .footer-bottom a:hover {
+      color: var(--ochre);
+    }
+
+    /* Redução de Movimento */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Responsividade */
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+      .nav-wrapper {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1.25rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+      }
+      .nav-wrapper.is-open {
+        display: flex;
+      }
+      .main-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 0.5rem;
+      }
+      .main-nav a {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0;
+      }
+      .lang-switcher {
+        margin-top: 0.5rem;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      .dev-banner, .menu-toggle, .skip-link, .lang-switcher, .hero-actions, .contato-wrap form, .btn-disabled-placeholder {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+      }
+      .site-header, .site-footer {
+        position: static;
+        box-shadow: none;
+        border: none;
+      }
+      .site-footer {
+        background: #fff;
+        color: #000;
+        border-top: 1px solid #ccc;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Acessibilidade: Atalho direto para o conteúdo -->
+  <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
+
+  <!-- Faixa de aviso: Ambiente de Desenvolvimento -->
+  <aside class="dev-banner" aria-label="Aviso de versão">
+    <p>
+      <span class="dev-tag">Homologação</span>
+      Versão de desenvolvimento — não indexada até o lançamento oficial.
+    </p>
+  </aside>
+
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Rede Interseccional de Resiliência — Página inicial">
+        <!-- Logotipo SVG inline: nós em rede conectados representando interseccionalidade e resiliência -->
+        <svg class="brand-logo-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <circle cx="24" cy="24" r="23" stroke="#0B4F4A" stroke-width="2" fill="#FAF8F5"/>
+          <!-- Conexões em teia -->
+          <line x1="14" y1="18" x2="34" y2="18" stroke="#D9A44B" stroke-width="2"/>
+          <line x1="14" y1="18" x2="24" y2="34" stroke="#B85C38" stroke-width="2"/>
+          <line x1="34" y1="18" x2="24" y2="34" stroke="#0B4F4A" stroke-width="2"/>
+          <line x1="24" y1="11" x2="14" y2="18" stroke="#0B4F4A" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <line x1="24" y1="11" x2="34" y2="18" stroke="#0B4F4A" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <line x1="24" y1="11" x2="24" y2="34" stroke="#B85C38" stroke-width="1.5"/>
+          <!-- Nós -->
+          <circle cx="24" cy="11" r="4" fill="#0B4F4A"/>
+          <circle cx="14" cy="18" r="4.5" fill="#B85C38"/>
+          <circle cx="34" cy="18" r="4.5" fill="#0B4F4A"/>
+          <circle cx="24" cy="34" r="5" fill="#D9A44B"/>
+          <!-- Núcleo central de convergência -->
+          <circle cx="24" cy="22" r="2.5" fill="#FFFFFF" stroke="#0B4F4A" stroke-width="1.5"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">RIR · Rede Interseccional de Resiliência</span>
+          <span class="brand-sub">Ciência, gênero e raça na redução de riscos de desastres</span>
+        </span>
+      </a>
+
+      <!-- Botão Menu Mobile -->
+      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="menuNavWrapper" aria-label="Abrir menu de navegação">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Navegação e seletor -->
+      <div class="nav-wrapper" id="menuNavWrapper">
+        <nav class="main-nav" aria-label="Navegação principal">
+          <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#eixos">Eixos metodológicos</a></li>
+            <li><a href="rede.html">A Rede</a></li>
+            <li><a href="instituicoes.html">Instituições</a></li>
+            <li><a href="#projeto">Projeto</a></li>
+            <li><a href="#producao">Produção</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </nav>
+
+        <div class="lang-switcher" role="group" aria-label="Selecionar idioma">
+          <a href="./" aria-current="true" lang="pt-BR" title="Português do Brasil (versão ativa)">PT</a>
+          <!-- TODO: criar en/index.html e es/index.html -->
+          <!-- TODO: disponibilizar as páginas traduzidas em en/ e es/ no lançamento -->
+          <a href="en/" lang="en" title="English version (in development)">EN</a>
+          <a href="es/" lang="es" title="Versión en Español (en desarrollo)">ES</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo">
+
+    <!-- Seção Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <span class="hero-badge">Criada em maio de 2026 · América Latina</span>
+        <h1 id="hero-title">Rede Interseccional de Resiliência</h1>
+        <p class="hero-subtitle">
+          Articulamos pesquisa, dados e ação para colocar gênero, raça, deficiência e território no centro da redução de riscos de desastres na América Latina e no Caribe.
+        </p>
+        <p class="hero-desc">
+          Uma rede científica internacional sem fins lucrativos que reúne pesquisadoras, pesquisadores e instituições de 9 países latino-americanos e de todas as 5 regiões do Brasil, comprometidos com a produção de evidências qualificadas e a transformação das políticas públicas de gestão de risco.
+        </p>
+        <div class="hero-actions">
+          <a href="rede.html" class="btn-terracotta">
+            Conheça a Rede
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="#contato" class="btn-outline-accent">
+            Participe
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Faixa de Status do Projeto -->
+    <div class="status-card-wrap" aria-label="Status do primeiro projeto da Rede">
+      <div class="status-card">
+        <div class="status-card-top">
+          <span class="status-card-label">Primeiro projeto da Rede</span>
+          <span class="badge-terracotta">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Contemplado em outubro de 2026
+          </span>
+        </div>
+        <p class="status-card-title">Projeto submetido ao CNPq em maio de 2026 — Processo 445280/2026-3</p>
+        <p class="status-card-desc">Chamada MCTI/CNPq nº 02/2026 — Programa PROSUL Pepe Mujica, Faixa B (Redes Temáticas de Pesquisa Emergentes).</p>
+      </div>
+    </div>
+
+    <!-- Seção Sobre (#sobre) -->
+    <section id="sobre" class="section-wrap" aria-labelledby="sobre-title">
+      <div class="section-header">
+        <h2 id="sobre-title">Sobre a RIR</h2>
+        <p>A ciência dos desastres sob a perspectiva da justiça social e da igualdade interseccional.</p>
+      </div>
+
+      <p class="about-lead">
+        A Rede Interseccional de Resiliência (RIR) — gênero, raça, deficiência e território na redução de riscos de desastres na América Latina e no Caribe — nasce como espaço de intercâmbio regional para pensar e propor respostas integrais e inclusivas aos desafios climáticos, sob a perspectiva da justiça social no Sul Global. A iniciativa articula ações que reconhecem como as opressões estruturais associadas aos marcadores sociais se sobrepõem, produzindo vulnerabilidades específicas diante dos desastres socioambientais.
+      </p>
+
+      <div class="about-obj-card">
+        <h3>Objetivo geral</h3>
+        <p>
+          Consolidar a RIR como plataforma transnacional de cooperação Sul-Sul para analisar vulnerabilidades interseccionais de gênero, raça, deficiência e território — e demais marcadores sociais —, desenvolvendo metodologias para índices de vulnerabilidade e diretrizes técnicas orientadas a uma redução de riscos de desastres inclusiva e decolonial.
+        </p>
+      </div>
+
+      <div class="about-cards">
+        <article class="card-custom">
+          <h3>
+            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            Missão
+          </h3>
+          <p>
+            Transformar a gestão de riscos de desastres no Sul Global pela lente da interseccionalidade: combater o epistemicídio estatístico, promover a soberania de dados, consolidar alertas orientados a impactos e proteger as populações mais vulnerabilizadas, convertendo resiliência em política pública.
+          </p>
+        </article>
+
+        <article class="card-custom">
+          <h3>
+            <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            Visão
+          </h3>
+          <p>
+            Ser referência regional na integração interseccional de gênero, raça, deficiência e território nas políticas de resiliência climática, liderando o Observatório Interseccional de Desastres e assegurando que a justiça social seja o pilar central das estratégias de adaptação.
+          </p>
+        </article>
+      </div>
+
+      <h3 class="valores-section-title">Valores</h3>
+      <div class="valores-grid">
+        <article class="valor-card">
+          <strong>Interseccionalidade</strong>
+          <p>Reconhecimento das camadas sobrepostas de opressão que os marcadores sociais produzem.</p>
+        </article>
+        <article class="valor-card">
+          <strong>Decolonialidade</strong>
+          <p>Valorização dos saberes e das epistemologias do Sul Global.</p>
+        </article>
+        <article class="valor-card">
+          <strong>Cooperação Sul-Sul</strong>
+          <p>Fortalecimento de redes entre nações irmãs na gestão de riscos de desastres.</p>
+        </article>
+        <article class="valor-card">
+          <strong>Justiça climática</strong>
+          <p>Equidade na proteção, reparação histórica e inclusão.</p>
+        </article>
+        <article class="valor-card">
+          <strong>Soberania de dados</strong>
+          <p>Autonomia na produção de evidências científicas.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Seção Eixos Metodológicos (#eixos) -->
+    <section id="eixos" class="section-wrap" style="background-color: #FAF8F5;" aria-labelledby="eixos-title">
+      <div class="section-header">
+        <h2 id="eixos-title">Eixos metodológicos</h2>
+        <p>Os cinco eixos que organizam a execução do projeto, do nivelamento de dados à institucionalização da rede.</p>
+      </div>
+
+      <div class="eixos-grid">
+        <article class="eixo-card">
+          <div class="eixo-num" aria-hidden="true">1</div>
+          <div class="eixo-body">
+            <h3>Harmonização e microdados</h3>
+            <p>Construção da base BATER-ALC e integração de microdados censitários do Brasil, Equador e Peru.</p>
+          </div>
+        </article>
+
+        <article class="eixo-card">
+          <div class="eixo-num" aria-hidden="true">2</div>
+          <div class="eixo-body">
+            <h3>Modelagem e dinâmica de risco</h3>
+            <p>Validação do modelo de previsão baseada em impactos em bacias piloto, integrando variáveis físicas e o índice SoVI-I ALC.</p>
+          </div>
+        </article>
+
+        <article class="eixo-card">
+          <div class="eixo-num" aria-hidden="true">3</div>
+          <div class="eixo-body">
+            <h3>Análise interseccional e RRD</h3>
+            <p>Aplicação do Índice de Inclusão Interseccional e de protocolos de gênero nos territórios críticos.</p>
+          </div>
+        </article>
+
+        <article class="eixo-card">
+          <div class="eixo-num" aria-hidden="true">4</div>
+          <div class="eixo-body">
+            <h3>Inovação e tecnologias sociais</h3>
+            <p>Implementação de alertas de previsão baseada em impactos no sistema SALVAR, com interface multilíngue e protocolos decoloniais.</p>
+          </div>
+        </article>
+
+        <article class="eixo-card">
+          <div class="eixo-num" aria-hidden="true">5</div>
+          <div class="eixo-body">
+            <h3>Extensão e governança regional</h3>
+            <p>Formação de multiplicadores territoriais e institucionalização da rede.</p>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align: center; margin-top: 2.5rem;">
+        <a href="instituicoes.html" class="btn-outline-accent">
+          Ver instituições por eixo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Seção A Rede (#rede) -->
+    <section id="rede" class="stats-section section-wrap" aria-labelledby="rede-title">
+      <div class="section-header">
+        <h2 id="rede-title">A Rede em números</h2>
+        <p>Capilaridade continental articulando academia, serviços técnicos governamentais e territórios.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val">44</div>
+          <div class="stat-lbl">Pesquisadores e pesquisadoras</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">22</div>
+          <div class="stat-lbl">Instituições parceiras</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">9</div>
+          <div class="stat-lbl">Países</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val">5</div>
+          <div class="stat-lbl">Regiões brasileiras</div>
+        </div>
+      </div>
+
+      <div class="rede-callout">
+        <p style="margin: 0 0 1.25rem 0; line-height: 1.6;">
+          A Rede Interseccional de Resiliência reúne Instituições Científicas e Tecnológicas, universidades, órgãos de governo, organizações da sociedade civil e empresas de engenharia da América Latina e do Caribe em prol de uma ciência decolonial e transformadora.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="rede.html" class="btn-terracotta" style="font-size: 0.9375rem;">
+            Conheça as pessoas da Rede
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+          <a href="instituicoes.html" class="btn-outline-accent" style="font-size: 0.9375rem;">
+            Ver as instituições parceiras
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Projeto (#projeto) -->
+    <section id="projeto" class="section-wrap" aria-labelledby="projeto-title">
+      <div class="section-header">
+        <h2 id="projeto-title">Projeto fundador</h2>
+        <p>A iniciativa estruturante apoiada pelo Programa PROSUL Pepe Mujica.</p>
+      </div>
+
+      <div class="projeto-banner">
+        <div class="status-card" style="margin-bottom: 1.5rem; border-color: var(--accent);">
+          <div class="status-card-top">
+            <span class="status-card-label">Primeiro projeto da Rede</span>
+            <span class="badge-terracotta">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Contemplado em outubro de 2026
+            </span>
+          </div>
+          <p class="status-card-title">Projeto submetido ao CNPq em maio de 2026 — Processo 445280/2026-3</p>
+          <p class="status-card-desc">Chamada MCTI/CNPq nº 02/2026 — Programa PROSUL Pepe Mujica, Faixa B (Redes Temáticas de Pesquisa Emergentes).</p>
+        </div>
+        <p style="color: var(--text-muted); font-size: 1.0625rem; line-height: 1.6; margin: 0;">
+          O ALERTA-INTERSEC reúne 44 pesquisadoras e pesquisadores de nove países da América Latina e do Caribe com o objetivo de integrar gênero, raça, deficiência e território ao monitoramento de desastres. A iniciativa promove a transição do monitoramento hidrometeorológico puramente físico para a previsão baseada em impactos sensível à interseccionalidade, a partir da criação e validação do Índice de Vulnerabilidade Socioeconômica Interseccional (SoVI-I ALC).
+        </p>
+
+        <div class="projeto-grid">
+          <div class="projeto-col">
+            <h3>Objetivo geral</h3>
+            <p>
+              Estruturar uma matriz metodológica padronizada para identificar, mapear e quantificar a sobreposição de desigualdades raciais e de gênero na exposição e na recuperação frente a eventos extremos geo-hidrológicos, promovendo a cooperação transnacional no Sul Global.
+            </p>
+          </div>
+
+          <div class="projeto-col">
+            <h3>Metodologia</h3>
+            <p>
+              Integração de modelagem hidrológica-geotécnica e microdados censitários regionais, combinados a tecnologias sociais decoloniais, escuta comunitária qualificada e mapeamento rigoroso de zonas de sacrifício socioambiental.
+            </p>
+          </div>
+
+          <div class="projeto-col">
+            <h3>Resultados esperados</h3>
+            <ul>
+              <li>Protocolo operacional sensível a gênero e raça para monitoramento de impactos.</li>
+              <li>Base de indicadores BATER-ALC de livre acesso.</li>
+              <li>Formação de multiplicadores territoriais e capacitação em gestão de riscos.</li>
+              <li>Publicação científica qualificada e indexação em acesso aberto.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p style="margin: 1.5rem 0 0; font-size: 0.875rem; color: var(--text-muted); font-style: italic; border-top: 1px solid var(--border); padding-top: 1rem;">
+          O Observatório Interseccional de Desastres está previsto como legado do projeto, na fase final do cronograma de 36 meses.
+        </p>
+      </div>
+    </section>
+
+    <!-- Seção Produção (#producao) -->
+    <section id="producao" class="section-wrap" style="background-color: #FAF8F5;" aria-labelledby="producao-title">
+      <div class="section-header">
+        <h2 id="producao-title">Produção e Dados</h2>
+        <p>Repositório preliminar de publicações, protocolos de trabalho e bases de evidência em fase de elaboração.</p>
+      </div>
+
+      <div class="producao-list">
+        <!-- Item 1 -->
+        <article class="producao-item">
+          <div>
+            <div class="item-meta">
+              <span class="tag-tipo">Artigo Científico</span>
+              <span class="item-ano">2026 · Em submissão</span>
+            </div>
+            <div class="item-titulo">[Quadro conceitual: interseccionalidade como determinante primário na gestão de riscos na América Latina]</div>
+          </div>
+          <!-- TODO: apontar para repositório Zenodo com DOI quando publicado -->
+          <a href="#" class="btn-disabled-placeholder" aria-disabled="true" role="button" onclick="event.preventDefault();" title="Item em preparação editorial">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Pré-print em breve
+          </a>
+        </article>
+
+        <!-- Item 2 -->
+        <article class="producao-item">
+          <div>
+            <div class="item-meta">
+              <span class="tag-tipo">Relatório Técnico</span>
+              <span class="item-ano">2026 · Versão piloto</span>
+            </div>
+            <div class="item-titulo">[Diretrizes metodológicas para inclusão de marcadores de raça e gênero nos Planos Municipais de Contingência]</div>
+          </div>
+          <!-- TODO: disponibilizar PDF de download após validação no conselho -->
+          <a href="#" class="btn-disabled-placeholder" aria-disabled="true" role="button" onclick="event.preventDefault();" title="Em processo de revisão pelos parceiros">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Relatório Restrito
+          </a>
+        </article>
+
+        <!-- Item 3 -->
+        <article class="producao-item">
+          <div>
+            <div class="item-meta">
+              <span class="tag-tipo">Conjunto de Dados</span>
+              <span class="item-ano">2026 · Metadados abertos</span>
+            </div>
+            <div class="item-titulo">[Matriz harmonizada de indicadores censitários e suscetibilidade geo-hidrológica — Casos-piloto]</div>
+          </div>
+          <!-- TODO: vincular ao repositório aberto de dados científicos -->
+          <a href="#" class="btn-disabled-placeholder" aria-disabled="true" role="button" onclick="event.preventDefault();" title="Em processo de anonimização e homologação LGPD">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Base em Curadoria
+          </a>
+        </article>
+      </div>
+
+      <p class="producao-footnote">
+        Todas as publicações e dados abertos gerados pela <strong>RIR</strong> serão depositados com identificador digital permanente (<abbr title="Digital Object Identifier">DOI</abbr>) via repositório Zenodo e indexados nos perfis <abbr title="Open Researcher and Contributor ID">ORCID</abbr> e plataformas curriculares institucionais dos autores participantes.
+      </p>
+
+      <div style="text-align: center; margin-top: 1.75rem;">
+        <!-- TODO: criar producao.html -->
+        <a href="producao.html" class="btn-outline-accent">
+          Ver toda a produção
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Seção Contato (#contato) -->
+    <section id="contato" class="section-wrap" aria-labelledby="contato-title">
+      <div class="section-header">
+        <h2 id="contato-title">Participe da Rede</h2>
+        <p>Convidamos grupos de pesquisa, órgãos gestores de risco e organizações da sociedade civil a somarem forças na construção da rede.</p>
+      </div>
+
+      <div class="contato-wrap">
+        <!-- Aviso de desenvolvimento para o formulário -->
+        <div class="form-alert" role="status">
+          <strong>Aviso de homologação:</strong> Este formulário ainda não está conectado a um serviço de envio ativo. Nenhuma informação será gravada em banco externo nesta versão preliminar.
+        </div>
+        <!--
+          TODO: Configurar endpoint real de envio (ex: action="https://formspree.io/f/..." ou Cloudflare Workers POST) antes de colocar a página em produção.
+        -->
+
+        <form id="formAdesao" novalidate>
+          <div class="form-group">
+            <label for="campoNome">Nome completo <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="campoNome" name="nome" class="form-input" required autocomplete="name" aria-describedby="helpNome">
+            <div id="helpNome" class="form-help">Informe seu nome como consta em publicações ou registros profissionais.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="campoEmail">E-mail institucional <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="campoEmail" name="email" class="form-input" required autocomplete="email" aria-describedby="helpEmail">
+            <div id="helpEmail" class="form-help">Dê preferência a endereços de sua universidade, centro de pesquisa ou órgão público.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="campoInstituicao">Instituição e país <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="campoInstituicao" name="instituicao" class="form-input" required placeholder="Ex.: Universidade de Brasília (UnB) — Brasil" aria-describedby="helpInst">
+            <div id="helpInst" class="form-help">Nome por extenso e sigla da organização, seguido do país sede.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="campoAtuacao">Área principal de atuação <span class="req" aria-hidden="true">*</span></label>
+            <select id="campoAtuacao" name="atuacao" class="form-select" required>
+              <option value="" disabled selected>Selecione uma área...</option>
+              <option value="pesquisa">Pesquisa acadêmica / Pós-graduação</option>
+              <option value="gestao">Gestão de riscos e Defesa Civil</option>
+              <option value="sociedade">Sociedade civil / Coletivo comunitário</option>
+              <option value="setor_publico">Setor público e formulação de políticas</option>
+              <option value="outro">Outro setor correlato</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="campoMensagem">Mensagem ou proposta de cooperação</label>
+            <textarea id="campoMensagem" name="mensagem" rows="4" class="form-textarea" placeholder="Descreva brevemente sua linha de atuação, projetos em andamento ou interesse na cooperação com a RIR..."></textarea>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="campoLgpd" name="consentimento_lgpd" required>
+            <label for="campoLgpd">
+              Autorizo o contato e o tratamento dos meus dados para fins de articulação da Rede, nos termos da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr> (Lei Federal nº 13.709/2018). <span class="req" aria-hidden="true">*</span>
+            </label>
+          </div>
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn-terracotta" id="btnSubmitForm">
+              Enviar manifestação de interesse
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <!-- Coluna 1: Identidade -->
+      <div class="footer-col">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+          <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="22" stroke="#FAF8F5" stroke-width="2" fill="transparent"/>
+            <line x1="14" y1="18" x2="34" y2="18" stroke="#D9A44B" stroke-width="2"/>
+            <line x1="14" y1="18" x2="24" y2="34" stroke="#B85C38" stroke-width="2"/>
+            <line x1="34" y1="18" x2="24" y2="34" stroke="#FAF8F5" stroke-width="2"/>
+            <circle cx="24" cy="11" r="3.5" fill="#FAF8F5"/>
+            <circle cx="14" cy="18" r="4" fill="#B85C38"/>
+            <circle cx="34" cy="18" r="4" fill="#FAF8F5"/>
+            <circle cx="24" cy="34" r="4.5" fill="#D9A44B"/>
+          </svg>
+          <span style="font-family: var(--font-serif); font-size: 1.125rem; font-weight: 700; color: #FAF8F5;">RIR</span>
+        </div>
+        <p>
+          <strong>Rede Interseccional de Resiliência</strong><br>
+          Ciência, gênero e raça na redução de riscos de desastres.
+        </p>
+        <p style="font-size: 0.8125rem;">
+          Iniciativa autônoma de cooperação interinstitucional no Sul Global, formulada em maio de 2026.
+        </p>
+      </div>
+
+      <!-- Coluna 2: Navegação e Idiomas -->
+      <div class="footer-col">
+        <h3>Navegação do Portal</h3>
+        <ul class="footer-nav" aria-label="Links do rodapé">
+          <li><a href="#sobre">Sobre a RIR</a></li>
+          <li><a href="#eixos">Eixos metodológicos</a></li>
+          <li><a href="rede.html">A Rede</a></li>
+          <li><a href="instituicoes.html">Instituições</a></li>
+          <li><a href="#projeto">Projeto fundador</a></li>
+          <li><a href="#producao">Produção e Dados</a></li>
+          <li><a href="#contato">Contato e Adesão</a></li>
+        </ul>
+        <div style="margin-top: 1.25rem;">
+          <p style="font-size: 0.8125rem; margin-bottom: 0.5rem; color: #FAF8F5;">Outros idiomas (em desenvolvimento):</p>
+          <div style="display: flex; gap: 0.75rem; font-size: 0.875rem;">
+            <!-- TODO: criar en/index.html e es/index.html -->
+            <!-- TODO: vincular quando os diretórios en/ e es/ forem gerados -->
+            <a href="en/" style="color: #D9A44B; text-decoration: underline;">English (EN)</a>
+            <span aria-hidden="true" style="color: #666;">·</span>
+            <a href="es/" style="color: #D9A44B; text-decoration: underline;">Español (ES)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna 3: Informações Institucionais e Licença -->
+      <div class="footer-col">
+        <h3>Marco Institucional</h3>
+        <p>
+          Idealização: Regla Somoza (<abbr title="Centro Nacional de Monitoramento e Alertas de Desastres Naturais">CEMADEN</abbr>/<abbr title="Ministério da Ciência, Tecnologia e Inovação">MCTI</abbr>).
+        </p>
+        <p>
+          Primeiro projeto submetido ao <abbr title="Conselho Nacional de Desenvolvimento Científico e Tecnológico">CNPq</abbr>, Processo 445280/2026-3.
+        </p>
+        <p style="font-size: 0.8125rem;">
+          Todo o conteúdo deste portal está licenciado sob licença internacional
+          <a href="https://creativecommons.org/licenses/by/4.0/deed.pt_BR" target="_blank" rel="noopener noreferrer" style="color: #D9A44B; text-decoration: underline;">
+            Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)
+          </a>.
+        </p>
+      </div>
+    </div>
+
+    <!-- Linha Inferior -->
+    <div class="footer-bottom">
+      <div>
+        Versão de homologação científica · Maio de 2026 · Brasil / América Latina
+      </div>
+      <div>
+        <!-- TODO: criar privacidade.html -->
+        <!-- TODO: criar página privacidade.html detalhando encarregado DPO e termos de uso dos dados -->
+        <a href="privacidade.html" title="Diretrizes de proteção de dados e privacidade">Política de Privacidade</a>
+      </div>
+    </div>
+  </footer>
+
+  <!--
+    CONFIGURAÇÃO RECOMENDADA PARA CLOUDFLARE PAGES:
+    Arquivo: public/_headers
+    Conteúdo sugerido para o deploy de produção:
+    /*
+      X-Frame-Options: DENY
+      X-Content-Type-Options: nosniff
+      Referrer-Policy: strict-origin-when-cross-origin
+      Permissions-Policy: geolocation=(), microphone=(), camera=()
+      Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self';
+    (Observação: no lançamento oficial, retirar o cabeçalho 'X-Robots-Tag: noindex' se houver)
+  -->
+
+  <script>
+    // Progressive enhancement: menu mobile acessível
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuBtn = document.getElementById('menuToggle');
+      const menuNav = document.getElementById('menuNavWrapper');
+
+      if (menuBtn && menuNav) {
+        menuBtn.addEventListener('click', function () {
+          const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+          const nextState = !isExpanded;
+
+          menuBtn.setAttribute('aria-expanded', String(nextState));
+          menuNav.classList.toggle('is-open', nextState);
+          menuBtn.setAttribute('aria-label', nextState ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
+        });
+
+        // Fechar o menu ao clicar em links internos
+        const navLinks = menuNav.querySelectorAll('a[href^="#"]');
+        navLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            if (menuNav.classList.contains('is-open')) {
+              menuNav.classList.remove('is-open');
+              menuBtn.setAttribute('aria-expanded', 'false');
+              menuBtn.setAttribute('aria-label', 'Abrir menu de navegação');
+            }
+          });
+        });
+      }
+
+      // Validação amigável do formulário sem submissão simulada indevida
+      const formAdesao = document.getElementById('formAdesao');
+      if (formAdesao) {
+        formAdesao.addEventListener('submit', function (evt) {
+          evt.preventDefault();
+          
+          if (!formAdesao.checkValidity()) {
+            formAdesao.reportValidity();
+            return;
+          }
+
+          // Notificação de desenvolvimento utilizando componente Shell se disponível
+          if (window.skipUI && typeof window.skipUI.toast === 'function') {
+            window.skipUI.toast(
+              'Formulário preenchido com sucesso! Em versão de desenvolvimento o envio direto está desativado.',
+              { type: 'success', title: 'Validação Concluída' }
+            );
+          } else {
+            alert('Validação concluída com sucesso. Nesta versão de desenvolvimento o envio direto está desativado até a conexão do endpoint oficial.');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

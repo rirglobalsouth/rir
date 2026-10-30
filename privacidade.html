@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIR — Política de Privacidade (LGPD)</title>
+
+  <!-- Bloqueio de indexação para ambiente de homologação/desenvolvimento -->
+  <!-- TODO: remover noindex e publicar _headers sem X-Robots-Tag no lançamento -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Links canônicos e hreflang -->
+  <!-- TODO: substituir por URL absoluta no lançamento (ex.: https://redeinterseccional.org/privacidade.html) -->
+  <link rel="canonical" href="privacidade.html">
+  <link rel="alternate" hreflang="pt-BR" href="privacidade.html">
+  <link rel="alternate" hreflang="en" href="en/privacidade.html">
+  <link rel="alternate" hreflang="es" href="es/privacidade.html">
+  <link rel="alternate" hreflang="x-default" href="privacidade.html">
+
+  <style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Tokens, utilities and components (basecoat 1.0 markup, no CDN); artifacts
+   override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+  --success: #0a7a35;
+  --danger: #c0262d;
+  --warning: #8a5300;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --success: #4ade80;
+    --danger: #f87171;
+    --warning: #fbbf24;
+  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --success: #4ade80;
+  --danger: #f87171;
+  --warning: #fbbf24;
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+/* Pages generated before the shell had its own components still link the
+   basecoat CDN, which reads its own tokens and switches theme only on a
+   .dark class. Bridged to the shell's, whatever of it those pages use takes
+   the page's accent and follows the declared theme. Its --accent token is a
+   hover tint, renamed in its theme as --color-accent; the shell's --accent is
+   the brand colour, so the tint is derived from it here. */
+:root {
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-contrast);
+  --secondary: color-mix(in srgb, var(--text) 7%, var(--surface));
+  --secondary-foreground: var(--text);
+  --muted: color-mix(in srgb, var(--text) 5%, var(--surface));
+  --muted-foreground: var(--text-muted);
+  --color-accent: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --color-accent-foreground: var(--text);
+  --destructive: var(--danger);
+  --input: var(--border);
+  --ring: var(--accent);
+}
+* { box-sizing: border-box; }
+/* The reset the pages were written against: they all linked basecoat, which
+   ships Tailwind's. Its components now live here, so the reset does too. */
+*, ::before, ::after, ::backdrop { margin: 0; padding: 0; border: 0 solid; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+a { color: inherit; text-decoration: inherit; }
+b, strong { font-weight: bolder; }
+ol, ul, menu { list-style: none; }
+svg, video, canvas, iframe { display: block; vertical-align: middle; }
+button, input, select, textarea { color: inherit; background-color: transparent; border-radius: 0; }
+table { border-collapse: collapse; }
+hr { height: 0; color: inherit; border-top-width: 1px; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: 28px; font-weight: 650; line-height: 1.1; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: var(--success); }
+.kpi .kpi-delta.down { color: var(--danger); }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+/* Layout and type utilities: what the pages kept spelling in style="".
+   Spacing and type sizes follow Tailwind's scale; there is no Tailwind. */
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.stack { display: flex; flex-direction: column; gap: var(--space); }
+.between { justify-content: space-between; }
+.grow { flex: 1 1 0; min-width: 0; }
+.cols-2, .cols-3, .cols-4 { display: grid; gap: var(--space); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) {
+  .cols-2, .cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) { .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; }
+.m-0 { margin: 0; }
+.mt-1 { margin-top: 4px; } .mt-2 { margin-top: 8px; } .mt-3 { margin-top: 12px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mb-1 { margin-bottom: 4px; } .mb-2 { margin-bottom: 8px; } .mb-3 { margin-bottom: 12px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; }
+.p-2 { padding: 8px; } .p-3 { padding: 12px; } .p-4 { padding: 16px; } .p-6 { padding: 24px; }
+.text-xs { font-size: 12px; } .text-sm { font-size: 14px; } .text-base { font-size: 16px; }
+.text-lg { font-size: 18px; } .text-xl { font-size: 20px; line-height: 1.35; }
+.text-2xl { font-size: 24px; line-height: 1.25; } .text-3xl { font-size: 30px; line-height: 1.2; }
+.font-medium { font-weight: 500; } .font-semibold { font-weight: 600; } .font-bold { font-weight: 700; }
+.text-right { text-align: right; } .text-center { text-align: center; }
+.nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.w-full { width: 100%; }
+.text-success { color: var(--success); } .text-danger { color: var(--danger); } .text-warning { color: var(--warning); }
+
+/* Components, with basecoat 1.0 markup (variants and sizes are data
+   attributes) and the shell tokens, so a page needs neither component CSS
+   nor a CSS framework. An older page that also links basecoat gets these
+   rules after it, over the same properties. */
+button, input, select, textarea { font: inherit; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 0 14px; border: 1px solid transparent; border-radius: calc(var(--radius) - 2px);
+  background: var(--accent); color: var(--accent-contrast);
+  font-size: 14px; font-weight: 500; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 86%, #000); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.btn[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.btn[data-variant="secondary"]:hover { background: color-mix(in srgb, var(--text) 14%, var(--surface)); }
+.btn[data-variant="outline"] { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn[data-variant="ghost"] { background: transparent; color: var(--text); }
+.btn[data-variant="outline"]:hover, .btn[data-variant="ghost"]:hover { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.btn[data-variant="destructive"] { background: var(--danger); color: var(--bg); }
+.btn[data-variant="destructive"]:hover { background: color-mix(in srgb, var(--danger) 86%, var(--text)); }
+.btn[data-variant="link"] { height: auto; padding: 0; background: none; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.btn[data-size="sm"] { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn[data-size="lg"] { height: 42px; padding: 0 20px; font-size: 15px; }
+.btn[data-size="icon"] { width: 36px; padding: 0; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px;
+  border: 1px solid transparent; border-radius: 999px; background: var(--accent); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 600; line-height: 1.5; white-space: nowrap;
+}
+.badge[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.badge[data-variant="outline"] { background: transparent; color: var(--text); border-color: var(--border); }
+.badge[data-variant="destructive"] { background: color-mix(in srgb, var(--danger) 14%, var(--surface)); color: var(--danger); }
+
+.alert {
+  display: grid; gap: 4px; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+.alert h2, .alert h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.alert p, .alert section { margin: 0; color: var(--text-muted); }
+.alert[data-variant="destructive"] { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); background: color-mix(in srgb, var(--danger) 7%, var(--surface)); color: var(--danger); }
+
+.card {
+  display: flex; flex-direction: column; gap: 16px; padding: 20px 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 2px);
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+}
+.card > header, .card > section, .card > footer { padding: 0 20px; }
+.card > header { display: grid; gap: 4px; }
+.card > header h2, .card > header h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.card > header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+.card > footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.input {
+  width: 100%; min-height: 36px; padding: 6px 12px; border: 1px solid var(--border); border-radius: calc(var(--radius) - 2px);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+textarea.input { min-height: 84px; resize: vertical; }
+.input::placeholder { color: var(--text-muted); }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 14px; font-weight: 500; }
+.field [role="alert"] { color: var(--danger); font-size: 13px; }
+
+dialog.dialog {
+  width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; padding: 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  background: var(--surface); color: var(--text); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+dialog.dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+dialog.dialog > div { display: grid; gap: 16px; padding: 24px; }
+dialog.dialog header { display: grid; gap: 4px; }
+dialog.dialog header h2 { margin: 0; font-size: 18px; font-weight: 600; }
+dialog.dialog header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+dialog.dialog footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+.tabs { display: grid; gap: 12px; }
+.tabs > [role="tablist"] {
+  display: inline-flex; gap: 4px; width: fit-content; max-width: 100%; padding: 4px; overflow-x: auto;
+  border-radius: var(--radius); background: color-mix(in srgb, var(--text) 6%, var(--surface));
+}
+.tabs [role="tab"] {
+  padding: 6px 12px; border: 0; border-radius: calc(var(--radius) - 4px); background: transparent;
+  color: var(--text-muted); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer;
+}
+.tabs [role="tab"][aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.tabs [role="tabpanel"][hidden] { display: none; }
+
+.accordion > details { border-bottom: 1px solid var(--border); }
+.accordion > details > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0; font-weight: 500; list-style: none; cursor: pointer;
+}
+.accordion > details > summary::-webkit-details-marker { display: none; }
+.accordion > details > summary::after { content: "+"; color: var(--text-muted); font-size: 18px; line-height: 1; }
+.accordion > details[open] > summary::after { content: "\2212"; }
+.accordion > details > :not(summary) { margin: 0 0 14px; color: var(--text-muted); }
+
+.toaster {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-direction: column-reverse; gap: 8px;
+  width: min(360px, calc(100vw - 32px)); pointer-events: none;
+}
+.toaster .toast { pointer-events: auto; transition: opacity 200ms ease, transform 200ms ease; }
+.toaster .toast[aria-hidden="true"] { opacity: 0; transform: translateY(8px); }
+.toaster .toast-content {
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); font-size: 13px;
+}
+.toaster .toast-content h2 { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
+.toaster .toast-content p { margin: 0; color: var(--text-muted); }
+
+/* skipUI building blocks. */
+.skip-table-search { max-width: 320px; margin-bottom: 12px; }
+.skip-table-wrap { overflow-x: auto; }
+table.shell-table th[data-sort] { cursor: pointer; user-select: none; }
+table.shell-table th[aria-sort="ascending"]::after { content: " \25B2"; font-size: 9px; }
+table.shell-table th[aria-sort="descending"]::after { content: " \25BC"; font-size: 9px; }
+table.shell-table td.skip-table-empty { color: var(--text-muted); text-align: center; padding: 24px 0; }
+.skip-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 13px; color: var(--text-muted); }
+.toaster .toast[data-type="success"] .toast-content { border-left: 3px solid var(--success); }
+.toaster .toast[data-type="error"] .toast-content { border-left: 3px solid var(--danger); }
+
+</style>
+  <script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
+
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisFmt keeps axis tick labels short (compact notation) so long values
+  // (e.g. full BRL amounts) never clip against the plot edge.
+  function axisFmt(v) {
+    return fmt.num(v, { notation: "compact", maximumFractionDigits: 1 });
+  }
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  function coerceFormat(spec) {
+    if (typeof spec === "function") return spec;
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el = resolve(el);
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 12, plotH = H - padT - padB;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 12, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (v / max) * plotH);
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      var tx = svgEl("text", { x: x + bw / 2, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // line(el, {labels:[], values:[], color?, format?}) — single-series line.
+  function line(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 16, plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 16, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    var pts = cfg.values.map(function (v, i) {
+      var x = padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+      var y = padT + plotH - (v / max) * plotH;
+      return [x, y];
+    });
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    pts.forEach(function (p, i) {
+      var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(cfg.values[i]);
+      c.appendChild(t);
+      svg.appendChild(c);
+      var tx = svgEl("text", { x: p[0], y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // donut(el, {labels:[], values:[], colors?}) — donut with center total.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    // At 100% of a wide container the donut outgrows the height pages give
+    // the box and spills over the next section: keep it at its own size.
+    svg.style.maxWidth = W + "px";
+    svg.style.margin = "0 auto";
+    var total = cfg.values.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var palette = cfg.colors || [accent(), "#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4"];
+    var a0 = -Math.PI / 2;
+    cfg.values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + fmt.num(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    var center = svgEl("text", { x: cx, y: cy + 5, "text-anchor": "middle", "font-size": 20, "font-weight": 650, fill: "currentColor" });
+    center.textContent = fmt.num(total);
+    svg.appendChild(center);
+  }
+
+  // ---- Page building blocks: what dashboards and small systems kept
+  // re-implementing — a searchable sortable table, a KPI row, tabs, toasts,
+  // dialogs, saved state and mock data. Every call is opt-in, so a page that
+  // brings its own versions keeps them.
+
+  function resolve(target) {
+    return typeof target === "string" ? document.querySelector(target) : target;
+  }
+
+  function node(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function isNumberColumn(col) {
+    return col.align === "right" || col.format === "num" || col.format === "brl" || col.format === "pct";
+  }
+
+  function cellText(col, row) {
+    var value = row[col.key];
+    if (value == null) return "";
+    return col.format ? coerceFormat(col.format)(value) : String(value);
+  }
+
+  function compareValues(a, b) {
+    if (typeof a === "number" && typeof b === "number") return a - b;
+    return String(a == null ? "" : a).localeCompare(String(b == null ? "" : b), "pt-BR", { numeric: true });
+  }
+
+  // table(el, {columns, rows, search?, pageSize?, empty?, onRowClick?}) — a
+  // table.shell-table with sortable headers, an optional search box and
+  // pager. A column is {key, label, format?, align?, sortable? (true),
+  // render?(value, row) returning a Node or an HTML string — the page writes
+  // its cell templates as markup}. Plain values are always set as text.
+  // Returns {setRows, rows}.
+  function table(target, cfg) {
+    var root = resolve(target);
+    var cols = cfg.columns || [];
+    var pageSize = cfg.pageSize || 0;
+    var state = { rows: (cfg.rows || []).slice(), query: "", key: null, dir: 1, page: 0 };
+    root.innerHTML = "";
+    if (cfg.search) {
+      var search = node("input", "input skip-table-search");
+      search.type = "search";
+      search.placeholder = typeof cfg.search === "string" ? cfg.search : "Buscar…";
+      search.setAttribute("aria-label", search.placeholder);
+      search.addEventListener("input", function () {
+        state.query = search.value.trim().toLowerCase();
+        state.page = 0;
+        draw();
+      });
+      root.appendChild(search);
+    }
+    var tableEl = node("table", "shell-table");
+    var headRow = node("tr");
+    var heads = cols.map(function (col) {
+      var th = node("th", isNumberColumn(col) ? "num" : "", col.label == null ? col.key : col.label);
+      th.scope = "col";
+      if (col.sortable !== false) {
+        var toggle = function () {
+          state.dir = state.key === col.key ? -state.dir : 1;
+          state.key = col.key;
+          draw();
+        };
+        th.setAttribute("data-sort", col.key);
+        th.tabIndex = 0;
+        th.addEventListener("click", toggle);
+        th.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+        });
+      }
+      headRow.appendChild(th);
+      return th;
+    });
+    var thead = node("thead");
+    var tbody = node("tbody");
+    var wrap = node("div", "skip-table-wrap");
+    var pager = node("div", "skip-pager");
+    thead.appendChild(headRow);
+    tableEl.appendChild(thead);
+    tableEl.appendChild(tbody);
+    wrap.appendChild(tableEl);
+    root.appendChild(wrap);
+    if (pageSize) root.appendChild(pager);
+
+    function visibleRows() {
+      var rows = state.rows;
+      if (state.query) {
+        rows = rows.filter(function (row) {
+          return cols.some(function (col) { return cellText(col, row).toLowerCase().indexOf(state.query) >= 0; });
+        });
+      }
+      if (state.key) {
+        var key = state.key, dir = state.dir;
+        rows = rows.slice().sort(function (a, b) { return dir * compareValues(a[key], b[key]); });
+      }
+      return rows;
+    }
+
+    function drawRow(row) {
+      var tr = node("tr");
+      cols.forEach(function (col) {
+        var td = node("td", isNumberColumn(col) ? "num" : "");
+        if (!col.render) {
+          td.textContent = cellText(col, row);
+        } else {
+          var content = col.render(row[col.key], row);
+          if (content instanceof Node) td.appendChild(content);
+          else td.innerHTML = content == null ? "" : String(content);
+        }
+        tr.appendChild(td);
+      });
+      // The row stays a row (no role) and takes focus, so a keyboard reaches
+      // the same action; keys pressed on a control inside a cell are its own.
+      if (cfg.onRowClick) {
+        tr.style.cursor = "pointer";
+        tr.tabIndex = 0;
+        tr.addEventListener("click", function () { cfg.onRowClick(row); });
+        tr.addEventListener("keydown", function (e) {
+          if (e.target !== tr || (e.key !== "Enter" && e.key !== " ")) return;
+          e.preventDefault();
+          cfg.onRowClick(row);
+        });
+      }
+      return tr;
+    }
+
+    function pagerButton(label, disabled, step) {
+      var button = node("button", "btn", label);
+      button.type = "button";
+      button.setAttribute("data-variant", "outline");
+      button.setAttribute("data-size", "sm");
+      button.disabled = disabled;
+      button.addEventListener("click", function () { state.page += step; draw(); });
+      return button;
+    }
+
+    function draw() {
+      var rows = visibleRows();
+      heads.forEach(function (th, i) {
+        if (cols[i].key === state.key) th.setAttribute("aria-sort", state.dir > 0 ? "ascending" : "descending");
+        else th.removeAttribute("aria-sort");
+      });
+      var pages = pageSize ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1;
+      state.page = Math.min(state.page, pages - 1);
+      var shown = pageSize ? rows.slice(state.page * pageSize, (state.page + 1) * pageSize) : rows;
+      tbody.innerHTML = "";
+      if (!shown.length) {
+        var empty = node("td", "skip-table-empty", cfg.empty || "Nenhum registro encontrado.");
+        empty.colSpan = cols.length;
+        tbody.appendChild(node("tr")).appendChild(empty);
+      }
+      shown.forEach(function (row) { tbody.appendChild(drawRow(row)); });
+      if (!pageSize) return;
+      pager.innerHTML = "";
+      var from = rows.length ? state.page * pageSize + 1 : 0;
+      pager.appendChild(node("span", "", from + "–" + Math.min(rows.length, (state.page + 1) * pageSize) + " de " + rows.length));
+      var nav = node("div", "row gap-2");
+      nav.appendChild(pagerButton("Anterior", state.page === 0, -1));
+      nav.appendChild(pagerButton("Próxima", state.page >= pages - 1, 1));
+      pager.appendChild(nav);
+    }
+
+    draw();
+    return {
+      setRows: function (rows) { state.rows = rows.slice(); draw(); },
+      rows: visibleRows
+    };
+  }
+
+  // kpis(el, [{label, value, format?, delta?, hint?}]) — KPI cards in a
+  // responsive grid; delta is a fraction (0.12 renders as ▲ 12%).
+  function kpis(target, items) {
+    var root = resolve(target);
+    root.innerHTML = "";
+    root.classList.add("shell-grid");
+    items.forEach(function (item) {
+      var card = node("div", "panel kpi");
+      card.appendChild(node("span", "kpi-label", item.label));
+      card.appendChild(node("span", "kpi-value", item.format ? coerceFormat(item.format)(item.value) : String(item.value)));
+      if (typeof item.delta === "number") {
+        var up = item.delta >= 0;
+        card.appendChild(node("span", "kpi-delta " + (up ? "up" : "down"), (up ? "▲ " : "▼ ") + fmt.pct(Math.abs(item.delta))));
+      }
+      if (item.hint) card.appendChild(node("span", "kpi-label", item.hint));
+      root.appendChild(card);
+    });
+  }
+
+  // badge(text, variant?) — a .badge node for table cells and lists;
+  // variant is "secondary" | "outline" | "destructive" (default: primary).
+  function badge(text, variant) {
+    var el = node("span", "badge", text);
+    if (variant) el.setAttribute("data-variant", variant);
+    return el;
+  }
+
+  // tabs(el) — wires one .tabs block: [role=tab] buttons inside
+  // [role=tablist], each with aria-controls naming its [role=tabpanel].
+  function tabs(target) {
+    var root = resolve(target);
+    var buttons = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(chosen) {
+      buttons.forEach(function (b) {
+        var on = b === chosen;
+        b.setAttribute("aria-selected", on ? "true" : "false");
+        b.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(b.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    buttons.forEach(function (b, i) {
+      b.addEventListener("click", function () { select(b); });
+      b.addEventListener("keydown", function (e) {
+        var step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        var next = buttons[(i + step + buttons.length) % buttons.length];
+        next.focus();
+        select(next);
+      });
+    });
+    select(buttons.filter(function (b) { return b.getAttribute("aria-selected") === "true"; })[0] || buttons[0]);
+  }
+
+  // toast(message, {type?: "success" | "error", title?, duration?}) — a
+  // .toast in a shared .toaster at the bottom of the page.
+  function toast(message, opts) {
+    opts = opts || {};
+    var toaster = document.querySelector(".toaster") || document.body.appendChild(node("div", "toaster"));
+    var item = node("div", "toast");
+    item.setAttribute("role", opts.type === "error" ? "alert" : "status");
+    item.setAttribute("aria-hidden", "true");
+    if (opts.type) item.setAttribute("data-type", opts.type);
+    var content = node("div", "toast-content");
+    var section = node("section");
+    if (opts.title) section.appendChild(node("h2", "", opts.title));
+    section.appendChild(node("p", "", message));
+    content.appendChild(section);
+    item.appendChild(content);
+    toaster.appendChild(item);
+    requestAnimationFrame(function () { item.setAttribute("aria-hidden", "false"); });
+    setTimeout(function () {
+      item.setAttribute("aria-hidden", "true");
+      setTimeout(function () { item.remove(); }, 400);
+    }, opts.duration || 3000);
+  }
+
+  // Dialogs are native <dialog class="dialog">: a [data-dialog-open="id"]
+  // anywhere opens one, a [data-dialog-close] inside closes it, and a click on
+  // its backdrop closes it too. Plain dialog.showModal()/close() still work.
+  document.addEventListener("click", function (e) {
+    var target = e.target;
+    if (!(target instanceof Element)) return;
+    var opener = target.closest("[data-dialog-open]");
+    if (opener) {
+      var dialog = document.getElementById(opener.getAttribute("data-dialog-open"));
+      if (dialog && dialog.showModal && !dialog.open) dialog.showModal();
+      return;
+    }
+    var closer = target.closest("[data-dialog-close]");
+    if (closer && closer.closest("dialog")) {
+      closer.closest("dialog").close();
+      return;
+    }
+    if (target.tagName === "DIALOG" && target.classList.contains("dialog") && target.open) target.close();
+  });
+
+  // store(key, fallback) — JSON state in localStorage that never throws (a
+  // private window or a full quota falls back to memory): {get, set, update}.
+  function store(key, fallback) {
+    var memory;
+    // Set while the last write did not reach localStorage: what is stored
+    // there is older than memory until a write goes through again.
+    var unsaved = false;
+    var initial = function () { return fallback === undefined ? undefined : JSON.parse(JSON.stringify(fallback)); };
+    function get() {
+      if (!unsaved) {
+        try {
+          var raw = localStorage.getItem(key);
+          if (raw != null) return JSON.parse(raw);
+        } catch (e) { /* storage unavailable: memory below */ }
+      }
+      return memory !== undefined ? memory : initial();
+    }
+    function set(value) {
+      memory = value;
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        unsaved = false;
+      } catch (e) {
+        unsaved = true;
+      }
+      return value;
+    }
+    return { get: get, set: set, update: function (fn) { return set(fn(get())); } };
+  }
+
+  // mock — seeded random data, so a page asks for 90 days of numbers in one
+  // line instead of writing them out; the same seed gives the same data.
+  var FIRST = ["Ana", "Bruno", "Carla", "Diego", "Eduarda", "Felipe", "Gabriela", "Henrique", "Isabela", "João",
+    "Larissa", "Marcos", "Natália", "Otávio", "Paula", "Rafael", "Sofia", "Thiago", "Vanessa", "Lucas"];
+  var LAST = ["Silva", "Santos", "Oliveira", "Souza", "Pereira", "Costa", "Rodrigues", "Almeida", "Nascimento", "Lima",
+    "Araújo", "Fernandes", "Carvalho", "Gomes", "Martins", "Rocha", "Ribeiro", "Barbosa"];
+  var CITIES = ["São Paulo, SP", "Rio de Janeiro, RJ", "Belo Horizonte, MG", "Curitiba, PR", "Porto Alegre, RS",
+    "Salvador, BA", "Recife, PE", "Fortaleza, CE", "Brasília, DF", "Goiânia, GO", "Campinas, SP", "Florianópolis, SC",
+    "Manaus, AM", "Belém, PA", "Vitória, ES", "Natal, RN"];
+
+  function createMock(seed) {
+    var state = seed >>> 0;
+    function random() {
+      state = (state + 0x6d2b79f5) >>> 0;
+      var t = state;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    function int(min, max) { return min + Math.floor(random() * (max - min + 1)); }
+    function pick(list) { return list[Math.floor(random() * list.length)]; }
+    var mock = {
+      seed: function (value) { state = value >>> 0; return mock; },
+      random: random,
+      int: int,
+      float: function (min, max, decimals) {
+        var factor = Math.pow(10, decimals == null ? 2 : decimals);
+        return Math.round((min + random() * (max - min)) * factor) / factor;
+      },
+      pick: pick,
+      chance: function (p) { return random() < p; },
+      name: function () { return pick(FIRST) + " " + pick(LAST); },
+      city: function () { return pick(CITIES); },
+      // series(n, {start, trend, noise, min, decimals}) — a walk: each value
+      // moves by trend (fraction per step) plus up to ±noise of itself.
+      series: function (n, opts) {
+        opts = opts || {};
+        var value = opts.start == null ? 100 : opts.start;
+        var factor = Math.pow(10, opts.decimals || 0);
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          out.push(Math.max(opts.min == null ? 0 : opts.min, Math.round(value * factor) / factor));
+          value = value * (1 + (opts.trend || 0)) * (1 + (random() * 2 - 1) * (opts.noise == null ? 0.08 : opts.noise));
+        }
+        return out;
+      },
+      // dates(n, {end?, step?: "day" | "week" | "month"}) — ISO dates
+      // (YYYY-MM-DD), oldest first, ending at end (default: today).
+      dates: function (n, opts) {
+        opts = opts || {};
+        var end = opts.end ? new Date(opts.end) : new Date();
+        var out = [];
+        for (var i = n - 1; i >= 0; i--) {
+          var d = new Date(end.getTime());
+          if (opts.step === "month") d.setMonth(d.getMonth() - i);
+          else d.setDate(d.getDate() - i * (opts.step === "week" ? 7 : 1));
+          out.push(d.toISOString().slice(0, 10));
+        }
+        return out;
+      },
+      // rows(n, spec) — n objects; each spec value is a function(i), a list
+      // to pick from, or a constant.
+      rows: function (n, spec) {
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          var row = {};
+          for (var key in spec) {
+            var value = spec[key];
+            row[key] = typeof value === "function" ? value(i) : Array.isArray(value) ? pick(value) : value;
+          }
+          out.push(row);
+        }
+        return out;
+      }
+    };
+    return mock;
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+  window.skipUI = { table: table, kpis: kpis, badge: badge, tabs: tabs, toast: toast };
+  window.skipStore = store;
+  window.skipMock = createMock(20261022);
+})();
+
+</script>
+
+  <style>
+    :root {
+      --accent: #0B4F4A;
+      --accent-text: #0B4F4A;
+      --accent-contrast: #FFFFFF;
+      --rir-terracota: #B85C38;
+      --rir-ocre: #D9A44B;
+      --rir-bg: #FAF8F5;
+      --rir-text: #1A1A1A;
+      --rir-text-muted: #4A4A4A;
+      --rir-border: #E2DDD5;
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--rir-bg);
+      color: var(--rir-text);
+      font-family: var(--font-sans);
+      line-height: 1.75;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Acessibilidade: atalho para pular ao conteúdo */
+    .skip-link {
+      position: absolute;
+      top: -3rem;
+      left: 1rem;
+      background: var(--accent);
+      color: #FFFFFF;
+      padding: 0.5rem 1rem;
+      z-index: 1000;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 0 0 4px 4px;
+      transition: top 0.2s ease-in-out;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 3px solid var(--rir-ocre);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--rir-ocre);
+      outline-offset: 2px;
+    }
+
+    /* Faixa de homologação */
+    .dev-banner {
+      background-color: #F1ECE1;
+      color: var(--rir-text-muted);
+      font-size: 0.8125rem;
+      text-align: center;
+      padding: 0.375rem 1rem;
+      border-bottom: 1px solid var(--rir-border);
+    }
+
+    /* Cabeçalho institucional */
+    .site-header {
+      background-color: #FFFFFF;
+      border-bottom: 1px solid var(--rir-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 0.875rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--accent);
+    }
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: bold;
+      line-height: 1.2;
+      color: var(--accent);
+      margin: 0;
+    }
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--rir-text-muted);
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .main-nav a {
+      color: var(--rir-text);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .main-nav a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.8125rem;
+      border-left: 1px solid var(--rir-border);
+      padding-left: 0.75rem;
+    }
+    .lang-switcher a, .lang-switcher span {
+      text-decoration: none;
+      color: var(--rir-text-muted);
+      font-weight: 600;
+      padding: 0.125rem 0.25rem;
+    }
+    .lang-switcher a:hover {
+      color: var(--accent);
+    }
+    .lang-switcher [aria-current="page"] {
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* Estrutura principal */
+    .page-wrap {
+      max-width: 68rem;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.875rem;
+      color: var(--rir-text-muted);
+      margin-bottom: 1.25rem;
+    }
+    .breadcrumb a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    /* Tipografia de leitura jurídica */
+    .prose-column {
+      max-width: 72ch;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: 2.25rem;
+      line-height: 1.2;
+      color: var(--accent);
+      margin: 0 0 0.5rem 0;
+      font-weight: 700;
+    }
+
+    .version-meta {
+      font-size: 0.875rem;
+      color: var(--rir-text-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* Resumo em destaque */
+    .summary-card {
+      background-color: #FFFFFF;
+      border: 1px solid var(--rir-border);
+      border-left: 5px solid var(--rir-terracota);
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .summary-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--rir-terracota);
+      margin: 0 0 0.75rem 0;
+    }
+    .summary-text {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--rir-text);
+    }
+
+    /* Sumário / Índice */
+    .toc-card {
+      background-color: #FFFFFF;
+      border: 1px solid var(--rir-border);
+      border-radius: 4px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 3rem;
+    }
+    .toc-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 1rem 0;
+    }
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    @media (min-width: 640px) {
+      .toc-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem 1.5rem;
+      }
+    }
+    .toc-list a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      display: inline-block;
+      line-height: 1.4;
+    }
+    .toc-list a:hover {
+      color: var(--rir-terracota);
+      text-decoration: underline;
+    }
+
+    /* Seções Jurídicas */
+    .legal-section {
+      margin-bottom: 2.75rem;
+      scroll-margin-top: 5rem;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      line-height: 1.3;
+      color: var(--accent);
+      margin: 0 0 1rem 0;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--rir-border);
+      font-weight: 700;
+    }
+
+    h3 {
+      font-family: var(--font-sans);
+      font-size: 1.0625rem;
+      line-height: 1.4;
+      color: var(--rir-terracota);
+      margin: 1.5rem 0 0.5rem 0;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0 0 1rem 0;
+      font-size: 1rem;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    abbr {
+      text-decoration: none;
+      border-bottom: 1px dotted var(--rir-text-muted);
+      cursor: help;
+    }
+
+    .citation {
+      font-style: italic;
+    }
+
+    .highlight-card {
+      background-color: #F8F6F2;
+      border: 1px solid var(--rir-border);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem;
+      border-radius: 4px;
+      margin: 1.25rem 0;
+      font-size: 0.9375rem;
+    }
+    .highlight-card p {
+      margin: 0 0 0.5rem 0;
+    }
+    .highlight-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Nota de revisão jurídica */
+    .review-note {
+      background-color: #FFFDF7;
+      border: 1px dashed var(--rir-ocre);
+      padding: 1.25rem;
+      border-radius: 4px;
+      margin-top: 3.5rem;
+      font-size: 0.875rem;
+      color: var(--rir-text-muted);
+      line-height: 1.6;
+    }
+
+    /* Rodapé */
+    .site-footer {
+      background-color: #083733;
+      color: #E2DDD5;
+      padding: 3.5rem 1.25rem 2rem;
+      margin-top: 4rem;
+      font-size: 0.875rem;
+    }
+    .footer-inner {
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(226, 221, 213, 0.2);
+    }
+    @media (min-width: 768px) {
+      .footer-top {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+    }
+    .footer-brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      margin: 0 0 0.5rem 0;
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem 2rem;
+    }
+    .footer-nav a {
+      color: #E2DDD5;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-nav a:hover {
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
+    .footer-nav [aria-current="page"] {
+      color: var(--rir-ocre);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      color: #B5AFA6;
+      font-size: 0.8125rem;
+    }
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-delay: -1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        background-attachment: initial !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+      }
+    }
+
+    @media print {
+      .dev-banner, .site-header, .toc-card, .skip-link, .review-note, .site-footer {
+        display: none !important;
+      }
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+      }
+      .page-wrap {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .legal-section {
+        page-break-inside: avoid;
+      }
+      a {
+        text-decoration: none !important;
+        color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
+
+  <!-- Faixa de aviso de desenvolvimento -->
+  <aside class="dev-banner" aria-label="Aviso de ambiente de desenvolvimento">
+    Versão de desenvolvimento — não indexada até o lançamento
+  </aside>
+
+  <!-- Cabeçalho Institucional -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="brand-link" aria-label="Página inicial da Rede Interseccional de Resiliência">
+        <!-- Logotipo SVG em nós de rede conectados -->
+        <svg width="40" height="40" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
+          <circle cx="24" cy="10" r="4.5" fill="#0B4F4A" />
+          <circle cx="10" cy="34" r="4.5" fill="#0B4F4A" />
+          <circle cx="38" cy="34" r="4.5" fill="#0B4F4A" />
+          <circle cx="24" cy="24" r="5" fill="#B85C38" />
+          <circle cx="24" cy="39" r="3.5" fill="#D9A44B" />
+          <line x1="24" y1="10" x2="24" y2="24" stroke="#0B4F4A" stroke-width="2.5" stroke-linecap="round" />
+          <line x1="10" y1="34" x2="24" y2="24" stroke="#0B4F4A" stroke-width="2.5" stroke-linecap="round" />
+          <line x1="38" y1="34" x2="24" y2="24" stroke="#0B4F4A" stroke-width="2.5" stroke-linecap="round" />
+          <line x1="10" y1="34" x2="24" y2="39" stroke="#D9A44B" stroke-width="2" stroke-linecap="round" />
+          <line x1="38" y1="34" x2="24" y2="39" stroke="#D9A44B" stroke-width="2" stroke-linecap="round" />
+          <line x1="24" y1="24" x2="24" y2="39" stroke="#D9A44B" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <div>
+          <p class="brand-title">RIR ALC</p>
+          <p class="brand-subtitle">Rede Interseccional de Resiliência</p>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#eixos">Eixos metodológicos</a>
+        <a href="rede.html">A Rede</a>
+        <a href="instituicoes.html">Instituições</a>
+        <a href="index.html#projeto">Projeto</a>
+        <a href="index.html#producao">Produção</a>
+        <a href="index.html#contato">Contato</a>
+      </nav>
+
+      <div class="lang-switcher" aria-label="Seletor de idioma">
+        <span aria-current="page" lang="pt">PT</span>
+        <a href="en/privacidade.html" lang="en" hreflang="en" title="English version">EN</a>
+        <a href="es/privacidade.html" lang="es" hreflang="es" title="Versión en español">ES</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo" class="page-wrap" role="main">
+    <div class="prose-column">
+      
+      <!-- Trilha de navegação -->
+      <nav class="breadcrumb" aria-label="Trilha de navegação">
+        <a href="index.html">Início</a> &rsaquo; <span>Política de Privacidade</span>
+      </nav>
+
+      <h1>Política de Privacidade</h1>
+
+      <!-- Linha de vigência -->
+      <!-- TODO: confirmar data de publicação e versão com a assessoria jurídica -->
+      <p class="version-meta">Versão 1.0 — outubro de 2026. Última atualização: outubro de 2026.</p>
+
+      <!-- Bloco "Em resumo" -->
+      <aside class="summary-card" aria-labelledby="resumo-titulo">
+        <h2 id="resumo-titulo" class="summary-title">Em resumo</h2>
+        <p class="summary-text">
+          Este site não usa cookies de rastreamento, não cria perfis de visitantes e não vende dados pessoais. O único formulário que coleta dados é o de contato, e os dados informados são usados apenas para responder à sua mensagem e para a articulação da Rede. Os nomes e vínculos institucionais dos pesquisadores publicados neste site são dados de natureza acadêmico-profissional, obtidos em documento público de projeto científico. Você pode solicitar informação, correção ou eliminação dos seus dados a qualquer momento pelo canal indicado na seção XIII.
+        </p>
+      </aside>
+
+      <!-- Índice navegável -->
+      <nav class="toc-card" aria-label="Índice da política">
+        <h2 class="toc-title">Índice da Política</h2>
+        <ul class="toc-list">
+          <li><a href="#secao-I">I. Disposições gerais e identificação do controlador</a></li>
+          <li><a href="#secao-II">II. Definições</a></li>
+          <li><a href="#secao-III">III. Quais dados pessoais são tratados</a></li>
+          <li><a href="#secao-IV">IV. Finalidades e bases legais</a></li>
+          <li><a href="#secao-V">V. Publicação de dados de pesquisadores e instituições</a></li>
+          <li><a href="#secao-VI">VI. Dados sensíveis e pesquisa científica</a></li>
+          <li><a href="#secao-VII">VII. Cookies e tecnologias de medição</a></li>
+          <li><a href="#secao-VIII">VIII. Compartilhamento de dados com terceiros</a></li>
+          <li><a href="#secao-IX">IX. Transferência internacional de dados</a></li>
+          <li><a href="#secao-X">X. Retenção e eliminação</a></li>
+          <li><a href="#secao-XI">XI. Direitos do titular</a></li>
+          <li><a href="#secao-XII">XII. Segurança da informação</a></li>
+          <li><a href="#secao-XIII">XIII. Encarregado pelo tratamento de dados pessoais</a></li>
+          <li><a href="#secao-XIV">XIV. Reclamações à Autoridade Nacional</a></li>
+          <li><a href="#secao-XV">XV. Atualizações desta política</a></li>
+          <li><a href="#secao-XVI">XVI. Contato</a></li>
+        </ul>
+      </nav>
+
+      <!-- I. Disposições gerais e identificação do controlador -->
+      <section id="secao-I" class="legal-section">
+        <h2>I. Disposições gerais e identificação do controlador</h2>
+        <p>
+          Esta política descreve como a Rede Interseccional de Resiliência (<abbr title="Rede Interseccional de Resiliência na América Latina e Caribe">RIR ALC</abbr>) trata dados pessoais no âmbito deste site institucional, em estrita conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018, <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>) e com o Marco Civil da Internet (Lei nº 12.965/2014).
+        </p>
+        <p>
+          O controlador das atividades de tratamento é a <strong>Rede Interseccional de Resiliência (RIR ALC)</strong>, articulada pelo <strong>Centro Nacional de Monitoramento e Alertas de Desastres Naturais (<abbr title="Centro Nacional de Monitoramento e Alertas de Desastres Naturais">Cemaden</abbr>)</strong>, Instituição Científica e Tecnológica (<abbr title="Instituição Científica e Tecnológica">ICT</abbr>) pública vinculada ao Ministério da Ciência, Tecnologia e Inovação (<abbr title="Ministério da Ciência, Tecnologia e Inovação">MCTI</abbr>). A iniciativa integra as ações do Projeto ALERTA-INTERSEC, apoiado pelo Conselho Nacional de Desenvolvimento Científico e Tecnológico (<abbr title="Conselho Nacional de Desenvolvimento Científico e Tecnológico">CNPq</abbr>) sob o processo nº 445280/2026-3, aprovado na chamada pública de outubro de 2026.
+        </p>
+        <!-- TODO: confirmar razão social/CNPJ do controlador e endereço institucional com a assessoria jurídica do Cemaden -->
+        <p>
+          Para os fins deste instrumento, os termos "nós" e "nosso" designam o controlador; "você", "usuário" e "visitante" designam a pessoa física titular dos dados pessoais; e "site" refere-se ao conjunto de páginas, subdomínios e recursos hipertexto sob este domínio institucional.
+        </p>
+        <p>
+          O escopo material desta política aplica-se exclusivamente às operações de tratamento de dados realizadas em decorrência da disponibilização, navegação e interação por meio deste site. As atividades de pesquisa científica, produção de microdados e modelagens geoespaciais executadas no projeto ALERTA-INTERSEC regem-se por bases normativas e protocolos éticos próprios, detalhados especificamente na seção VI.
+        </p>
+      </section>
+
+      <!-- II. Definições -->
+      <section id="secao-II" class="legal-section">
+        <h2>II. Definições</h2>
+        <p>
+          Para os efeitos desta política, e nos moldes do art. 5º da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>, considera-se dado pessoal a informação relacionada a pessoa natural identificada ou identificável; dado pessoal sensível aquele sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dado referente à saúde ou à vida sexual, dado genético ou biométrico, quando vinculado a uma pessoa natural; titular a pessoa natural a quem se referem os dados pessoais que são objeto de tratamento; controlador a pessoa jurídica de direito público ou privado a quem competem as decisões referentes ao tratamento de dados pessoais; operador a pessoa natural ou jurídica que realiza o tratamento de dados pessoais em nome do controlador; tratamento toda operação realizada com dados pessoais, como as que se referem a coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, modificação, comunicação, transferência, difusão ou extração; consentimento a manifestação livre, informada e inequívoca pela qual o titular concorda com o tratamento de seus dados pessoais para uma finalidade determinada; e anonimização a utilização de meios técnicos razoáveis e disponíveis no momento do tratamento, por meio dos quais um dado perde a possibilidade de associação, direta ou indireta, a um indivíduo.
+        </p>
+      </section>
+
+      <!-- III. Quais dados pessoais são tratados -->
+      <section id="secao-III" class="legal-section">
+        <h2>III. Quais dados pessoais são tratados</h2>
+        
+        <h3>III.1. Formulário de contato</h3>
+        <p>
+          O site disponibiliza um formulário de mensagem pelo qual são recebidos o nome completo, o endereço de correio eletrônico corporativo ou pessoal, a instituição de vínculo profissional, o país de origem, a área temática de atuação e o teor do texto submetido. O preenchimento deste formulário é facultativo por parte do visitante, sendo indispensáveis para a formulação de resposta apenas os campos de nome, correio eletrônico, instituição e conteúdo da mensagem.
+        </p>
+
+        <h3>III.2. Dados de navegação e registros de conexão</h3>
+        <p>
+          Durante a requisição de qualquer página, a infraestrutura técnica registra automaticamente o endereço de protocolo de internet (<abbr title="Internet Protocol">IP</abbr>), a data e a hora do acesso no fuso horário internacional (<abbr title="Coordinated Universal Time">UTC</abbr>), a página solicitada, o protocolo utilizado, o código de status HTTP retornado pelo servidor e o agente do usuário (versão de navegador e sistema operacional). Esses dados são gerados por estrita necessidade de entrega técnica e estabilidade de rede, constituindo a guarda de registros de acesso a aplicações de internet uma obrigação legal imperativa, fixada no art. 15 da Lei nº 12.965/2014.
+        </p>
+
+        <h3>III.3. Dados que não são coletados</h3>
+        <p>
+          Este site não coleta nem processa dados pessoais sensíveis, não utiliza arquivos cookies de publicidade, não emprega rastreadores comportamentais entre plataformas, não gera perfis automatizados de consumo ou personalidade, não toma decisões automatizadas sobre direitos dos visitantes e não solicita dados pessoais pertencentes a crianças ou adolescentes.
+        </p>
+
+        <h3>III.4. Dados de pesquisadores publicados</h3>
+        <p>
+          Os dados referentes aos integrantes da rede científica apresentados nas páginas institucionais recebem disciplina própria e pormenorizada, conforme estipulado na seção V deste documento.
+        </p>
+      </section>
+
+      <!-- IV. Finalidades e bases legais -->
+      <section id="secao-IV" class="legal-section">
+        <h2>IV. Finalidades e bases legais</h2>
+        <p>
+          Toda atividade de tratamento de dados conduzida pela Rede obedece ao princípio da legalidade, fundamentando-se expressamente em uma das hipóteses taxativas do art. 7º da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>, associada à sua respectiva destinação:
+        </p>
+
+        <h3>IV.1. Atendimento a mensagens de contato</h3>
+        <p>
+          Finalidade: receber, registrar, analisar e responder a manifestações enviadas por acadêmicos, gestores públicos e cidadãos interessados nos trabalhos da Rede. Base legal: consentimento livre e informado do titular (art. 7º, I, da LGPD), manifestado de modo inequívoco ao acionar o comando de envio da mensagem.
+        </p>
+
+        <h3>IV.2. Articulação interinstitucional e comunicação científica</h3>
+        <p>
+          Finalidade: estabelecer diálogo com interlocutores que se apresentaram voluntariamente com o intuito de estabelecer cooperações de pesquisa, parcerias metodológicas em redução do risco de desastres (<abbr title="Redução do Risco de Desastres">RRD</abbr>) na América Latina e Caribe (<abbr title="América Latina e Caribe">ALC</abbr>) e difusão do conhecimento. Base legal: consentimento do titular (art. 7º, I, da LGPD) e, quando conduzido por entidade pública no exercício de suas competências institucionais, execução de políticas públicas consagradas em leis e regulamentos (art. 7º, III, da LGPD).
+        </p>
+
+        <h3>IV.3. Salvaguarda técnica e segurança do serviço</h3>
+        <p>
+          Finalidade: garantir a estabilidade do sítio eletrônico, prevenir incidentes de saturação, mitigar ataques cibernéticos e assegurar a disponibilidade pública dos dados abertos. Base legal: legítimo interesse do controlador (art. 7º, IX, da LGPD), voltado estritamente à segurança física e lógica da infraestrutura, mediante medidas proporcionais.
+        </p>
+
+        <h3>IV.4. Cumprimento de dever legal</h3>
+        <p>
+          Finalidade: retenção dos registros de conexão e acesso a aplicações em ambiente seguro e sob sigilo. Base legal: cumprimento de obrigação legal ou regulatória imposta ao controlador (art. 7º, II, da LGPD), em observância direta ao art. 15 da Lei nº 12.965/2014.
+        </p>
+
+        <h3>IV.5. Transparência da composição acadêmica</h3>
+        <p>
+          Finalidade e base legal detalhadas expressamente na seção V a seguir.
+        </p>
+        <p>
+          Em qualquer hipótese, o volume de dados tratados mantém-se circunscrito à extensão estritamente indispensável ao alcance das finalidades pretendidas, respeitados integralmente os princípios da finalidade, adequação, necessidade, livre acesso, qualidade e transparência previstos no art. 6º da legislação de proteção de dados.
+        </p>
+      </section>
+
+      <!-- V. Publicação de dados de pesquisadores e instituições -->
+      <section id="secao-V" class="legal-section">
+        <h2>V. Publicação de dados de pesquisadores e instituições</h2>
+        <p>
+          As seções nominadas "A Rede" e "Instituições" divulgam o nome civil e profissional, vínculo institucional formal, unidade acadêmica, titulação, carga horária semanal declarada para a iniciativa, síntese descritiva de expertise e links para perfis curriculares públicos externos, notadamente o identificador ORCID e o Currículo Lattes mantido pelo <abbr title="Conselho Nacional de Desenvolvimento Científico e Tecnológico">CNPq</abbr>.
+        </p>
+        <p>
+          A divulgação decorre de documento integrante da proposta científica aprovada em processo seletivo público de fomento pelo Ministério da Ciência, Tecnologia e Inovação (<abbr title="Ministério da Ciência, Tecnologia e Inovação">MCTI</abbr>) e <abbr title="Conselho Nacional de Desenvolvimento Científico e Tecnológico">CNPq</abbr> (Anexo 1). O tratamento encontra respaldo nos preceitos do art. 7º, § 3º, e art. 7º, I, da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>, cuidando-se de dados manifestamente públicos em virtude do certame acadêmico e orientados à garantia do princípio republicano da publicidade dos atos praticados com financiamento do erário.
+        </p>
+        <p>
+          A Rede não veicula números de documentos pessoais de identificação, endereços residenciais, linhas telefônicas privadas ou qualquer dado categorizado como sensível. Todos os apontamentos externos remetem a plataformas públicas mantidas por instituições governamentais ou científicas multilaterais.
+        </p>
+        <p>
+          A qualquer momento, o pesquisador vinculado poderá solicitar a correção, atualização, retificação ou remoção de seus dados cadastrais pelo canal do encarregado apontado na seção XIII, independentemente de taxa ou motivação, procedendo-se ao imediato descarte, excetuadas as obrigações estritas de prestação de contas dos projetos públicos, as quais serão justificadas por escrito caso aplicáveis.
+        </p>
+      </section>
+
+      <!-- VI. Dados sensíveis e pesquisa científica -->
+      <section id="secao-VI" class="legal-section">
+        <h2>VI. Dados sensíveis e pesquisa científica</h2>
+        <p>
+          Importa assinalar a expressa demarcação entre a plataforma institucional na internet e o núcleo empírico das investigações científicas do projeto ALERTA-INTERSEC.
+        </p>
+        <p>
+          O ambiente deste site não efetua coleta, armazenamento ou disponibilização de dados pessoais sensíveis, conforme classificados pelo art. 5º, II, da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>. As investigações desenvolvidas pela Rede manipulam unicamente microdados censitários agregados provenientes de fontes públicas e notórias, tais como o Censo Demográfico do Instituto Brasileiro de Geografia e Estatística (IBGE) e levantamentos oficiais do Peru e Equador, ao lado de amostragens primárias obtidas sob estritos protocolos científicos.
+        </p>
+        <p>
+          O tratamento de dados no âmbito das pesquisas universitárias e institucionais assenta-se na disciplina do art. 11, II, alínea "c", da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>, que franqueia o tratamento para a realização de estudos por órgãos de pesquisa, com observância do art. 13 no tocante aos parâmetros de saúde coletiva e resiliência comunitária, sendo vedado o repasse a entidades terceiras com finalidades comerciais ou estranhas aos propósitos científicos aprovados.
+        </p>
+        <p>
+          Os procedimentos de campo envolvendo entrevistas qualitativas e levantamentos territoriais participativos são previamente submetidos à apreciação dos Comitês de Ética em Pesquisa do Sistema <abbr title="Comitê de Ética em Pesquisa / Comissão Nacional de Ética em Pesquisa">CEP/CONEP</abbr>, em fiel cumprimento à Resolução CNS nº 466/2012, assegurando o anonimato pleno, a outorga de Termo de Consentimento Livre e Esclarecido (TCLE) e o direito inalienável de revogação sem prejuízos aos participantes.
+        </p>
+        <p>
+          Quaisquer repositórios, cartografias interativas, matrizes interseccionais e indicadores divulgados no site são confeccionados sob forma estritamente agregada ou anonimizada, inviabilizando qualquer processo de reidentificação ou inferência sobre indivíduos isolados.
+        </p>
+      </section>
+
+      <!-- VII. Cookies e tecnologias de medição -->
+      <section id="secao-VII" class="legal-section">
+        <h2>VII. Cookies e tecnologias de medição</h2>
+        <p>
+          Este sítio adota uma política de minimização digital estrita: não são instalados cookies primários ou de terceiros voltados a publicidade contextual, rastreamento persistente, aferição mercadológica ou elaboração de perfis de usuário. Não existem instalados contadores de conversão social, mapas de calor de digitação ou pixels de redes sociais.
+        </p>
+        <p>
+          A eventual contabilização de acessos dá-se exclusivamente mediante infraestrutura analítica de agregação, sem recurso a cookies e sem armazenamento de dados que permitam correlacionar a atividade do internauta com navegações em outros domínios da web.
+        </p>
+        <p>
+          A infraestrutura técnica de rede e proteção perimetral pode gravar identificadores de sessão estritamente necessários para a mitigação de requisições maliciosas, balanceamento de carga e entrega dos pacotes hipertexto. Tais artefatos operacionais não coletam dados qualificadores de identidade pessoal e são essenciais para o correto provimento das páginas.
+        </p>
+        <!-- TODO: se forem adicionados widgets de terceiros, mapas incorporados ou vídeos do YouTube, esta seção deverá ser revisada antes da publicação -->
+      </section>
+
+      <!-- VIII. Compartilhamento de dados com terceiros -->
+      <section id="secao-VIII" class="legal-section">
+        <h2>VIII. Compartilhamento de dados com terceiros</h2>
+        <p>
+          Os dados pessoais coletados não são comercializados, alugados, distribuídos ou cedidos a nenhuma entidade de caráter econômico privado. As hipóteses estritas de compartilhamento técnico e institucional abrangem:
+        </p>
+
+        <h3>VIII.1. Operadores de suporte e hospedagem</h3>
+        <p>
+          Para viabilizar a presença na rede mundial de computadores e a gestão colaborativa de código aberto, a infraestrutura apoia-se em serviços especializados, notadamente Cloudflare (distribuição segura de conteúdo) e GitHub (controle de versões documentais). Esses prestadores atuam na condição jurídica de operadores, processando requisições conforme diretrizes do controlador e sob obrigações rigorosas de confidencialidade e segurança.
+        </p>
+
+        <h3>VIII.2. Plataformas e repositórios abertos de ciência</h3>
+        <p>
+          Os resultados e bases de dados derivadas da pesquisa são depositados em repositórios científicos de acesso aberto, como o Zenodo, sob identificadores digitais permanentes (DOI), sempre e exclusivamente após protocolos consolidados de anonimização e agregação estatística.
+        </p>
+
+        <h3>VIII.3. Cumprimento de ordens judiciais e administrativas</h3>
+        <p>
+          Os registros armazenados em observância ao Marco Civil da Internet poderão ser fornecidos exclusivamente mediante requisição expressa de autoridade judicial competente, ou nos casos legalmente autorizados pela administração pública, na extensão restrita do despacho motivador.
+        </p>
+
+        <h3>VIII.4. Instâncias da Rede e comitês de coordenação</h3>
+        <p>
+          As comunicações oriundas do formulário cujo teor envolva manifestação de interesse em adesão acadêmica ou institucional poderão ser compartilhadas internamente com os membros do Comitê Gestor Interinstitucional (<abbr title="Comitê Gestor Interinstitucional">CGI</abbr>) da Rede, tendo por objetivo único e direto o exame e encaminhamento da solicitação formulada pelo próprio interessado.
+        </p>
+      </section>
+
+      <!-- IX. Transferência internacional de dados -->
+      <section id="secao-IX" class="legal-section">
+        <h2>IX. Transferência internacional de dados</h2>
+        <p>
+          Tendo em vista a natureza descentralizada e as sedes físicas dos provedores de rede e de distribuição de código estático (Cloudflare e GitHub), determinados registros de conexão e mensagens de comunicação institucional podem trafegar e repousar temporariamente em centros de dados situados fora do território nacional brasileiro.
+        </p>
+        <p>
+          Tais procedimentos de transferência internacional submetem-se aos parâmetros do art. 33 da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>, respaldando-se em salvaguardas contratuais equivalentes, cláusulas-padrão de proteção de dados, compromissos vinculantes das operadoras e na necessidade material de execução do serviço de conectividade requerido pelo próprio usuário ao solicitar as páginas.
+        </p>
+        <p>
+          A Rede assegura que suas escolhas de ferramentas técnicas privilegiam organizações comprometidas com elevados índices de governança e compatibilidade regulatória com as diretrizes da Autoridade Nacional de Proteção de Dados (<abbr title="Autoridade Nacional de Proteção de Dados">ANPD</abbr>).
+        </p>
+      </section>
+
+      <!-- X. Retenção e eliminação -->
+      <section id="secao-X" class="legal-section">
+        <h2>X. Retenção e eliminação</h2>
+        <p>
+          O armazenamento de dados pessoais é mantido tão somente pelo intervalo cronológico estritamente correspondente ao esgotamento das finalidades que motivaram a coleta.
+        </p>
+
+        <h3>X.1. Mensagens recebidas</h3>
+        <p>
+          As mensagens e dados fornecidos pelo formulário de contato são mantidos durante o processamento do diálogo institucional e o acompanhamento dos desdobramentos de cooperação, sendo arquivadas ou excluídas periodicamente, ou tão logo seja formalizada manifestação do titular pelo seu descarte.
+        </p>
+
+        <h3>X.2. Registros de navegação</h3>
+        <p>
+          Os registros de conexão e de requisições de página gerados pela infraestrutura são mantidos sob custódia e sigilo pelo período mínimo e necessário previsto no art. 15 da Lei nº 12.965/2014, observadas as regras de descarte seguro decorrido o interregno legal.
+        </p>
+
+        <h3>X.3. Dados do corpo de pesquisadores</h3>
+        <p>
+          As informações do quadro de pesquisadores e instituições permanecem publicadas ao longo de toda a vigência e divulgação dos relatórios do projeto de pesquisa financiado, procedendo-se à despublicação ou substituição tempestiva sempre que solicitado pelo respectivo titular ou havendo alteração formal da equipe.
+        </p>
+        <!-- TODO: alinhar os prazos da seção X com a tabela de temporalidade documental do Cemaden/MCTI e com a política de privacidade institucional -->
+        <p>
+          Ultimados os prazos regimentais ou acolhidos os pleitos de exclusão, as informações são eliminadas mediante métodos técnicos que garantam sua irrecuperabilidade, ressalvadas as prerrogativas de guarda autorizadas pelo art. 16 da Lei nº 13.709/2018 para o cumprimento de dever fiscal e legal, prestação de contas de verbas federais ou uso estritamente anonimizado para fins estatísticos.
+        </p>
+      </section>
+
+      <!-- XI. Direitos do titular -->
+      <section id="secao-XI" class="legal-section">
+        <h2>XI. Direitos do titular</h2>
+        <p>
+          A pessoa natural titular dos dados pode exercer perante o controlador, a qualquer instante e mediante solicitação escrita, todos os direitos previstos no art. 18 da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>:
+        </p>
+
+        <h3>XI.1. Especificação dos direitos</h3>
+        <p>
+          É assegurada ao titular a confirmação da existência de tratamento; o acesso aos dados tratados; a correção de informações incompletas, inexatas ou desatualizadas; a anonimização, bloqueio ou eliminação de dados que se revelem desnecessários, excessivos ou tratados em desacordo com as prescrições normativas; a portabilidade dos dados a outro prestador de serviço mediante requisição expressa; a eliminação dos dados tratados exclusivamente com esteio no consentimento, salvo exceções de guarda legal; a informação das entidades públicas e privadas com as quais o controlador estabeleceu uso compartilhado de dados; a informação clara acerca da possibilidade de não fornecer consentimento e sobre as consequências de tal negativa; a revogação formal do consentimento; e o direito de peticionar oposição ao tratamento realizado na hipótese de descumprimento legal.
+        </p>
+        <p>
+          As requisições formuladas pelo titular serão atendidas em até 15 (quinze) dias contados de sua apresentação formal, nos moldes do art. 19, II, da Lei nº 13.709/2018. Quando a consulta envolver unicamente a confirmação de existência ou a disponibilização simplificada de registros, a resposta dar-se-á de plano, por formato eletrônico claro.
+        </p>
+        <p>
+          O processamento e atendimento às manifestações do titular são integralmente gratuitos, em conformidade com o art. 18, § 5º, do diploma protetivo.
+        </p>
+        <p>
+          A revogação do consentimento concedido opera efeitos imediatos e prospectivos, não invalidando a licitude dos tratamentos pretéritos regularmente executados nem prejudicando hipóteses que encontrem fundamentação autônoma nas demais bases do art. 7º da legislação.
+        </p>
+      </section>
+
+      <!-- XII. Segurança da informação -->
+      <section id="secao-XII" class="legal-section">
+        <h2>XII. Segurança da informação</h2>
+        <p>
+          O controlador implementa salvaguardas técnicas, administrativas e organizacionais aptas a proteger os dados pessoais de interceptações ilícitas, acessos desautorizados, vazamentos acidentais ou qualquer modalidade de adulteração e destruição, cumprindo o art. 46 da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>.
+        </p>
+
+        <h3>XII.1. Mecanismos técnicos empregados</h3>
+        <p>
+          O sítio impõe o tráfego estrito sob protocolo criptográfico seguro (HTTPS/TLS) em todas as suas rotas; incorpora cabeçalhos HTTP de segurança recomendados para mitigar ataques de injeção e adulteração de conteúdo (como restrição de tipos de mídia e política estrita de referenciador); adota autenticação robusta em múltiplos fatores para os mantenedores com acesso aos repositórios de código; e prescinde de bancos de dados relacionais expostos para visitantes, minimizando substancialmente a superfície de potenciais vulnerabilidades.
+        </p>
+
+        <h3>XII.2. Resposta e notificação de incidentes</h3>
+        <p>
+          Na remota hipótese de evento de quebra de segurança que acarrete risco ou dano relevante aos direitos e liberdades dos titulares, o controlador comunicará formalmente o fato à Autoridade Nacional de Proteção de Dados (<abbr title="Autoridade Nacional de Proteção de Dados">ANPD</abbr>) e aos afetados, em atenção aos preceitos do art. 48 da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr> e ao Regulamento de Comunicação de Incidentes de Segurança aprovado pela Resolução CD/ANPD nº 15/2024.
+        </p>
+      </section>
+
+      <!-- XIII. Encarregado pelo tratamento de dados pessoais -->
+      <section id="secao-XIII" class="legal-section">
+        <h2>XIII. Encarregado pelo tratamento de dados pessoais</h2>
+        <p>
+          O Encarregado de Proteção de Dados (<abbr title="Data Protection Officer">DPO</abbr>) atua como o elo oficial e qualificado de interlocução entre o titular, o controlador institucional e a Autoridade Nacional de Proteção de Dados (<abbr title="Autoridade Nacional de Proteção de Dados">ANPD</abbr>), consoante determina o art. 41 da Lei nº 13.709/2018.
+        </p>
+        
+        <div class="highlight-card">
+          <p><strong>Encarregado pelo Tratamento de Dados:</strong> [a definir]</p>
+          <p><strong>Canal Eletrônico de Atendimento:</strong> [a definir]</p>
+          <p><strong>Instituição Responsável:</strong> Centro Nacional de Monitoramento e Alertas de Desastres Naturais (Cemaden/MCTI)</p>
+          <p><strong>Horário de Recepção:</strong> dias úteis, das 09h00 às 17h00 (horário de Brasília)</p>
+        </div>
+        <!-- TODO: preencher nome completo e e-mail institucional do encarregado antes da publicação. Se o site for publicado em subdomínio gov.br, usar o encarregado do órgão, conforme a política institucional -->
+        
+        <p>
+          As solicitações alusivas ao exercício dos direitos preconizados na <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr> devem ser encaminhadas ao endereço informado, contendo identificação civil do requerente e descrição circunstanciada da providência requerida, a fim de assegurar a autenticação da titularidade.
+        </p>
+      </section>
+
+      <!-- XIV. Reclamações à Autoridade Nacional -->
+      <section id="secao-XIV" class="legal-section">
+        <h2>XIV. Reclamações à Autoridade Nacional</h2>
+        <p>
+          Nos termos do art. 18, § 1º, da <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr>, é facultado ao titular apresentar reclamações e petições administrativas dirigidas à Autoridade Nacional de Proteção de Dados (<abbr title="Autoridade Nacional de Proteção de Dados">ANPD</abbr>) caso entenda que suas demandas não foram satisfatoriamente sanadas pelo controlador ou para denunciar eventuais desconformidades no tratamento de seus dados pessoais.
+        </p>
+        <!-- TODO: confirmar o canal vigente de peticionamento da ANPD antes da publicação -->
+        <p>
+          O acionamento da autoridade reguladora pode ser formalizado pelos canais eletrônicos oficiais mantidos pelo órgão fiscalizador federal, recomendando-se preferencialmente a comunicação prévia ao Encarregado da Rede para pronta averiguação técnica.
+        </p>
+      </section>
+
+      <!-- XV. Atualizações desta política -->
+      <section id="secao-XV" class="legal-section">
+        <h2>XV. Atualizações desta política</h2>
+        <p>
+          O presente documento pode ser objeto de revisões periódicas destinadas a refletir modificações nos arranjos técnicos do portal, transformações estruturais da Rede ou a edição de novas normas infralegais e resoluções emitidas pela <abbr title="Autoridade Nacional de Proteção de Dados">ANPD</abbr>.
+        </p>
+        <p>
+          A versão vigente é sempre a mais recente disponibilizada nesta URL, com a data da última chancela destacada no cabeçalho. Eventuais alterações estruturais que importem em modificação substantiva das finalidades de tratamento ou das bases jurídicas outorgadas serão devidamente notificadas em local visível da página inicial com antecedência hábil, colhendo-se novas declarações de vontade quando exigido pelo regramento vigente.
+        </p>
+      </section>
+
+      <!-- XVI. Contato -->
+      <section id="secao-XVI" class="legal-section">
+        <h2>XVI. Contato</h2>
+        <p>
+          Para dirimir dúvidas relativas à interpretação deste texto, requerer informações complementares ou enviar comunicações pertinentes à governança de dados pessoais, o visitante dispõe dos canais do Encarregado consignados na seção XIII ou pode recorrer ao formulário geral de atendimento.
+        </p>
+        <p>
+          Acesse diretamente o <a href="index.html#contato">Formulário de contato da Rede</a> ou retorne à <a href="index.html">Página inicial do site institucional</a>.
+        </p>
+        <p>
+          Esta Política de Privacidade entra em vigor e produz efeitos jurídicos a partir da data de sua publicação oficial.
+        </p>
+      </section>
+
+      <!-- Nota de revisão jurídica -->
+      <aside class="review-note" aria-label="Nota sobre a natureza técnica da minuta">
+        <strong>Nota de revisão jurídica:</strong> Este documento foi elaborado como minuta técnica para revisão pela assessoria jurídica do controlador. Os campos assinalados como pendentes devem ser preenchidos antes da publicação.
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom: 0.75rem;">
+            <!-- Logo SVG em versão clara -->
+            <svg width="32" height="32" viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false">
+              <circle cx="24" cy="10" r="4.5" fill="#E2DDD5" />
+              <circle cx="10" cy="34" r="4.5" fill="#E2DDD5" />
+              <circle cx="38" cy="34" r="4.5" fill="#E2DDD5" />
+              <circle cx="24" cy="24" r="5" fill="#D9A44B" />
+              <circle cx="24" cy="39" r="3.5" fill="#B85C38" />
+              <line x1="24" y1="10" x2="24" y2="24" stroke="#E2DDD5" stroke-width="2.5" stroke-linecap="round" />
+              <line x1="10" y1="34" x2="24" y2="24" stroke="#E2DDD5" stroke-width="2.5" stroke-linecap="round" />
+              <line x1="38" y1="34" x2="24" y2="24" stroke="#E2DDD5" stroke-width="2.5" stroke-linecap="round" />
+              <line x1="10" y1="34" x2="24" y2="39" stroke="#D9A44B" stroke-width="2" stroke-linecap="round" />
+              <line x1="38" y1="34" x2="24" y2="39" stroke="#D9A44B" stroke-width="2" stroke-linecap="round" />
+              <line x1="24" y1="24" x2="24" y2="39" stroke="#D9A44B" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <p class="footer-brand-title">Rede Interseccional de Resiliência</p>
+          </div>
+          <p style="margin:0; max-width: 38ch; line-height: 1.5; color: #B5AFA6;">
+            Projeto ALERTA-INTERSEC &middot; Centro Nacional de Monitoramento e Alertas de Desastres Naturais (Cemaden/MCTI).
+          </p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Navegação secundária do rodapé">
+          <a href="index.html#sobre">Sobre</a>
+          <a href="index.html#eixos">Eixos metodológicos</a>
+          <a href="rede.html">A Rede</a>
+          <a href="instituicoes.html">Instituições</a>
+          <a href="index.html#projeto">Projeto</a>
+          <a href="index.html#producao">Produção</a>
+          <a href="index.html#contato">Contato</a>
+          <a href="privacidade.html" aria-current="page">Política de privacidade</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          <span>Rede Interseccional de Resiliência — criada em maio de 2026.</span>
+          <span style="display:inline-block; margin-left: 0.5rem;">Conteúdo sob licença Creative Commons CC BY 4.0.</span>
+        </div>
+        <div>
+          <span>Versão de desenvolvimento &middot; 2026</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!--
+    ============================================================================
+    CONFIGURAÇÃO RECOMENDADA DE CABEÇALHOS (_headers) PARA CLOUDFLARE PAGES:
+    ============================================================================
+    /*
+      X-Robots-Tag: noindex, nofollow
+      X-Content-Type-Options: nosniff
+      Referrer-Policy: strict-origin-when-cross-origin
+      Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+      X-Frame-Options: SAMEORIGIN
+    ============================================================================
+  -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Suporte a foco acessível suave ao navegar pelas âncoras do sumário
+      var tocLinks = document.querySelectorAll('.toc-list a');
+      tocLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          var targetId = this.getAttribute('href');
+          if (targetId && targetId.startsWith('#')) {
+            var targetEl = document.querySelector(targetId);
+            if (targetEl) {
+              targetEl.setAttribute('tabindex', '-1');
+              targetEl.focus();
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

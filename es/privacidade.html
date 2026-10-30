@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <!-- TODO: eliminar noindex y publicar _headers sin X-Robots-Tag al lanzar -->
+
+  <title>RIR — Política de Privacidad (versión en español)</title>
+  <meta name="description" content="Política de Privacidad de la Red Interseccional de Resiliencia (RIR ALC) - Proyecto ALERTA-INTERSEC, Cemaden/MCTI. Información sobre el tratamiento de datos personales conforme a la LGPD y normativas asociadas.">
+
+  <!-- hreflang y canonical relativos -->
+  <link rel="alternate" hreflang="pt-BR" href="../privacidade.html">
+  <link rel="alternate" hreflang="en" href="../en/privacidade.html">
+  <link rel="alternate" hreflang="es" href="privacidade.html">
+  <link rel="alternate" hreflang="x-default" href="../privacidade.html">
+  <link rel="canonical" href="privacidade.html">
+  <!-- TODO: sustituir por URL absoluta al lanzar -->
+
+  <style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Tokens, utilities and components (basecoat 1.0 markup, no CDN); artifacts
+   override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+  --success: #0a7a35;
+  --danger: #c0262d;
+  --warning: #8a5300;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --success: #4ade80;
+    --danger: #f87171;
+    --warning: #fbbf24;
+  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --success: #4ade80;
+  --danger: #f87171;
+  --warning: #fbbf24;
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+/* Pages generated before the shell had its own components still link the
+   basecoat CDN, which reads its own tokens and switches theme only on a
+   .dark class. Bridged to the shell's, whatever of it those pages use takes
+   the page's accent and follows the declared theme. Its --accent token is a
+   hover tint, renamed in its theme as --color-accent; the shell's --accent is
+   the brand colour, so the tint is derived from it here. */
+:root {
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-contrast);
+  --secondary: color-mix(in srgb, var(--text) 7%, var(--surface));
+  --secondary-foreground: var(--text);
+  --muted: color-mix(in srgb, var(--text) 5%, var(--surface));
+  --muted-foreground: var(--text-muted);
+  --color-accent: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --color-accent-foreground: var(--text);
+  --destructive: var(--danger);
+  --input: var(--border);
+  --ring: var(--accent);
+}
+* { box-sizing: border-box; }
+/* The reset the pages were written against: they all linked basecoat, which
+   ships Tailwind's. Its components now live here, so the reset does too. */
+*, ::before, ::after, ::backdrop { margin: 0; padding: 0; border: 0 solid; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+a { color: inherit; text-decoration: inherit; }
+b, strong { font-weight: bolder; }
+ol, ul, menu { list-style: none; }
+svg, video, canvas, iframe { display: block; vertical-align: middle; }
+button, input, select, textarea { color: inherit; background-color: transparent; border-radius: 0; }
+table { border-collapse: collapse; }
+hr { height: 0; color: inherit; border-top-width: 1px; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: 28px; font-weight: 650; line-height: 1.1; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: var(--success); }
+.kpi .kpi-delta.down { color: var(--danger); }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+/* Layout and type utilities: what the pages kept spelling in style="".
+   Spacing and type sizes follow Tailwind's scale; there is no Tailwind. */
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.stack { display: flex; flex-direction: column; gap: var(--space); }
+.between { justify-content: space-between; }
+.grow { flex: 1 1 0; min-width: 0; }
+.cols-2, .cols-3, .cols-4 { display: grid; gap: var(--space); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) {
+  .cols-2, .cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) { .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; }
+.m-0 { margin: 0; }
+.mt-1 { margin-top: 4px; } .mt-2 { margin-top: 8px; } .mt-3 { margin-top: 12px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mb-1 { margin-bottom: 4px; } .mb-2 { margin-bottom: 8px; } .mb-3 { margin-bottom: 12px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; }
+.p-2 { padding: 8px; } .p-3 { padding: 12px; } .p-4 { padding: 16px; } .p-6 { padding: 24px; }
+.text-xs { font-size: 12px; } .text-sm { font-size: 14px; } .text-base { font-size: 16px; }
+.text-lg { font-size: 18px; } .text-xl { font-size: 20px; line-height: 1.35; }
+.text-2xl { font-size: 24px; line-height: 1.25; } .text-3xl { font-size: 30px; line-height: 1.2; }
+.font-medium { font-weight: 500; } .font-semibold { font-weight: 600; } .font-bold { font-weight: 700; }
+.text-right { text-align: right; } .text-center { text-align: center; }
+.nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.w-full { width: 100%; }
+.text-success { color: var(--success); } .text-danger { color: var(--danger); } .text-warning { color: var(--warning); }
+
+/* Components, with basecoat 1.0 markup (variants and sizes are data
+   attributes) and the shell tokens, so a page needs neither component CSS
+   nor a CSS framework. An older page that also links basecoat gets these
+   rules after it, over the same properties. */
+button, input, select, textarea { font: inherit; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 0 14px; border: 1px solid transparent; border-radius: calc(var(--radius) - 2px);
+  background: var(--accent); color: var(--accent-contrast);
+  font-size: 14px; font-weight: 500; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 86%, #000); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.btn[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.btn[data-variant="secondary"]:hover { background: color-mix(in srgb, var(--text) 14%, var(--surface)); }
+.btn[data-variant="outline"] { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn[data-variant="ghost"] { background: transparent; color: var(--text); }
+.btn[data-variant="outline"]:hover, .btn[data-variant="ghost"]:hover { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.btn[data-variant="destructive"] { background: var(--danger); color: var(--bg); }
+.btn[data-variant="destructive"]:hover { background: color-mix(in srgb, var(--danger) 86%, var(--text)); }
+.btn[data-variant="link"] { height: auto; padding: 0; background: none; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.btn[data-size="sm"] { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn[data-size="lg"] { height: 42px; padding: 0 20px; font-size: 15px; }
+.btn[data-size="icon"] { width: 36px; padding: 0; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px;
+  border: 1px solid transparent; border-radius: 999px; background: var(--accent); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 600; line-height: 1.5; white-space: nowrap;
+}
+.badge[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.badge[data-variant="outline"] { background: transparent; color: var(--text); border-color: var(--border); }
+.badge[data-variant="destructive"] { background: color-mix(in srgb, var(--danger) 14%, var(--surface)); color: var(--danger); }
+
+.alert {
+  display: grid; gap: 4px; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+.alert h2, .alert h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.alert p, .alert section { margin: 0; color: var(--text-muted); }
+.alert[data-variant="destructive"] { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); background: color-mix(in srgb, var(--danger) 7%, var(--surface)); color: var(--danger); }
+
+.card {
+  display: flex; flex-direction: column; gap: 16px; padding: 20px 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 2px);
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+}
+.card > header, .card > section, .card > footer { padding: 0 20px; }
+.card > header { display: grid; gap: 4px; }
+.card > header h2, .card > header h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.card > header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+.card > footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.input {
+  width: 100%; min-height: 36px; padding: 6px 12px; border: 1px solid var(--border); border-radius: calc(var(--radius) - 2px);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+textarea.input { min-height: 84px; resize: vertical; }
+.input::placeholder { color: var(--text-muted); }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 14px; font-weight: 500; }
+.field [role="alert"] { color: var(--danger); font-size: 13px; }
+
+dialog.dialog {
+  width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; padding: 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  background: var(--surface); color: var(--text); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+dialog.dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+dialog.dialog > div { display: grid; gap: 16px; padding: 24px; }
+dialog.dialog header { display: grid; gap: 4px; }
+dialog.dialog header h2 { margin: 0; font-size: 18px; font-weight: 600; }
+dialog.dialog header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+dialog.dialog footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+.tabs { display: grid; gap: 12px; }
+.tabs > [role="tablist"] {
+  display: inline-flex; gap: 4px; width: fit-content; max-width: 100%; padding: 4px; overflow-x: auto;
+  border-radius: var(--radius); background: color-mix(in srgb, var(--text) 6%, var(--surface));
+}
+.tabs [role="tab"] {
+  padding: 6px 12px; border: 0; border-radius: calc(var(--radius) - 4px); background: transparent;
+  color: var(--text-muted); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer;
+}
+.tabs [role="tab"][aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.tabs [role="tabpanel"][hidden] { display: none; }
+
+.accordion > details { border-bottom: 1px solid var(--border); }
+.accordion > details > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0; font-weight: 500; list-style: none; cursor: pointer;
+}
+.accordion > details > summary::-webkit-details-marker { display: none; }
+.accordion > details > summary::after { content: "+"; color: var(--text-muted); font-size: 18px; line-height: 1; }
+.accordion > details[open] > summary::after { content: "\2212"; }
+.accordion > details > :not(summary) { margin: 0 0 14px; color: var(--text-muted); }
+
+.toaster {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-direction: column-reverse; gap: 8px;
+  width: min(360px, calc(100vw - 32px)); pointer-events: none;
+}
+.toaster .toast { pointer-events: auto; transition: opacity 200ms ease, transform 200ms ease; }
+.toaster .toast[aria-hidden="true"] { opacity: 0; transform: translateY(8px); }
+.toaster .toast-content {
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); font-size: 13px;
+}
+.toaster .toast-content h2 { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
+.toaster .toast-content p { margin: 0; color: var(--text-muted); }
+
+/* skipUI building blocks. */
+.skip-table-search { max-width: 320px; margin-bottom: 12px; }
+.skip-table-wrap { overflow-x: auto; }
+table.shell-table th[data-sort] { cursor: pointer; user-select: none; }
+table.shell-table th[aria-sort="ascending"]::after { content: " \25B2"; font-size: 9px; }
+table.shell-table th[aria-sort="descending"]::after { content: " \25BC"; font-size: 9px; }
+table.shell-table td.skip-table-empty { color: var(--text-muted); text-align: center; padding: 24px 0; }
+.skip-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 13px; color: var(--text-muted); }
+.toaster .toast[data-type="success"] .toast-content { border-left: 3px solid var(--success); }
+.toaster .toast[data-type="error"] .toast-content { border-left: 3px solid var(--danger); }
+
+</style>
+  <script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
+
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisFmt keeps axis tick labels short (compact notation) so long values
+  // (e.g. full BRL amounts) never clip against the plot edge.
+  function axisFmt(v) {
+    return fmt.num(v, { notation: "compact", maximumFractionDigits: 1 });
+  }
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  function coerceFormat(spec) {
+    if (typeof spec === "function") return spec;
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el = resolve(el);
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 12, plotH = H - padT - padB;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 12, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (v / max) * plotH);
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      var tx = svgEl("text", { x: x + bw / 2, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // line(el, {labels:[], values:[], color?, format?}) — single-series line.
+  function line(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 16, plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 16, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    var pts = cfg.values.map(function (v, i) {
+      var x = padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+      var y = padT + plotH - (v / max) * plotH;
+      return [x, y];
+    });
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    pts.forEach(function (p, i) {
+      var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(cfg.values[i]);
+      c.appendChild(t);
+      svg.appendChild(c);
+      var tx = svgEl("text", { x: p[0], y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // donut(el, {labels:[], values:[], colors?}) — donut with center total.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    // At 100% of a wide container the donut outgrows the height pages give
+    // the box and spills over the next section: keep it at its own size.
+    svg.style.maxWidth = W + "px";
+    svg.style.margin = "0 auto";
+    var total = cfg.values.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var palette = cfg.colors || [accent(), "#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4"];
+    var a0 = -Math.PI / 2;
+    cfg.values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + fmt.num(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    var center = svgEl("text", { x: cx, y: cy + 5, "text-anchor": "middle", "font-size": 20, "font-weight": 650, fill: "currentColor" });
+    center.textContent = fmt.num(total);
+    svg.appendChild(center);
+  }
+
+  // ---- Page building blocks: what dashboards and small systems kept
+  // re-implementing — a searchable sortable table, a KPI row, tabs, toasts,
+  // dialogs, saved state and mock data. Every call is opt-in, so a page that
+  // brings its own versions keeps them.
+
+  function resolve(target) {
+    return typeof target === "string" ? document.querySelector(target) : target;
+  }
+
+  function node(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function isNumberColumn(col) {
+    return col.align === "right" || col.format === "num" || col.format === "brl" || col.format === "pct";
+  }
+
+  function cellText(col, row) {
+    var value = row[col.key];
+    if (value == null) return "";
+    return col.format ? coerceFormat(col.format)(value) : String(value);
+  }
+
+  function compareValues(a, b) {
+    if (typeof a === "number" && typeof b === "number") return a - b;
+    return String(a == null ? "" : a).localeCompare(String(b == null ? "" : b), "pt-BR", { numeric: true });
+  }
+
+  // table(el, {columns, rows, search?, pageSize?, empty?, onRowClick?}) — a
+  // table.shell-table with sortable headers, an optional search box and
+  // pager. A column is {key, label, format?, align?, sortable? (true),
+  // render?(value, row) returning a Node or an HTML string — the page writes
+  // its cell templates as markup}. Plain values are always set as text.
+  // Returns {setRows, rows}.
+  function table(target, cfg) {
+    var root = resolve(target);
+    var cols = cfg.columns || [];
+    var pageSize = cfg.pageSize || 0;
+    var state = { rows: (cfg.rows || []).slice(), query: "", key: null, dir: 1, page: 0 };
+    root.innerHTML = "";
+    if (cfg.search) {
+      var search = node("input", "input skip-table-search");
+      search.type = "search";
+      search.placeholder = typeof cfg.search === "string" ? cfg.search : "Buscar…";
+      search.setAttribute("aria-label", search.placeholder);
+      search.addEventListener("input", function () {
+        state.query = search.value.trim().toLowerCase();
+        state.page = 0;
+        draw();
+      });
+      root.appendChild(search);
+    }
+    var tableEl = node("table", "shell-table");
+    var headRow = node("tr");
+    var heads = cols.map(function (col) {
+      var th = node("th", isNumberColumn(col) ? "num" : "", col.label == null ? col.key : col.label);
+      th.scope = "col";
+      if (col.sortable !== false) {
+        var toggle = function () {
+          state.dir = state.key === col.key ? -state.dir : 1;
+          state.key = col.key;
+          draw();
+        };
+        th.setAttribute("data-sort", col.key);
+        th.tabIndex = 0;
+        th.addEventListener("click", toggle);
+        th.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+        });
+      }
+      headRow.appendChild(th);
+      return th;
+    });
+    var thead = node("thead");
+    var tbody = node("tbody");
+    var wrap = node("div", "skip-table-wrap");
+    var pager = node("div", "skip-pager");
+    thead.appendChild(headRow);
+    tableEl.appendChild(thead);
+    tableEl.appendChild(tbody);
+    wrap.appendChild(tableEl);
+    root.appendChild(wrap);
+    if (pageSize) root.appendChild(pager);
+
+    function visibleRows() {
+      var rows = state.rows;
+      if (state.query) {
+        rows = rows.filter(function (row) {
+          return cols.some(function (col) { return cellText(col, row).toLowerCase().indexOf(state.query) >= 0; });
+        });
+      }
+      if (state.key) {
+        var key = state.key, dir = state.dir;
+        rows = rows.slice().sort(function (a, b) { return dir * compareValues(a[key], b[key]); });
+      }
+      return rows;
+    }
+
+    function drawRow(row) {
+      var tr = node("tr");
+      cols.forEach(function (col) {
+        var td = node("td", isNumberColumn(col) ? "num" : "");
+        if (!col.render) {
+          td.textContent = cellText(col, row);
+        } else {
+          var content = col.render(row[col.key], row);
+          if (content instanceof Node) td.appendChild(content);
+          else td.innerHTML = content == null ? "" : String(content);
+        }
+        tr.appendChild(td);
+      });
+      // The row stays a row (no role) and takes focus, so a keyboard reaches
+      // the same action; keys pressed on a control inside a cell are its own.
+      if (cfg.onRowClick) {
+        tr.style.cursor = "pointer";
+        tr.tabIndex = 0;
+        tr.addEventListener("click", function () { cfg.onRowClick(row); });
+        tr.addEventListener("keydown", function (e) {
+          if (e.target !== tr || (e.key !== "Enter" && e.key !== " ")) return;
+          e.preventDefault();
+          cfg.onRowClick(row);
+        });
+      }
+      return tr;
+    }
+
+    function pagerButton(label, disabled, step) {
+      var button = node("button", "btn", label);
+      button.type = "button";
+      button.setAttribute("data-variant", "outline");
+      button.setAttribute("data-size", "sm");
+      button.disabled = disabled;
+      button.addEventListener("click", function () { state.page += step; draw(); });
+      return button;
+    }
+
+    function draw() {
+      var rows = visibleRows();
+      heads.forEach(function (th, i) {
+        if (cols[i].key === state.key) th.setAttribute("aria-sort", state.dir > 0 ? "ascending" : "descending");
+        else th.removeAttribute("aria-sort");
+      });
+      var pages = pageSize ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1;
+      state.page = Math.min(state.page, pages - 1);
+      var shown = pageSize ? rows.slice(state.page * pageSize, (state.page + 1) * pageSize) : rows;
+      tbody.innerHTML = "";
+      if (!shown.length) {
+        var empty = node("td", "skip-table-empty", cfg.empty || "Nenhum registro encontrado.");
+        empty.colSpan = cols.length;
+        tbody.appendChild(node("tr")).appendChild(empty);
+      }
+      shown.forEach(function (row) { tbody.appendChild(drawRow(row)); });
+      if (!pageSize) return;
+      pager.innerHTML = "";
+      var from = rows.length ? state.page * pageSize + 1 : 0;
+      pager.appendChild(node("span", "", from + "–" + Math.min(rows.length, (state.page + 1) * pageSize) + " de " + rows.length));
+      var nav = node("div", "row gap-2");
+      nav.appendChild(pagerButton("Anterior", state.page === 0, -1));
+      nav.appendChild(pagerButton("Próxima", state.page >= pages - 1, 1));
+      pager.appendChild(nav);
+    }
+
+    draw();
+    return {
+      setRows: function (rows) { state.rows = rows.slice(); draw(); },
+      rows: visibleRows
+    };
+  }
+
+  // kpis(el, [{label, value, format?, delta?, hint?}]) — KPI cards in a
+  // responsive grid; delta is a fraction (0.12 renders as ▲ 12%).
+  function kpis(target, items) {
+    var root = resolve(target);
+    root.innerHTML = "";
+    root.classList.add("shell-grid");
+    items.forEach(function (item) {
+      var card = node("div", "panel kpi");
+      card.appendChild(node("span", "kpi-label", item.label));
+      card.appendChild(node("span", "kpi-value", item.format ? coerceFormat(item.format)(item.value) : String(item.value)));
+      if (typeof item.delta === "number") {
+        var up = item.delta >= 0;
+        card.appendChild(node("span", "kpi-delta " + (up ? "up" : "down"), (up ? "▲ " : "▼ ") + fmt.pct(Math.abs(item.delta))));
+      }
+      if (item.hint) card.appendChild(node("span", "kpi-label", item.hint));
+      root.appendChild(card);
+    });
+  }
+
+  // badge(text, variant?) — a .badge node for table cells and lists;
+  // variant is "secondary" | "outline" | "destructive" (default: primary).
+  function badge(text, variant) {
+    var el = node("span", "badge", text);
+    if (variant) el.setAttribute("data-variant", variant);
+    return el;
+  }
+
+  // tabs(el) — wires one .tabs block: [role=tab] buttons inside
+  // [role=tablist], each with aria-controls naming its [role=tabpanel].
+  function tabs(target) {
+    var root = resolve(target);
+    var buttons = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(chosen) {
+      buttons.forEach(function (b) {
+        var on = b === chosen;
+        b.setAttribute("aria-selected", on ? "true" : "false");
+        b.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(b.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    buttons.forEach(function (b, i) {
+      b.addEventListener("click", function () { select(b); });
+      b.addEventListener("keydown", function (e) {
+        var step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        var next = buttons[(i + step + buttons.length) % buttons.length];
+        next.focus();
+        select(next);
+      });
+    });
+    select(buttons.filter(function (b) { return b.getAttribute("aria-selected") === "true"; })[0] || buttons[0]);
+  }
+
+  // toast(message, {type?: "success" | "error", title?, duration?}) — a
+  // .toast in a shared .toaster at the bottom of the page.
+  function toast(message, opts) {
+    opts = opts || {};
+    var toaster = document.querySelector(".toaster") || document.body.appendChild(node("div", "toaster"));
+    var item = node("div", "toast");
+    item.setAttribute("role", opts.type === "error" ? "alert" : "status");
+    item.setAttribute("aria-hidden", "true");
+    if (opts.type) item.setAttribute("data-type", opts.type);
+    var content = node("div", "toast-content");
+    var section = node("section");
+    if (opts.title) section.appendChild(node("h2", "", opts.title));
+    section.appendChild(node("p", "", message));
+    content.appendChild(section);
+    item.appendChild(content);
+    toaster.appendChild(item);
+    requestAnimationFrame(function () { item.setAttribute("aria-hidden", "false"); });
+    setTimeout(function () {
+      item.setAttribute("aria-hidden", "true");
+      setTimeout(function () { item.remove(); }, 400);
+    }, opts.duration || 3000);
+  }
+
+  // Dialogs are native <dialog class="dialog">: a [data-dialog-open="id"]
+  // anywhere opens one, a [data-dialog-close] inside closes it, and a click on
+  // its backdrop closes it too. Plain dialog.showModal()/close() still work.
+  document.addEventListener("click", function (e) {
+    var target = e.target;
+    if (!(target instanceof Element)) return;
+    var opener = target.closest("[data-dialog-open]");
+    if (opener) {
+      var dialog = document.getElementById(opener.getAttribute("data-dialog-open"));
+      if (dialog && dialog.showModal && !dialog.open) dialog.showModal();
+      return;
+    }
+    var closer = target.closest("[data-dialog-close]");
+    if (closer && closer.closest("dialog")) {
+      closer.closest("dialog").close();
+      return;
+    }
+    if (target.tagName === "DIALOG" && target.classList.contains("dialog") && target.open) target.close();
+  });
+
+  // store(key, fallback) — JSON state in localStorage that never throws (a
+  // private window or a full quota falls back to memory): {get, set, update}.
+  function store(key, fallback) {
+    var memory;
+    // Set while the last write did not reach localStorage: what is stored
+    // there is older than memory until a write goes through again.
+    var unsaved = false;
+    var initial = function () { return fallback === undefined ? undefined : JSON.parse(JSON.stringify(fallback)); };
+    function get() {
+      if (!unsaved) {
+        try {
+          var raw = localStorage.getItem(key);
+          if (raw != null) return JSON.parse(raw);
+        } catch (e) { /* storage unavailable: memory below */ }
+      }
+      return memory !== undefined ? memory : initial();
+    }
+    function set(value) {
+      memory = value;
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        unsaved = false;
+      } catch (e) {
+        unsaved = true;
+      }
+      return value;
+    }
+    return { get: get, set: set, update: function (fn) { return set(fn(get())); } };
+  }
+
+  // mock — seeded random data, so a page asks for 90 days of numbers in one
+  // line instead of writing them out; the same seed gives the same data.
+  var FIRST = ["Ana", "Bruno", "Carla", "Diego", "Eduarda", "Felipe", "Gabriela", "Henrique", "Isabela", "João",
+    "Larissa", "Marcos", "Natália", "Otávio", "Paula", "Rafael", "Sofia", "Thiago", "Vanessa", "Lucas"];
+  var LAST = ["Silva", "Santos", "Oliveira", "Souza", "Pereira", "Costa", "Rodrigues", "Almeida", "Nascimento", "Lima",
+    "Araújo", "Fernandes", "Carvalho", "Gomes", "Martins", "Rocha", "Ribeiro", "Barbosa"];
+  var CITIES = ["São Paulo, SP", "Rio de Janeiro, RJ", "Belo Horizonte, MG", "Curitiba, PR", "Porto Alegre, RS",
+    "Salvador, BA", "Recife, PE", "Fortaleza, CE", "Brasília, DF", "Goiânia, GO", "Campinas, SP", "Florianópolis, SC",
+    "Manaus, AM", "Belém, PA", "Vitória, ES", "Natal, RN"];
+
+  function createMock(seed) {
+    var state = seed >>> 0;
+    function random() {
+      state = (state + 0x6d2b79f5) >>> 0;
+      var t = state;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    function int(min, max) { return min + Math.floor(random() * (max - min + 1)); }
+    function pick(list) { return list[Math.floor(random() * list.length)]; }
+    var mock = {
+      seed: function (value) { state = value >>> 0; return mock; },
+      random: random,
+      int: int,
+      float: function (min, max, decimals) {
+        var factor = Math.pow(10, decimals == null ? 2 : decimals);
+        return Math.round((min + random() * (max - min)) * factor) / factor;
+      },
+      pick: pick,
+      chance: function (p) { return random() < p; },
+      name: function () { return pick(FIRST) + " " + pick(LAST); },
+      city: function () { return pick(CITIES); },
+      // series(n, {start, trend, noise, min, decimals}) — a walk: each value
+      // moves by trend (fraction per step) plus up to ±noise of itself.
+      series: function (n, opts) {
+        opts = opts || {};
+        var value = opts.start == null ? 100 : opts.start;
+        var factor = Math.pow(10, opts.decimals || 0);
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          out.push(Math.max(opts.min == null ? 0 : opts.min, Math.round(value * factor) / factor));
+          value = value * (1 + (opts.trend || 0)) * (1 + (random() * 2 - 1) * (opts.noise == null ? 0.08 : opts.noise));
+        }
+        return out;
+      },
+      // dates(n, {end?, step?: "day" | "week" | "month"}) — ISO dates
+      // (YYYY-MM-DD), oldest first, ending at end (default: today).
+      dates: function (n, opts) {
+        opts = opts || {};
+        var end = opts.end ? new Date(opts.end) : new Date();
+        var out = [];
+        for (var i = n - 1; i >= 0; i--) {
+          var d = new Date(end.getTime());
+          if (opts.step === "month") d.setMonth(d.getMonth() - i);
+          else d.setDate(d.getDate() - i * (opts.step === "week" ? 7 : 1));
+          out.push(d.toISOString().slice(0, 10));
+        }
+        return out;
+      },
+      // rows(n, spec) — n objects; each spec value is a function(i), a list
+      // to pick from, or a constant.
+      rows: function (n, spec) {
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          var row = {};
+          for (var key in spec) {
+            var value = spec[key];
+            row[key] = typeof value === "function" ? value(i) : Array.isArray(value) ? pick(value) : value;
+          }
+          out.push(row);
+        }
+        return out;
+      }
+    };
+    return mock;
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+  window.skipUI = { table: table, kpis: kpis, badge: badge, tabs: tabs, toast: toast };
+  window.skipStore = store;
+  window.skipMock = createMock(20261022);
+})();
+
+</script>
+
+  <style>
+    :root {
+      --accent: #0B4F4A;
+      --accent-text: #0B4F4A;
+      --accent-contrast: #ffffff;
+      --terracotta: #B85C38;
+      --ochre: #D9A44B;
+      --bg: #FAF8F5;
+      --surface: #ffffff;
+      --text: #1A1A1A;
+      --text-muted: #4A4A4A;
+      --border: #E3DDD4;
+      --border-subtle: #EBE6DF;
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      margin: 0;
+      padding: 0;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Enlace de salto accesible */
+    .skip-link {
+      position: absolute;
+      top: -3rem;
+      left: 1rem;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      padding: 0.5rem 1rem;
+      border-radius: 0 0 4px 4px;
+      font-weight: 600;
+      z-index: 1000;
+      text-decoration: none;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 0;
+      outline: 3px solid var(--ochre);
+      outline-offset: 2px;
+    }
+
+    /* Foco visible estricto */
+    a:focus-visible,
+    button:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 3px solid var(--terracotta) !important;
+      outline-offset: 3px !important;
+    }
+
+    /* Franja superior de desarrollo */
+    .dev-banner {
+      background-color: #2F3E3B;
+      color: #F0ECE4;
+      font-size: 0.8125rem;
+      text-align: center;
+      padding: 0.4rem 1rem;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
+
+    /* Encabezado */
+    .site-header {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      max-width: 74rem;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      text-decoration: none;
+      color: var(--accent);
+    }
+    .brand-logo-svg {
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+    }
+
+    /* Navegación principal */
+    .nav-menu {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.25rem 0.25rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .nav-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Selector de idioma */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.15rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .lang-btn {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      line-height: 1;
+    }
+    .lang-btn:hover {
+      color: var(--accent);
+    }
+    .lang-btn[aria-current="true"] {
+      background: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    /* Migas de pan */
+    .breadcrumbs-wrap {
+      max-width: 74rem;
+      margin: 1.25rem auto 0;
+      padding: 0 1.25rem;
+    }
+    .breadcrumbs {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .breadcrumbs a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .breadcrumbs a:hover {
+      color: var(--terracotta);
+    }
+    .breadcrumbs span[aria-current="page"] {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Columna jurídica principal: máx 72ch */
+    .legal-container {
+      max-width: 52rem;
+      margin: 1.5rem auto 4rem;
+      padding: 0 1.25rem;
+    }
+    .legal-prose {
+      max-width: 72ch;
+      margin: 0 auto;
+      font-size: 1.0625rem;
+      color: var(--text);
+    }
+
+    /* Títulos con serifa */
+    h1.doc-title {
+      font-family: var(--font-serif);
+      font-size: 2.375rem;
+      line-height: 1.2;
+      color: var(--accent);
+      margin: 0.5rem 0 0.5rem;
+      font-weight: 700;
+    }
+    .validity-line {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    /* Cuadro de resumen */
+    .summary-card {
+      background: #FFFFFF;
+      border-left: 4px solid var(--terracotta);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.375rem 1.5rem;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 2px 8px rgba(11, 79, 74, 0.04);
+    }
+    .summary-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--terracotta);
+      font-weight: 700;
+      margin: 0 0 0.75rem 0;
+    }
+    .summary-card p {
+      margin: 0;
+      line-height: 1.6;
+      color: #262626;
+    }
+
+    /* Índice de navegación */
+    .index-nav {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .index-title {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.5rem 1.25rem;
+      font-size: 0.9375rem;
+      line-height: 1.45;
+    }
+    .index-item a {
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-block;
+      padding: 0.2rem 0;
+    }
+    .index-item a:hover {
+      color: var(--terracotta);
+      text-decoration: underline;
+    }
+
+    /* Tipografía de las secciones */
+    .legal-prose h2 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin: 3rem 0 1.25rem;
+      line-height: 1.3;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .legal-prose h2:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 2rem;
+    }
+    .legal-prose h3 {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: #2F3E3B;
+      margin: 1.75rem 0 0.75rem;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+    .legal-prose p {
+      margin: 0 0 1.25rem 0;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    /* Destaques institucionales en prosa */
+    .field-label {
+      font-weight: 600;
+      color: #1A1A1A;
+    }
+
+    /* Caja destacada DPO */
+    .dpo-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1.5rem 0;
+    }
+    .dpo-box p {
+      margin: 0 0 0.5rem 0;
+      text-align: left;
+    }
+    .dpo-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Enlaces internos de acción */
+    .legal-actions {
+      margin: 1.5rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .legal-btn-link {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--accent-contrast);
+      padding: 0.625rem 1.125rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9375rem;
+    }
+    .legal-btn-link:hover {
+      background: #083733;
+    }
+    .legal-btn-outline {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.625rem 1.125rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      background: #FFFFFF;
+    }
+    .legal-btn-outline:hover {
+      background: #F0ECE4;
+    }
+
+    /* Nota de revisión jurídica */
+    .legal-review-note {
+      background: #F4EFEB;
+      border: 1px dashed var(--terracotta);
+      color: #4A3A35;
+      padding: 1.25rem 1.5rem;
+      border-radius: 6px;
+      margin-top: 3.5rem;
+      font-size: 0.9375rem;
+    }
+    .legal-review-note strong {
+      color: var(--terracotta);
+    }
+    .legal-review-note p {
+      margin: 0;
+      text-align: left;
+    }
+
+    /* Abreviaturas accesibles */
+    abbr[title] {
+      text-decoration: underline dotted var(--accent);
+      cursor: help;
+    }
+
+    /* Pie de página */
+    .site-footer {
+      background: #182321;
+      color: #E2DDD5;
+      padding: 3rem 1.25rem 2rem;
+      margin-top: 4rem;
+      border-top: 4px solid var(--accent);
+    }
+    .footer-inner {
+      max-width: 74rem;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(226, 221, 213, 0.15);
+    }
+    @media (max-width: 768px) {
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    .footer-brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .footer-brand-sub {
+      font-size: 0.8125rem;
+      color: #ABA398;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .footer-heading {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: #FFFFFF;
+      font-weight: 600;
+      margin: 0 0 1rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+    .footer-links a {
+      color: #E2DDD5;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .footer-links a:hover {
+      color: var(--ochre);
+      text-decoration: underline;
+    }
+    .footer-links a[aria-current="page"] {
+      color: var(--ochre);
+      font-weight: 600;
+    }
+    .footer-bottom {
+      padding-top: 2rem;
+      font-size: 0.8125rem;
+      color: #8C8479;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+    }
+    .footer-bottom a {
+      color: #ABA398;
+    }
+    .footer-bottom a:hover {
+      color: #FFFFFF;
+    }
+
+    /* Respeto estricto a prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Medidas para impresión */
+    @media print {
+      .dev-banner, .site-header, .index-nav, .legal-actions, .site-footer, .skip-link {
+        display: none !important;
+      }
+      body {
+        background: #ffffff;
+        color: #000000;
+        font-size: 11pt;
+      }
+      .legal-container, .legal-prose {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      h2 {
+        page-break-after: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#contenido" class="skip-link">Ir al contenido principal</a>
+
+  <!-- Franja superior de desarrollo -->
+  <aside class="dev-banner" aria-label="Aviso de versión">
+    Versión de desarrollo — no indexada hasta el lanzamiento
+  </aside>
+
+  <!-- Encabezado del sitio -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="brand-group" aria-label="Red Interseccional de Resiliencia - Portada en español">
+        <!-- Logotipo SVG inline: nodos conectados de la Red -->
+        <svg class="brand-logo-svg" width="38" height="38" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <circle cx="24" cy="24" r="23" stroke="#0B4F4A" stroke-width="2" fill="#FAF8F5" />
+          <line x1="14" y1="18" x2="34" y2="15" stroke="#0B4F4A" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="18" x2="24" y2="33" stroke="#0B4F4A" stroke-width="2" stroke-linecap="round"/>
+          <line x1="34" y1="15" x2="24" y2="33" stroke="#0B4F4A" stroke-width="2" stroke-linecap="round"/>
+          <line x1="24" y1="33" x2="36" y2="35" stroke="#B85C38" stroke-width="1.8" stroke-dasharray="2 2" stroke-linecap="round"/>
+          <line x1="14" y1="18" x2="11" y2="30" stroke="#D9A44B" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="14" cy="18" r="5" fill="#0B4F4A"/>
+          <circle cx="34" cy="15" r="4.5" fill="#0B4F4A"/>
+          <circle cx="24" cy="33" r="5.5" fill="#B85C38"/>
+          <circle cx="36" cy="35" r="3" fill="#0B4F4A"/>
+          <circle cx="11" cy="30" r="3" fill="#D9A44B"/>
+        </svg>
+        <div>
+          <div class="brand-title">RIR ALC</div>
+          <div class="brand-subtitle">Red Interseccional de Resiliencia</div>
+        </div>
+      </a>
+
+      <!-- Menú de navegación institucional -->
+      <nav class="nav-menu" aria-label="Navegación principal">
+        <a href="../index.html#sobre" class="nav-link">Acerca de</a>
+        <a href="../index.html#eixos" class="nav-link">Ejes metodológicos</a>
+        <a href="../rede.html" class="nav-link">La Red</a>
+        <a href="../instituicoes.html" class="nav-link">Instituciones</a>
+        <a href="../index.html#projeto" class="nav-link">Proyecto</a>
+        <a href="../index.html#producao" class="nav-link">Producción</a>
+        <a href="index.html#contacto" class="nav-link">Contacto</a>
+      </nav>
+
+      <!-- Selector de idioma accesible -->
+      <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
+        <a href="../privacidade.html" class="lang-btn" lang="pt" hreflang="pt-BR">Português</a>
+        <a href="../en/privacidade.html" class="lang-btn" lang="en" hreflang="en">English</a>
+        <a href="privacidade.html" class="lang-btn" lang="es" hreflang="es" aria-current="true">Español</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Ruta de navegación / Migas de pan -->
+  <nav class="breadcrumbs-wrap" aria-label="Ruta de navegación">
+    <div class="breadcrumbs">
+      <a href="../index.html">Inicio</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Política de Privacidad</span>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main id="contenido" class="legal-container" role="main">
+    <div class="legal-prose">
+      <h1 class="doc-title">Política de Privacidad</h1>
+      <div class="validity-line">Versión 1.0 — octubre de 2026. Última actualización: octubre de 2026.</div>
+      <!-- TODO: confirmar fecha de publicación y versión con la asesoría jurídica -->
+
+      <!-- Bloque "En resumen" -->
+      <section class="summary-card" aria-labelledby="resumen-heading">
+        <h2 id="resumen-heading" class="summary-title">En resumen</h2>
+        <p>
+          Este sitio no utiliza cookies de rastreo, no crea perfiles de visitantes y no vende datos personales. El único formulario que recoge datos es el de contacto, y los datos informados se usan únicamente para responder a su mensaje y para la articulación de la Red. Los nombres y vínculos institucionales de las personas investigadoras publicados en este sitio son datos de naturaleza académico-profesional, obtenidos de un documento público de proyecto científico. Usted puede solicitar información, corrección o eliminación de sus datos en cualquier momento por el canal indicado en la sección XIII.
+        </p>
+      </section>
+
+      <!-- Índice navegable en el tope -->
+      <nav class="index-nav" aria-label="Índice de la política">
+        <h2 class="index-title">Índice del documento</h2>
+        <div class="index-grid">
+          <div class="index-item"><a href="#seccion-i">I. Disposiciones generales y controlador</a></div>
+          <div class="index-item"><a href="#seccion-ii">II. Definiciones esenciales</a></div>
+          <div class="index-item"><a href="#seccion-iii">III. Qué datos personales se tratan</a></div>
+          <div class="index-item"><a href="#seccion-iv">IV. Finalidades y bases legales</a></div>
+          <div class="index-item"><a href="#seccion-v">V. Datos de investigadores e instituciones</a></div>
+          <div class="index-item"><a href="#seccion-vi">VI. Datos sensibles e investigación científica</a></div>
+          <div class="index-item"><a href="#seccion-vii">VII. Cookies y tecnologías de medición</a></div>
+          <div class="index-item"><a href="#seccion-viii">VIII. Compartición de datos con terceros</a></div>
+          <div class="index-item"><a href="#seccion-ix">IX. Transferencia internacional de datos</a></div>
+          <div class="index-item"><a href="#seccion-x">X. Retención y eliminación de datos</a></div>
+          <div class="index-item"><a href="#seccion-xi">XI. Derechos de la persona titular</a></div>
+          <div class="index-item"><a href="#seccion-xii">XII. Seguridad de la información</a></div>
+          <div class="index-item"><a href="#seccion-xiii">XIII. Encargado del tratamiento (DPO)</a></div>
+          <div class="index-item"><a href="#seccion-xiv">XIV. Reclamaciones ante la autoridad</a></div>
+          <div class="index-item"><a href="#seccion-xv">XV. Actualizaciones de esta política</a></div>
+          <div class="index-item"><a href="#seccion-xvi">XVI. Canales de contacto</a></div>
+        </div>
+      </nav>
+
+      <!-- SECCIÓN I -->
+      <h2 id="seccion-i" tabindex="-1">I. Disposiciones generales e identificación del controlador</h2>
+      <p>
+        Esta Política de Privacidad describe de manera transparente, rigurosa y accesible cómo la Red Interseccional de Resiliencia (<abbr title="Red Interseccional de Resiliencia para América Latina y el Caribe">RIR ALC</abbr>) recopila, utiliza, almacena y protege los datos personales tratados en el ámbito de este sitio institucional, en estricta conformidad con la Ley brasileña n.º 13.709/2018 (Ley General de Protección de Datos Personales, <abbr title="Lei Geral de Proteção de Dados Pessoais de Brasil">LGPD</abbr>) y con la Ley brasileña n.º 12.965/2014 (Marco Civil de Internet).
+      </p>
+      <p>
+        El controlador del tratamiento de datos personales efectuado a través de este sitio es la <span class="field-label">Red Interseccional de Resiliencia (RIR ALC)</span>, iniciativa de cooperación científica internacional articulada por el <span class="field-label">Centro Nacional de Monitoreo y Alertas de Desastres Naturales (<abbr title="Centro Nacional de Monitoramento e Alertas de Desastres Naturais">Cemaden</abbr>)</span>, Institución Científica y Tecnológica (<abbr title="Instituição Científica, Tecnológica e de Inovação">ICT</abbr>) pública federal vinculada al <span class="field-label">Ministerio de Ciencia, Tecnología e Innovación (<abbr title="Ministério da Ciência, Tecnologia e Inovação">MCTI</abbr>)</span> de la República Federativa de Brasil, en el marco del Proyecto ALERTA-INTERSEC, financiado bajo el proceso <abbr title="Conselho Nacional de Desenvolvimento Científico e Tecnológico">CNPq</abbr> 445280/2026-3 y formalmente aprobado en octubre de 2026.
+      </p>
+      <!-- TODO: confirmar razón social/CNPJ del controlador y dirección institucional con la asesoría jurídica del Cemaden -->
+      <p>
+        El controlador se encuentra legal e institucionalmente establecido en el territorio de la República Federativa de Brasil y aplica las disposiciones de la LGPD a la totalidad de las actividades de tratamiento de datos personales realizadas por medio de este sitio institucional, con absoluta independencia del país de residencia, origen o conexión de la persona titular (art. 3.º de la LGPD). Sin perjuicio de ello, dado que la plataforma y sus contenidos se ponen a disposición de la comunidad académica y de la ciudadanía en idioma español para los ocho países hispanohablantes socios de la Red —a saber: Argentina, Chile, Colombia, Costa Rica, Ecuador, Panamá, Perú y Uruguay—, la presente política se publica y ejecuta sin desmedro de los derechos, garantías y recursos previstos en las legislaciones nacionales de protección de datos vigentes en cada uno de dichos Estados, los cuales toda persona titular podrá hacer valer ante su respectiva autoridad nacional de control.
+      </p>
+      <p>
+        A los efectos de la interpretación uniforme del presente instrumento, la expresión "nosotros" alude al controlador; el vocablo "usted" designa a la persona física titular de los datos personales; y el término "sitio" refiere al conjunto de páginas web, documentos y recursos digitales accesibles bajo este nombre de dominio institucional.
+      </p>
+      <p>
+        El alcance material de este instrumento se circunscribe con exclusividad a las operaciones de tratamiento de datos ejecutadas en y a través de este portal web. Esta política no regula ni abarca las actividades de tratamiento de datos que se desarrollen en el ámbito sustantivo de la investigación empírica de campo, encuestas o análisis cuantitativos y cualitativos propios del proyecto científico ALERTA-INTERSEC, cuyas actividades se rigen por bases normativas y protocolos éticos autónomos, conforme se detalla en la sección VI.
+      </p>
+
+      <!-- SECCIÓN II -->
+      <h2 id="seccion-ii" tabindex="-1">II. Definiciones</h2>
+      <p>
+        De conformidad con lo dispuesto en el artículo 5.º de la LGPD, en este documento se entiende por datos personales toda información concerniente a una persona física identificada o identificable; por datos personales sensibles, aquellos relativos al origen racial o étnico, convicciones religiosas, opiniones políticas, filiación sindical u organización de carácter religioso, filosófico o político, así como datos referentes a la salud o a la vida sexual y datos genéticos o biométricos cuando estén vinculados a una persona física; por titular, la persona natural a quien se refieren los datos objeto de tratamiento; por controlador, la persona física o jurídica, de derecho público o privado, a la que competen las decisiones relativas al tratamiento; por operador, la persona física o jurídica que efectúa el tratamiento en nombre y por cuenta del controlador; por tratamiento, toda operación realizada con datos personales, tales como recolección, producción, recepción, clasificación, utilización, acceso, reproducción, transmisión, distribución, procesamiento, archivo, almacenamiento, eliminación, evaluación, control, modificación, comunicación, transferencia, difusión o extracción; por consentimiento, la manifestación libre, informada e inequívoca mediante la cual el titular autoriza el tratamiento para una finalidad determinada; y por anonimización, el empleo de medios técnicos razonables y disponibles al momento del tratamiento por los cuales un dato pierde la posibilidad de asociación directa o indirecta con un individuo.
+      </p>
+
+      <!-- SECCIÓN III -->
+      <h2 id="seccion-iii" tabindex="-1">III. Qué datos personales se tratan</h2>
+      <p>
+        La navegación y consulta de los contenidos informativos de este sitio web es libre y no exige registro previo, suscripción ni autenticación de identidad. No obstante, en situaciones operativas puntuales se tratan los datos que se desglosan a continuación.
+      </p>
+      <h3>III.1 — Formulario de contacto</h3>
+      <p>
+        Cuando usted decide voluntariamente dirigirse al equipo de la Red a través del formulario institucional de contacto, se recaban los siguientes campos: nombre completo, dirección de correo electrónico, institución o entidad de vinculación, país de desempeño profesional, área de actuación o disciplina y el texto del mensaje remitido. La cumplimentación de dicho formulario reviste carácter enteramente facultativo; únicamente el nombre, la dirección de correo electrónico, la institución de adscripción y el cuerpo del mensaje resultan estrictamente obligatorios a fin de posibilitar la recepción técnica, la debida comprensión y la respuesta motivada a su comunicación.
+      </p>
+      <h3>III.2 — Datos de navegación y registros de acceso</h3>
+      <p>
+        Por requerimiento inherente al protocolo de comunicación de internet y a la operación de la infraestructura de alojamiento y seguridad perimetral, se registran de forma automática determinados metadatos técnicos en el servidor, correspondientes a: la dirección de protocolo de internet (dirección IP), la fecha y la hora exacta de cada solicitud bajo el estándar de tiempo universal coordinado (<abbr title="Coordinated Universal Time">UTC</abbr>), el recurso o página web solicitada, el código de estado de respuesta del servidor web y la cadena de identificación del navegador y sistema operativo (agente del usuario o user agent). La generación de estos registros obedece a razones de integridad técnica y seguridad telemática, constituyendo su conservación una obligación legal ineludible a cargo del proveedor en los términos del artículo 15 de la Ley brasileña n.º 12.965/2014.
+      </p>
+      <h3>III.3 — Datos que no se recogen</h3>
+      <p>
+        Este portal no recolecta bajo ningún concepto categorías especiales o datos personales sensibles; no emplea tecnologías de seguimiento persistente, perfiles psicométricos ni cookies con propósitos publicitarios, mercadotécnicos o de monitoreo del comportamiento del usuario en línea; no adopta decisiones automatizadas de ninguna índole con efectos jurídicos sobre personas humanas; y no solicita ni almacena deliberadamente información concerniente a niños, niñas o adolescentes.
+      </p>
+      <h3>III.4 — Datos de personas investigadoras publicados</h3>
+      <p>
+        La exhibición pública de información relativa a las personas investigadoras y especialistas vinculados a los equipos de los países miembros se rige con exclusividad por las precisiones institucionales y jurídicas formuladas en la sección V de esta política.
+      </p>
+
+      <!-- SECCIÓN IV -->
+      <h2 id="seccion-iv" tabindex="-1">IV. Finalidades y bases legales</h2>
+      <p>
+        Toda operación de tratamiento de datos personales ejecutada por medio de este sitio se fundamenta taxativamente en alguna de las hipótesis autorizadas por el artículo 7.º de la LGPD, vinculando cada objetivo operativo a una base legal explícita y delimitada.
+      </p>
+      <h3>IV.1 — Responder a mensajes enviados por el formulario</h3>
+      <p>
+        El tratamiento tiene por finalidad recibir, clasificar, remitir internamente y responder de forma circunstanciada a las dudas, solicitudes de colaboración y comunicaciones enviadas por investigadoras, investigadores y entidades interesadas en la Red. La base legal que legitima esta operación es el consentimiento libre, inequívoco y expreso otorgado por la persona titular al pulsar el botón de envío del formulario de contacto (art. 7.º, I, de la LGPD).
+      </p>
+      <h3>IV.2 — Articulación institucional y comunicación de la Red</h3>
+      <p>
+        El tratamiento persigue entablar y coordinar el diálogo institucional con aquellas personas que se presentaron espontáneamente con el objeto de formalizar cooperación científica internacional, enriquecer la articulación de la Red y participar de las mesas de trabajo del proyecto ALERTA-INTERSEC. La base legal reside en el consentimiento manifestado por el emisor (art. 7.º, I, de la LGPD) y, en lo relativo a la actuación de los organismos públicos que componen la Red en el ejercicio de sus competencias legales de fomento a la resiliencia y mitigación del riesgo de desastres, en la ejecución de políticas públicas legalmente instituidas (art. 7.º, III, de la LGPD).
+      </p>
+      <h3>IV.3 — Seguridad y disponibilidad del sitio</h3>
+      <p>
+        La finalidad radica en garantizar la continuidad operativa del servicio web, prevenir intrusiones no autorizadas, mitigar ataques de denegación distribuida de servicio, frustrar maniobras fraudulentas y posibilitar la investigación forense ante eventuales incidentes telemáticos. La base legal aplicable es el interés legítimo del controlador (art. 7.º, IX, de la LGPD), circunscrito con rigor a las medidas indispensables para el resguardo de la infraestructura pública.
+      </p>
+      <h3>IV.4 — Cumplimiento de obligación legal</h3>
+      <p>
+        Consiste en el mantenimiento inalterado y seguro de los registros de conexión y acceso a aplicaciones de internet en un entorno controlado y confidencial. La base legal que impone dicho tratamiento es el cumplimiento de una obligación legal o reglamentaria expresamente contemplada en el ordenamiento jurídico (art. 7.º, II, de la LGPD), por mandato imperativo del artículo 15 de la Ley n.º 12.965/2014.
+      </p>
+      <h3>IV.5 — Publicación de datos de personas investigadoras</h3>
+      <p>
+        Las finalidades y fundamentos jurídicos específicos que respaldan la divulgación del directorio de especialistas del proyecto se detallan en la sección V subsiguiente.
+      </p>
+      <p>
+        En todo momento y bajo cualquier circunstancia, el tratamiento de datos personales se ceñirá estrictamente al mínimo indispensable para colmar los fines aquí declarados, garantizando la observancia integral de los principios rectores de finalidad, adecuación, necesidad, libre acceso, calidad de los datos, transparencia, seguridad, prevención y no discriminación (art. 6.º de la LGPD).
+      </p>
+
+      <!-- SECCIÓN V -->
+      <h2 id="seccion-v" tabindex="-1">V. Publicación de datos de personas investigadoras e instituciones</h2>
+      <p>
+        En las secciones de acceso público denominadas "La Red" e "Instituciones" se difunden de forma transparente datos de naturaleza exclusivamente académico-profesional relativos a los miembros de la Red, tales como: nombre completo, filiación institucional principal, unidad o laboratorio de desempeño, titulación o grado académico máximo alcanzado, dedicación horaria semanal formalmente asignada a las labores de la Red, síntesis curricular de trayectoria investigativa y enlaces a perfiles públicos de producción científica acreditada, tales como el registro internacional ORCID o la plataforma de Currículo Lattes.
+      </p>
+      <p>
+        Dichos antecedentes constan íntegramente en el Anexo 1 de la propuesta técnica y científica del proyecto ALERTA-INTERSEC, sometida, calificada y aprobada en el proceso de convocatoria pública de fomento científico nacional e internacional, revistiendo la calidad de documento administrativo de naturaleza pública. Por consiguiente, se tratan conforme a la previsión legal de datos personales manifiestamente hechos públicos por el titular o mediando su consentimiento institucional previo (art. 7.º, § 3.º, en concordancia con el art. 7.º, I, de la LGPD), persiguiendo como finalidad exclusiva el deber de máxima transparencia en la ejecución de iniciativas científicas financiadas con fondos públicos y el reconocimiento inexcusable de la autoría intelectual de las investigaciones.
+      </p>
+      <p>
+        El controlador garantiza que en dichas páginas no se difunden ni se difundirán direcciones de correo electrónico personal, números de telefonía fija o celular particular, números de documentos de identidad nacional, pasaportes, direcciones residenciales ni dato sensible o reservado alguno. Todo enlace externo remitido direcciona a repositorios públicos internacionales de acreditación científica.
+      </p>
+      <p>
+        Cualquier investigadora o investigador consignado en tales listados conserva el derecho incondicional de requerir en todo momento la actualización, rectificación o remoción de sus datos exhibidos mediante el canal institucional formalizado en la sección XIII, sin necesidad de justificación causal. Las solicitudes de eliminación se atenderán a la mayor brevedad administrativa, salvo en aquellos supuestos excepcionales donde la mención nominal resulte obligatoria por mandato imperativo de las normas de rendición de cuentas e informes de ejecución técnica de proyectos científicos financiados por agencias estatales de fomento, lo cual se notificará a la persona requirente de forma fundada por escrito.
+      </p>
+
+      <!-- SECCIÓN VI -->
+      <h2 id="seccion-vi" tabindex="-1">VI. Datos sensibles e investigación científica</h2>
+      <p>
+        Esta sección establece formalmente la frontera técnica y jurídica entre las operaciones de tratamiento propias de este portal web informativo y aquellas inherentes a la labor sustantiva de investigación científica de la Red Interseccional de Resiliencia y del proyecto ALERTA-INTERSEC.
+      </p>
+      <p>
+        Este sitio web no recopila, procesa ni difunde dato personal sensible alguno en el sentido del artículo 5.º, II, de la LGPD. En contraste, la labor científica y analítica desarrollada en el proyecto ALERTA-INTERSEC involucra el examen de microdatos censales y sociodemográficos anonimizados procedentes de bases de datos estadísticas públicas y oficiales —tales como el Censo Demográfico 2022 del Instituto Brasileño de Geografía y Estadística (<abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</abbr>), los censos de población y vivienda de la República del Ecuador y de la República del Perú, así como de las restantes naciones del consorcio—, complementados con datos primarios recolectados de forma presencial o remota en territorios de vulnerabilidad socioambiental.
+      </p>
+      <p>
+        El tratamiento de datos, incluso de naturaleza sensible, con fines exclusivos de estudio, investigación y producción científica a cargo de un órgano de investigación público halla amparo expreso y autónomo en el artículo 11, II, letra c, de la LGPD, guardando estricto cumplimiento con el artículo 13 de la misma norma en lo relativo a datos que atañen a la salud pública, hallándose vedada de forma absoluta la comunicación o el traspaso indiscriminado de microdatos a terceras partes en perjuicio de la privacidad o la autodeterminación informativa de las poblaciones participantes.
+      </p>
+      <p>
+        Todas las actividades de campo, grupos focales, encuestas y entrevistas cualitativas se someten preceptivamente a la aprobación previa y supervisión de los Comités de Ética en Investigación vinculados a la Comisión Nacional de Ética en Investigación (Sistema <abbr title="Comitês de Ética em Pesquisa / Comissão Nacional de Ética em Pesquisa">CEP/CONEP</abbr>), en observancia estricta de las directrices éticas de la Resolución CNS n.º 466/2012 de Brasil y de los estándares internacionales de bioética de las instituciones contrapartes en los países de América Latina. Se garantiza en todos los casos el consentimiento libre, previo e informado por escrito, el anonimato irrestricto de las fuentes y el derecho inalienable a revocar la participación en cualquier etapa del proceso sin perjuicio alguno.
+      </p>
+      <p>
+        En idéntico sentido, todos los productos cartográficos, capas geoespaciales (shapefiles), informes epidemiológicos y matrices de vulnerabilidad interseccional difundidos por la Red en materia de reducción del riesgo de desastres (<abbr title="Reducción del Riesgo de Desastres">RRD</abbr>) se publican única y exclusivamente a nivel agregado, estadístico o rigurosamente anonimizado, impidiendo de forma irreversible la identificación directa o indirecta de cualquier persona natural o núcleo familiar.
+      </p>
+
+      <!-- SECCIÓN VII -->
+      <h2 id="seccion-vii" tabindex="-1">VII. Cookies y tecnologías de medición</h2>
+      <p>
+        Este portal institucional no utiliza cookies de primera parte ni de terceros con propósitos de publicidad comportamental, reorientación (retargeting), elaboración de perfiles o rastreo transfronterizo del tráfico de usuarios. Tampoco incorpora librerías externas de mapas de calor, monitores de desplazamiento ni píxeles invisibles de redes sociales comerciales.
+      </p>
+      <p>
+        La cuantificación estadística de audiencia e impacto del sitio, cuando se encuentra operativa, se apoya exclusivamente en herramientas de telemetría agregada y sin cookies (cookieless), orientadas a la contabilización global de visitas por página y tipo de dispositivo general, sin generar identificadores persistentes de navegación ni posibilitar el seguimiento sincrónico o asincrónico entre diferentes dominios web.
+      </p>
+      <p>
+        La infraestructura técnica de distribución de contenidos y protección de red perimetral puede implementar cookies técnicas estrictamente necesarias con el exclusivo objetivo de autenticar la ruta de conexión, optimizar la entrega de paquetes de datos y proteger al servidor contra abusos telemáticos sistemáticos o ataques automatizados de denegación de servicio. Dichos mecanismos no almacenan datos personales nominativos y no pueden deshabilitarse en los servidores sin comprometer de manera directa la accesibilidad, estabilidad e integridad del portal.
+      </p>
+      <!-- TODO: si se añaden widgets de terceros, mapas incrustados o videos de YouTube, esta sección deberá revisarse antes de la publicación -->
+
+      <!-- SECCIÓN VIII -->
+      <h2 id="seccion-viii" tabindex="-1">VIII. Compartición de datos con terceros</h2>
+      <p>
+        Los datos personales confiados a la Red no son comercializados, cedidos a título oneroso ni gratuito, transferidos con fines mercantiles ni compartidos con organizaciones ajenas a las finalidades científicas y públicas expresamente enunciadas en este documento. Su eventual tratamiento por terceros se circunscribe estrictamente a los siguientes supuestos operativos.
+      </p>
+      <h3>VIII.1 — Operadores de infraestructura</h3>
+      <p>
+        La prestación de los servicios técnicos de alojamiento web, balanceo y red perimetral de entrega de contenido se realiza mediante la infraestructura provista por Cloudflare, en tanto que el control de versiones y el repositorio del código estático del portal residen en los sistemas provistos por GitHub. Dichas entidades actúan estrictamente en calidad de operadores de tratamiento, estando contractualmente compelidas a procesar los metadatos de conexión única y exclusivamente con arreglo a las directivas del controlador y en cumplimiento estricto de los estándares de confidencialidad y estabilidad del servicio.
+      </p>
+      <h3>VIII.2 — Repositorios científicos de acceso abierto</h3>
+      <p>
+        Los resultados, conjuntos de datos procesados, metodologías y publicaciones de investigación emanados del proyecto ALERTA-INTERSEC se depositan en repositorios digitales públicos y de preservación a largo plazo como Zenodo, bajo esquemas de ciencia abierta y mediante asignación de identificador de objeto digital (DOI). Dicha divulgación se efectúa pura y exclusivamente bajo formatos anonimizados o agregados, sin incluir en momento alguno datos personales no autorizados de participantes ni de colaboradores externos.
+      </p>
+      <h3>VIII.3 — Autoridades públicas competentes</h3>
+      <p>
+        El controlador pondrá a disposición de autoridades judiciales, administrativas o de control competentes los registros de conexión o los antecedentes de mensajes recibidos únicamente en virtud de orden judicial motivada, requerimiento fundamentado emitido por autoridad competente en el marco de la ley o cumplimiento ineludible de mandato legal expreso, en el marco estricto del debido proceso y de las prerrogativas de la legislación vigente.
+      </p>
+      <h3>VIII.4 — Instituciones miembros de la Red</h3>
+      <p>
+        Las comunicaciones y propuestas recibidas mediante el formulario de contacto que involucren convenios de cooperación o adhesión a grupos de trabajo podrán compartirse con los integrantes del Comité Gestor Interinstitucional (<abbr title="Comité Gestor Interinstitucional">CGI</abbr>) de la Red, integrado por representantes de las entidades universitarias e institutos científicos de los países hispanohablantes miembros, para la exclusiva finalidad de evaluar la pertinencia académica y articular la respuesta institucional, poniéndose dicha circunstancia en conocimiento de la persona interesada en el momento de la gestión.
+      </p>
+
+      <!-- SECCIÓN IX -->
+      <h2 id="seccion-ix" tabindex="-1">IX. Transferencia internacional de datos</h2>
+      <p>
+        En atención a la naturaleza distribuida a nivel global de las redes de entrega de contenidos (CDN) y de los repositorios de código tecnológico operados por Cloudflare y GitHub, la visualización de las páginas web y el diligenciamiento del formulario de contacto pueden entrañar técnicamente una transferencia internacional de datos personales, principalmente de direcciones IP, registros de servidor y metadatos de red hacia centros de procesamiento de datos ubicados fuera de la República Federativa de Brasil y de las naciones de origen de los usuarios.
+      </p>
+      <p>
+        Dichas transferencias se sustentan sólidamente en el artículo 33 de la LGPD, apoyándose en la concurrencia de compromisos contractuales rigurosos de protección y seguridad de datos brindados por los citados proveedores de servicios tecnológicos, así como en la necesidad material indispensable para la ejecución del servicio web público formalmente solicitado por la persona titular mediante su navegación en la plataforma.
+      </p>
+      <p>
+        El controlador asume el compromiso inalterable de requerir y fiscalizar que todo proveedor técnico externo adopte salvaguardas técnicas, lógicas y organizativas no inferiores a los estándares exigidos por el marco normativo brasileño de protección de datos personales y por las mejores prácticas del derecho internacional aplicables.
+      </p>
+
+      <!-- SECCIÓN X -->
+      <h2 id="seccion-x" tabindex="-1">X. Retención y eliminación</h2>
+      <p>
+        Los datos personales recolectados a través de este portal se conservan únicamente por el plazo estrictamente indispensable para dar cabal cumplimiento a las finalidades que motivaron su captación, o bien durante el lapso requerido por exigencias legales y reglamentarias aplicables a las entidades públicas de investigación.
+      </p>
+      <h3>X.1 — Mensajes de contacto</h3>
+      <p>
+        La información ingresada en el formulario de contacto se preservará durante el período necesario para dar trámite y respuesta a la solicitud formulada y, de ser el caso, para dar seguimiento formal a la articulación académica solicitada. Los mensajes se eliminarán de forma segura una vez agotada su finalidad operativa o tras la recepción de una solicitud formal de supresión elevada por su remitente.
+      </p>
+      <h3>X.2 — Registros de acceso telemático</h3>
+      <p>
+        Los registros automáticos de conexión a la aplicación web son preservados por el plazo legal mínimo e improrrogable de seis meses, conforme a lo taxativamente ordenado por el artículo 15 de la Ley n.º 12.965/2014, transcurrido el cual son eliminados o anonimizados de modo permanente en los servidores.
+      </p>
+      <h3>X.3 — Datos de personas investigadoras</h3>
+      <p>
+        Los antecedentes curriculares y de adscripción institucional de los especialistas se conservarán visibles en el portal mientras se mantenga la difusión institucional del proyecto de investigación y la vigencia activa de la Red Interseccional de Resiliencia, y se retirarán de inmediato a solicitud de la persona interesada o al término de su participación en las instancias científicas correspondientes.
+      </p>
+      <!-- TODO: alinear los plazos de la sección X con la tabla de temporalidad documental del Cemaden/MCTI y con la política de privacidad institucional -->
+      <p>
+        Una vez alcanzada la finalidad determinante del tratamiento o vencido el período legal de guarda, los datos serán eliminados definitivamente o sometidos a procedimientos irreversibles de anonimización, quedando a salvo aquellos supuestos de conservación autorizada que contempla de manera taxativa el artículo 16 de la LGPD, tales como la observancia de deberes legales de archivo o la preservación histórica para la memoria de la ciencia con fines estadísticos.
+      </p>
+
+      <!-- SECCIÓN XI -->
+      <h2 id="seccion-xi" tabindex="-1">XI. Derechos del titular</h2>
+      <p>
+        La persona física titular de datos personales tratatados a través de este sitio web puede ejercer en todo momento y de manera sencilla la totalidad de los derechos consagrados en el artículo 18 de la LGPD, así como aquellos reconocidos por el derecho comparado en los ordenamientos jurídicos de los países socios.
+      </p>
+      <h3>XI.1 — Alcance de los derechos</h3>
+      <p>
+        Usted ostenta el derecho a obtener: la confirmación de la existencia de tratamiento sobre sus datos personales; el acceso a los datos almacenados; la corrección de datos incompletos, inexactos o desactualizados; la anonimización, el bloqueo o la eliminación de datos que resulten innecesarios, excesivos o que hubieren sido tratados en transgresión a la normativa; la portabilidad de sus datos a otro proveedor de servicios cuando resulte jurídicamente procedente; la eliminación de los datos personales tratados sobre la base exclusiva de su consentimiento previo, a salvo de las excepciones legales de archivo; la información fehaciente respecto de las entidades públicas o privadas con las que el controlador haya compartido sus datos; la información transparente sobre la facultad de no otorgar el consentimiento requerido y las consecuencias técnicas o prácticas derivadas de dicha negativa; la revocación formal del consentimiento prestado con anterioridad; y la formulación de oposición a cualquier actividad de tratamiento amparada en una base jurídica diversa del consentimiento cuando concurra incumplimiento de las prescripciones legales.
+      </p>
+      <p>
+        Las solicitudes de ejercicio de derechos serán procesadas y respondidas de forma motivada, diáfana y exhaustiva dentro de un plazo máximo improrrogable de hasta quince días hábiles a contar desde la fecha de su recepción formal ante el Encargado de Datos (art. 19, II, de la LGPD). En aquellos supuestos en que la persona interesada requiera la simple confirmación de tratamiento o el acceso inmediato en formato simplificado, dicha información se pondrá a su disposición sin demora innecesaria.
+      </p>
+      <p>
+        El ejercicio de todos y cada uno de los derechos conferidos a las personas titulares se gestiona con gratuidad absoluta, hallándose rigurosamente prohibido el cobro de tasas, aranceles o estipendios de gestión (art. 18, § 5.º, de la LGPD).
+      </p>
+      <p>
+        La revocación del consentimiento previamente otorgado podrá formalizarse en cualquier tiempo a través de manifestación expresa, subsistiendo la plena validez de los tratamientos efectuados con anterioridad a dicho acto, así como la vigencia de aquellas operaciones fundadas en otra causal legal independiente.
+      </p>
+      <p>
+        Asimismo, toda persona titular residente en cualquiera de las ocho naciones hispanohablantes integrantes de la Red (Argentina, Chile, Colombia, Costa Rica, Ecuador, Panamá, Perú y Uruguay) asiste el derecho de deducir consultas, peticiones o reclamos ante la respectiva autoridad nacional de protección de datos de su jurisdicción territorial de conformidad con sus normas locales, con total prescindencia del ejercicio simultáneo de sus prerrogativas directas ante el controlador.
+      </p>
+
+      <!-- SECCIÓN XII -->
+      <h2 id="seccion-xii" tabindex="-1">XII. Seguridad de la información</h2>
+      <p>
+        El controlador implementa y supervisa un conjunto articulado de medidas de índole técnica, organizativa, lógica y administrativa idóneas para preservar los datos personales contra accesos no autorizados, interferencias ilegítimas y eventos accidentales o ilícitos de destrucción, pérdida, extravío, alteración, filtración, comunicación o difusión no consentida (art. 46 de la LGPD).
+      </p>
+      <h3>XII.1 — Salvaguardas técnicas implementadas</h3>
+      <p>
+        El portal opera con cifrado forzoso de extremo a extremo mediante protocolo seguro HTTPS bajo certificado criptográfico TLS de última generación en la totalidad de sus páginas; se configuran cabeceras estrictas de seguridad web en el servidor que neutralizan la inyección de código malicioso, restringen la ejecución indebida de contenidos externos e impiden la compartición indiscriminada de datos de procedencia (referrer policy); el acceso administrativo a los repositorios de código de la Red está celosamente limitado mediante credenciales individuales multifactoriales exclusivamente a personal técnico autorizado; y el sitio no mantiene en línea bases de datos relacionales accesibles ni registros históricos de navegación de los visitantes en entornos vulnerables.
+      </p>
+      <h3>XII.2 — Comunicación y gestión de incidentes</h3>
+      <p>
+        En la eventualidad de suscitarse un incidente de seguridad tecnológica que comprometa datos personales y que sea susceptible de acarrear un riesgo o daño relevante a los derechos individuales o colectivos de las personas titulares, el controlador procederá a cursar comunicación formal a la Autoridad Nacional de Protección de Datos de Brasil y a las personas titulares involucradas, respetando los estándares, plazos y contenidos estipulados por el artículo 48 de la LGPD y por el Reglamento de Comunicación de Incidentes de Seguridad de la Resolución CD/ANPD n.º 15/2024.
+      </p>
+
+      <!-- SECCIÓN XIII -->
+      <h2 id="seccion-xiii" tabindex="-1">XIII. Encargado del tratamiento de datos personales</h2>
+      <p>
+        El Encargado del tratamiento de datos personales, también denominado Delegado de Protección de Datos (<abbr title="Data Protection Officer">DPO</abbr>), es la persona formalmente designada por el controlador para fungir como canal centralizado y transparente de comunicación entre la persona titular de los datos, el propio controlador y la Autoridad Nacional de Protección de Datos (art. 41 de la LGPD).
+      </p>
+      <div class="dpo-box">
+        <p><span class="field-label">Encargado (DPO):</span> [a definir]</p>
+        <p><span class="field-label">Correo electrónico de contacto:</span> [a definir]</p>
+        <p><span class="field-label">Institución y dependencia:</span> Cemaden / MCTI — Brasil</p>
+      </div>
+      <!-- TODO: completar nombre completo y correo institucional del encargado antes de la publicación. Si el sitio se publica en subdominio gov.br, usar el encargado del órgano, conforme la política institucional -->
+      <p>
+        Cualquier requerimiento, solicitud de acceso, corrección, revocación de consentimiento o consulta referente al tratamiento de sus datos personales deberá canalizarse formalmente hacia dicha casilla de contacto, consignando el nombre del titular y una descripción clara de la solicitud. Con el fin de asegurar la máxima accesibilidad a la comunidad científica internacional, las peticiones serán admitidas y tramitadas indistintamente en idiomas portugués y español.
+      </p>
+
+      <!-- SECCIÓN XIV -->
+      <h2 id="seccion-xiv" tabindex="-1">XIV. Reclamaciones ante la Autoridad Nacional</h2>
+      <p>
+        Toda persona titular asiste de pleno derecho la prerrogativa de someter una petición o queja formal ante la Autoridad Nacional de Protección de Datos (<abbr title="Autoridade Nacional de Proteção de Dados">ANPD</abbr>) de la República Federativa de Brasil en lo concerniente a las actividades de tratamiento de datos personales ejecutadas por el controlador (art. 18, § 1.º, de la LGPD), con absoluta independencia de haber realizado gestiones previas ante el Encargado del portal y sin desmedro de la facultad jurídica de comparecer ante las agencias u órganos de defensa del consumidor o protección de datos de su propio país de residencia.
+      </p>
+      <!-- TODO: confirmar el canal vigente de peticionamiento de la ANPD antes de la publicación -->
+
+      <!-- SECCIÓN XV -->
+      <h2 id="seccion-xv" tabindex="-1">XV. Actualizaciones de esta política</h2>
+      <p>
+        La presente Política de Privacidad se somete a revisión periódica con el propósito de reflejar con fidelidad las mutaciones normativas, las innovaciones tecnológicas del portal o las ampliaciones en el alcance de los proyectos de cooperación de la Red Interseccional de Resiliencia. La versión formalmente en vigor y vinculante es en todo momento la que se halla publicada en esta página web, documentándose la fecha de su última modificación en la parte superior del texto.
+      </p>
+      <p>
+        En caso de verificarse modificaciones sustantivas que alteren las finalidades originales del tratamiento, extiendan los datos recabados o modifiquen las bases legales que lo sustentan, dichos cambios se notificarán de forma destacada en la portada del sitio web con antelación razonable y, en aquellos supuestos donde el tratamiento repose en el consentimiento de las partes, se requerirá una nueva y libre manifestación de voluntad por parte de los titulares afectados.
+      </p>
+      <p>
+        El presente texto en idioma español constituye una traducción jurídica autorizada del instrumento original redactado en idioma portugués. En el supuesto de sobrevenir divergencias de interpretación técnica o semántica entre ambos textos, prevalecerá la versión en lengua portuguesa, sin perjuicio alguno de la tutela efectiva de los derechos que la LGPD y los principios generales del derecho internacional reconocen a toda persona titular.
+      </p>
+
+      <!-- SECCIÓN XVI -->
+      <h2 id="seccion-xvi" tabindex="-1">XVI. Contacto</h2>
+      <p>
+        Para evacuar inquietudes, solicitar precisiones jurídicas o formular consideraciones sobre los alcances de esta Política de Privacidad o sobre los mecanismos de salvaguarda de sus datos, le invitamos a dirigirse directamente a la dirección del Encargado individualizada en la sección XIII o bien a completar nuestro formulario institucional en línea.
+      </p>
+      <div class="legal-actions">
+        <a href="index.html#contacto" class="legal-btn-link">Formulario de contacto</a>
+        <a href="index.html" class="legal-btn-outline">Portada en español</a>
+      </div>
+      <p>
+        La presente Política de Privacidad entra en vigencia a partir de la fecha de su publicación oficial en este dominio institucional.
+      </p>
+
+      <!-- Nota de revisión jurídica final -->
+      <aside class="legal-review-note" role="note" aria-label="Nota de revisión jurídica">
+        <p>
+          <strong>Nota de revisión jurídica:</strong> Este documento fue elaborado como minuta técnica para revisión por la asesoría jurídica del controlador. Los campos señalados como pendientes deben completarse antes de la publicación.
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Pie de página unificado -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <!-- Logotipo en versión pie de página -->
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+            <svg width="34" height="34" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <circle cx="24" cy="24" r="23" stroke="#ABA398" stroke-width="1.8" fill="#182321" />
+              <line x1="14" y1="18" x2="34" y2="15" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="14" y1="18" x2="24" y2="33" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="34" y1="15" x2="24" y2="33" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="24" y1="33" x2="36" y2="35" stroke="#B85C38" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="14" y1="18" x2="11" y2="30" stroke="#D9A44B" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="14" cy="18" r="4.5" fill="#FFFFFF"/>
+              <circle cx="34" cy="15" r="4" fill="#FFFFFF"/>
+              <circle cx="24" cy="33" r="5" fill="#B85C38"/>
+              <circle cx="36" cy="35" r="2.8" fill="#D9A44B"/>
+              <circle cx="11" cy="30" r="2.8" fill="#D9A44B"/>
+            </svg>
+            <div class="footer-brand-title">RIR ALC</div>
+          </div>
+          <div class="footer-brand-sub">
+            Red Interseccional de Resiliencia — creada en mayo de 2026. Proyecto ALERTA-INTERSEC, liderado por el Centro Nacional de Monitoreo y Alertas de Desastres Naturales (Cemaden/MCTI).
+          </div>
+          <div style="font-size: 0.8125rem; color: #ABA398;">
+            Contenido bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es" target="_blank" rel="noopener noreferrer" style="color: #E2DDD5; text-decoration: underline;">Creative Commons CC BY 4.0</a>
+          </div>
+        </div>
+
+        <nav aria-label="Navegación del pie de página">
+          <div class="footer-heading">Navegación</div>
+          <div class="footer-links">
+            <a href="../index.html#sobre">Acerca de</a>
+            <a href="../index.html#eixos">Ejes metodológicos</a>
+            <a href="../rede.html">La Red</a>
+            <a href="../instituicoes.html">Instituciones</a>
+            <a href="../index.html#projeto">Proyecto</a>
+            <a href="../index.html#producao">Producción</a>
+            <a href="index.html#contacto">Contacto</a>
+            <a href="privacidade.html" aria-current="page">Política de privacidad</a>
+          </div>
+        </nav>
+
+        <div>
+          <div class="footer-heading">Idiomas y enlaces</div>
+          <div class="footer-links">
+            <a href="../privacidade.html" hreflang="pt-BR">Versão em Português</a>
+            <a href="../en/privacidade.html" hreflang="en">English version</a>
+            <a href="privacidade.html" hreflang="es" style="color: var(--ochre); font-weight: 600;">Versión en Español (activa)</a>
+            <a href="../index.html">Portada principal (PT)</a>
+            <a href="index.html">Portada institucional (ES)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>Versión de desarrollo · 2026</div>
+        <div>Cemaden / MCTI — Brasil · Cooperación RIR para América Latina y el Caribe</div>
+      </div>
+    </div>
+  </footer>
+
+  <!--
+  Contenido recomendado para _headers en Cloudflare Pages:
+  /*
+    X-Robots-Tag: noindex, nofollow
+    X-Content-Type-Options: nosniff
+    Referrer-Policy: strict-origin-when-cross-origin
+    Permissions-Policy: geolocation=(), camera=(), microphone=()
+  -->
+</body>
+</html>

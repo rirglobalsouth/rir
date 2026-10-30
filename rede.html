@@ -1,0 +1,3047 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIR — A Rede (pesquisadores e instituições)</title>
+  <meta name="description" content="Pesquisadores e instituições parceiras da Rede Interseccional de Resiliência (RIR ALC), uma aliança científica transnacional liderada pelo Cemaden/MCTI.">
+  
+  <!-- Bloqueio de indexação para ambiente de homologação/desenvolvimento -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- TODO: remover noindex e publicar _headers sem X-Robots-Tag no lançamento -->
+
+  <!-- Relações de idioma e versão canônica -->
+  <!-- TODO: criar en/rede.html e es/rede.html -->
+  <link rel="alternate" hreflang="pt-BR" href="rede.html">
+  <link rel="alternate" hreflang="en" href="en/rede.html">
+  <link rel="alternate" hreflang="es" href="es/rede.html">
+  <link rel="alternate" hreflang="x-default" href="rede.html">
+  <link rel="canonical" href="rede.html">
+  <!-- TODO: substituir por URL absoluta no lançamento (ex.: https://rir-alc.org/rede.html) -->
+
+  <!-- Shell UI Base -->
+  <style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Tokens, utilities and components (basecoat 1.0 markup, no CDN); artifacts
+   override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+  --success: #0a7a35;
+  --danger: #c0262d;
+  --warning: #8a5300;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --success: #4ade80;
+    --danger: #f87171;
+    --warning: #fbbf24;
+  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --success: #4ade80;
+  --danger: #f87171;
+  --warning: #fbbf24;
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+/* Pages generated before the shell had its own components still link the
+   basecoat CDN, which reads its own tokens and switches theme only on a
+   .dark class. Bridged to the shell's, whatever of it those pages use takes
+   the page's accent and follows the declared theme. Its --accent token is a
+   hover tint, renamed in its theme as --color-accent; the shell's --accent is
+   the brand colour, so the tint is derived from it here. */
+:root {
+  --background: var(--bg);
+  --foreground: var(--text);
+  --card: var(--surface);
+  --card-foreground: var(--text);
+  --popover: var(--surface);
+  --popover-foreground: var(--text);
+  --primary: var(--accent);
+  --primary-foreground: var(--accent-contrast);
+  --secondary: color-mix(in srgb, var(--text) 7%, var(--surface));
+  --secondary-foreground: var(--text);
+  --muted: color-mix(in srgb, var(--text) 5%, var(--surface));
+  --muted-foreground: var(--text-muted);
+  --color-accent: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --color-accent-foreground: var(--text);
+  --destructive: var(--danger);
+  --input: var(--border);
+  --ring: var(--accent);
+}
+* { box-sizing: border-box; }
+/* The reset the pages were written against: they all linked basecoat, which
+   ships Tailwind's. Its components now live here, so the reset does too. */
+*, ::before, ::after, ::backdrop { margin: 0; padding: 0; border: 0 solid; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+a { color: inherit; text-decoration: inherit; }
+b, strong { font-weight: bolder; }
+ol, ul, menu { list-style: none; }
+svg, video, canvas, iframe { display: block; vertical-align: middle; }
+button, input, select, textarea { color: inherit; background-color: transparent; border-radius: 0; }
+table { border-collapse: collapse; }
+hr { height: 0; color: inherit; border-top-width: 1px; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: 28px; font-weight: 650; line-height: 1.1; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: var(--success); }
+.kpi .kpi-delta.down { color: var(--danger); }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+/* Layout and type utilities: what the pages kept spelling in style="".
+   Spacing and type sizes follow Tailwind's scale; there is no Tailwind. */
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.stack { display: flex; flex-direction: column; gap: var(--space); }
+.between { justify-content: space-between; }
+.grow { flex: 1 1 0; min-width: 0; }
+.cols-2, .cols-3, .cols-4 { display: grid; gap: var(--space); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) {
+  .cols-2, .cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) { .cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; } .gap-6 { gap: 24px; }
+.m-0 { margin: 0; }
+.mt-1 { margin-top: 4px; } .mt-2 { margin-top: 8px; } .mt-3 { margin-top: 12px; } .mt-4 { margin-top: 16px; } .mt-6 { margin-top: 24px; }
+.mb-1 { margin-bottom: 4px; } .mb-2 { margin-bottom: 8px; } .mb-3 { margin-bottom: 12px; } .mb-4 { margin-bottom: 16px; } .mb-6 { margin-bottom: 24px; }
+.p-2 { padding: 8px; } .p-3 { padding: 12px; } .p-4 { padding: 16px; } .p-6 { padding: 24px; }
+.text-xs { font-size: 12px; } .text-sm { font-size: 14px; } .text-base { font-size: 16px; }
+.text-lg { font-size: 18px; } .text-xl { font-size: 20px; line-height: 1.35; }
+.text-2xl { font-size: 24px; line-height: 1.25; } .text-3xl { font-size: 30px; line-height: 1.2; }
+.font-medium { font-weight: 500; } .font-semibold { font-weight: 600; } .font-bold { font-weight: 700; }
+.text-right { text-align: right; } .text-center { text-align: center; }
+.nowrap { white-space: nowrap; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-variant-numeric: tabular-nums; }
+.w-full { width: 100%; }
+.text-success { color: var(--success); } .text-danger { color: var(--danger); } .text-warning { color: var(--warning); }
+
+/* Components, with basecoat 1.0 markup (variants and sizes are data
+   attributes) and the shell tokens, so a page needs neither component CSS
+   nor a CSS framework. An older page that also links basecoat gets these
+   rules after it, over the same properties. */
+button, input, select, textarea { font: inherit; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; padding: 0 14px; border: 1px solid transparent; border-radius: calc(var(--radius) - 2px);
+  background: var(--accent); color: var(--accent-contrast);
+  font-size: 14px; font-weight: 500; line-height: 1; white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.btn:hover { background: color-mix(in srgb, var(--accent) 86%, #000); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; pointer-events: none; }
+.btn[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.btn[data-variant="secondary"]:hover { background: color-mix(in srgb, var(--text) 14%, var(--surface)); }
+.btn[data-variant="outline"] { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn[data-variant="ghost"] { background: transparent; color: var(--text); }
+.btn[data-variant="outline"]:hover, .btn[data-variant="ghost"]:hover { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.btn[data-variant="destructive"] { background: var(--danger); color: var(--bg); }
+.btn[data-variant="destructive"]:hover { background: color-mix(in srgb, var(--danger) 86%, var(--text)); }
+.btn[data-variant="link"] { height: auto; padding: 0; background: none; color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.btn[data-size="sm"] { height: 30px; padding: 0 10px; font-size: 13px; }
+.btn[data-size="lg"] { height: 42px; padding: 0 20px; font-size: 15px; }
+.btn[data-size="icon"] { width: 36px; padding: 0; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px;
+  border: 1px solid transparent; border-radius: 999px; background: var(--accent); color: var(--accent-contrast);
+  font-size: 12px; font-weight: 600; line-height: 1.5; white-space: nowrap;
+}
+.badge[data-variant="secondary"] { background: color-mix(in srgb, var(--text) 8%, var(--surface)); color: var(--text); }
+.badge[data-variant="outline"] { background: transparent; color: var(--text); border-color: var(--border); }
+.badge[data-variant="destructive"] { background: color-mix(in srgb, var(--danger) 14%, var(--surface)); color: var(--danger); }
+
+.alert {
+  display: grid; gap: 4px; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+.alert h2, .alert h3 { margin: 0; font-size: 14px; font-weight: 600; }
+.alert p, .alert section { margin: 0; color: var(--text-muted); }
+.alert[data-variant="destructive"] { border-color: color-mix(in srgb, var(--danger) 45%, var(--border)); background: color-mix(in srgb, var(--danger) 7%, var(--surface)); color: var(--danger); }
+
+.card {
+  display: flex; flex-direction: column; gap: 16px; padding: 20px 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 2px);
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+}
+.card > header, .card > section, .card > footer { padding: 0 20px; }
+.card > header { display: grid; gap: 4px; }
+.card > header h2, .card > header h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.card > header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+.card > footer { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.input {
+  width: 100%; min-height: 36px; padding: 6px 12px; border: 1px solid var(--border); border-radius: calc(var(--radius) - 2px);
+  background: var(--surface); color: var(--text); font-size: 14px;
+}
+textarea.input { min-height: 84px; resize: vertical; }
+.input::placeholder { color: var(--text-muted); }
+.input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+.field { display: grid; gap: 6px; }
+.field label { font-size: 14px; font-weight: 500; }
+.field [role="alert"] { color: var(--danger); font-size: 13px; }
+
+dialog.dialog {
+  width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); margin: auto; padding: 0;
+  border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
+  background: var(--surface); color: var(--text); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+dialog.dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+dialog.dialog > div { display: grid; gap: 16px; padding: 24px; }
+dialog.dialog header { display: grid; gap: 4px; }
+dialog.dialog header h2 { margin: 0; font-size: 18px; font-weight: 600; }
+dialog.dialog header p { margin: 0; color: var(--text-muted); font-size: 14px; }
+dialog.dialog footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+
+.tabs { display: grid; gap: 12px; }
+.tabs > [role="tablist"] {
+  display: inline-flex; gap: 4px; width: fit-content; max-width: 100%; padding: 4px; overflow-x: auto;
+  border-radius: var(--radius); background: color-mix(in srgb, var(--text) 6%, var(--surface));
+}
+.tabs [role="tab"] {
+  padding: 6px 12px; border: 0; border-radius: calc(var(--radius) - 4px); background: transparent;
+  color: var(--text-muted); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer;
+}
+.tabs [role="tab"][aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+.tabs [role="tabpanel"][hidden] { display: none; }
+
+.accordion > details { border-bottom: 1px solid var(--border); }
+.accordion > details > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 0; font-weight: 500; list-style: none; cursor: pointer;
+}
+.accordion > details > summary::-webkit-details-marker { display: none; }
+.accordion > details > summary::after { content: "+"; color: var(--text-muted); font-size: 18px; line-height: 1; }
+.accordion > details[open] > summary::after { content: "\2212"; }
+.accordion > details > :not(summary) { margin: 0 0 14px; color: var(--text-muted); }
+
+.toaster {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50; display: flex; flex-direction: column-reverse; gap: 8px;
+  width: min(360px, calc(100vw - 32px)); pointer-events: none;
+}
+.toaster .toast { pointer-events: auto; transition: opacity 200ms ease, transform 200ms ease; }
+.toaster .toast[aria-hidden="true"] { opacity: 0; transform: translateY(8px); }
+.toaster .toast-content {
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); font-size: 13px;
+}
+.toaster .toast-content h2 { margin: 0 0 2px; font-size: 14px; font-weight: 600; }
+.toaster .toast-content p { margin: 0; color: var(--text-muted); }
+
+/* skipUI building blocks. */
+.skip-table-search { max-width: 320px; margin-bottom: 12px; }
+.skip-table-wrap { overflow-x: auto; }
+table.shell-table th[data-sort] { cursor: pointer; user-select: none; }
+table.shell-table th[aria-sort="ascending"]::after { content: " \25B2"; font-size: 9px; }
+table.shell-table th[aria-sort="descending"]::after { content: " \25BC"; font-size: 9px; }
+table.shell-table td.skip-table-empty { color: var(--text-muted); text-align: center; padding: 24px 0; }
+.skip-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 13px; color: var(--text-muted); }
+.toaster .toast[data-type="success"] .toast-content { border-left: 3px solid var(--success); }
+.toaster .toast[data-type="error"] .toast-content { border-left: 3px solid var(--danger); }
+
+</style>
+  <script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
+
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisFmt keeps axis tick labels short (compact notation) so long values
+  // (e.g. full BRL amounts) never clip against the plot edge.
+  function axisFmt(v) {
+    return fmt.num(v, { notation: "compact", maximumFractionDigits: 1 });
+  }
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  function coerceFormat(spec) {
+    if (typeof spec === "function") return spec;
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el = resolve(el);
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 12, plotH = H - padT - padB;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 12, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (v / max) * plotH);
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      var tx = svgEl("text", { x: x + bw / 2, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // line(el, {labels:[], values:[], color?, format?}) — single-series line.
+  function line(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 16, plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 16, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    var pts = cfg.values.map(function (v, i) {
+      var x = padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+      var y = padT + plotH - (v / max) * plotH;
+      return [x, y];
+    });
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    pts.forEach(function (p, i) {
+      var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(cfg.values[i]);
+      c.appendChild(t);
+      svg.appendChild(c);
+      var tx = svgEl("text", { x: p[0], y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // donut(el, {labels:[], values:[], colors?}) — donut with center total.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    // At 100% of a wide container the donut outgrows the height pages give
+    // the box and spills over the next section: keep it at its own size.
+    svg.style.maxWidth = W + "px";
+    svg.style.margin = "0 auto";
+    var total = cfg.values.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var palette = cfg.colors || [accent(), "#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4"];
+    var a0 = -Math.PI / 2;
+    cfg.values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + fmt.num(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    var center = svgEl("text", { x: cx, y: cy + 5, "text-anchor": "middle", "font-size": 20, "font-weight": 650, fill: "currentColor" });
+    center.textContent = fmt.num(total);
+    svg.appendChild(center);
+  }
+
+  // ---- Page building blocks: what dashboards and small systems kept
+  // re-implementing — a searchable sortable table, a KPI row, tabs, toasts,
+  // dialogs, saved state and mock data. Every call is opt-in, so a page that
+  // brings its own versions keeps them.
+
+  function resolve(target) {
+    return typeof target === "string" ? document.querySelector(target) : target;
+  }
+
+  function node(tag, className, text) {
+    var el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text != null) el.textContent = text;
+    return el;
+  }
+
+  function isNumberColumn(col) {
+    return col.align === "right" || col.format === "num" || col.format === "brl" || col.format === "pct";
+  }
+
+  function cellText(col, row) {
+    var value = row[col.key];
+    if (value == null) return "";
+    return col.format ? coerceFormat(col.format)(value) : String(value);
+  }
+
+  function compareValues(a, b) {
+    if (typeof a === "number" && typeof b === "number") return a - b;
+    return String(a == null ? "" : a).localeCompare(String(b == null ? "" : b), "pt-BR", { numeric: true });
+  }
+
+  // table(el, {columns, rows, search?, pageSize?, empty?, onRowClick?}) — a
+  // table.shell-table with sortable headers, an optional search box and
+  // pager. A column is {key, label, format?, align?, sortable? (true),
+  // render?(value, row) returning a Node or an HTML string — the page writes
+  // its cell templates as markup}. Plain values are always set as text.
+  // Returns {setRows, rows}.
+  function table(target, cfg) {
+    var root = resolve(target);
+    var cols = cfg.columns || [];
+    var pageSize = cfg.pageSize || 0;
+    var state = { rows: (cfg.rows || []).slice(), query: "", key: null, dir: 1, page: 0 };
+    root.innerHTML = "";
+    if (cfg.search) {
+      var search = node("input", "input skip-table-search");
+      search.type = "search";
+      search.placeholder = typeof cfg.search === "string" ? cfg.search : "Buscar…";
+      search.setAttribute("aria-label", search.placeholder);
+      search.addEventListener("input", function () {
+        state.query = search.value.trim().toLowerCase();
+        state.page = 0;
+        draw();
+      });
+      root.appendChild(search);
+    }
+    var tableEl = node("table", "shell-table");
+    var headRow = node("tr");
+    var heads = cols.map(function (col) {
+      var th = node("th", isNumberColumn(col) ? "num" : "", col.label == null ? col.key : col.label);
+      th.scope = "col";
+      if (col.sortable !== false) {
+        var toggle = function () {
+          state.dir = state.key === col.key ? -state.dir : 1;
+          state.key = col.key;
+          draw();
+        };
+        th.setAttribute("data-sort", col.key);
+        th.tabIndex = 0;
+        th.addEventListener("click", toggle);
+        th.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+        });
+      }
+      headRow.appendChild(th);
+      return th;
+    });
+    var thead = node("thead");
+    var tbody = node("tbody");
+    var wrap = node("div", "skip-table-wrap");
+    var pager = node("div", "skip-pager");
+    thead.appendChild(headRow);
+    tableEl.appendChild(thead);
+    tableEl.appendChild(tbody);
+    wrap.appendChild(tableEl);
+    root.appendChild(wrap);
+    if (pageSize) root.appendChild(pager);
+
+    function visibleRows() {
+      var rows = state.rows;
+      if (state.query) {
+        rows = rows.filter(function (row) {
+          return cols.some(function (col) { return cellText(col, row).toLowerCase().indexOf(state.query) >= 0; });
+        });
+      }
+      if (state.key) {
+        var key = state.key, dir = state.dir;
+        rows = rows.slice().sort(function (a, b) { return dir * compareValues(a[key], b[key]); });
+      }
+      return rows;
+    }
+
+    function drawRow(row) {
+      var tr = node("tr");
+      cols.forEach(function (col) {
+        var td = node("td", isNumberColumn(col) ? "num" : "");
+        if (!col.render) {
+          td.textContent = cellText(col, row);
+        } else {
+          var content = col.render(row[col.key], row);
+          if (content instanceof Node) td.appendChild(content);
+          else td.innerHTML = content == null ? "" : String(content);
+        }
+        tr.appendChild(td);
+      });
+      // The row stays a row (no role) and takes focus, so a keyboard reaches
+      // the same action; keys pressed on a control inside a cell are its own.
+      if (cfg.onRowClick) {
+        tr.style.cursor = "pointer";
+        tr.tabIndex = 0;
+        tr.addEventListener("click", function () { cfg.onRowClick(row); });
+        tr.addEventListener("keydown", function (e) {
+          if (e.target !== tr || (e.key !== "Enter" && e.key !== " ")) return;
+          e.preventDefault();
+          cfg.onRowClick(row);
+        });
+      }
+      return tr;
+    }
+
+    function pagerButton(label, disabled, step) {
+      var button = node("button", "btn", label);
+      button.type = "button";
+      button.setAttribute("data-variant", "outline");
+      button.setAttribute("data-size", "sm");
+      button.disabled = disabled;
+      button.addEventListener("click", function () { state.page += step; draw(); });
+      return button;
+    }
+
+    function draw() {
+      var rows = visibleRows();
+      heads.forEach(function (th, i) {
+        if (cols[i].key === state.key) th.setAttribute("aria-sort", state.dir > 0 ? "ascending" : "descending");
+        else th.removeAttribute("aria-sort");
+      });
+      var pages = pageSize ? Math.max(1, Math.ceil(rows.length / pageSize)) : 1;
+      state.page = Math.min(state.page, pages - 1);
+      var shown = pageSize ? rows.slice(state.page * pageSize, (state.page + 1) * pageSize) : rows;
+      tbody.innerHTML = "";
+      if (!shown.length) {
+        var empty = node("td", "skip-table-empty", cfg.empty || "Nenhum registro encontrado.");
+        empty.colSpan = cols.length;
+        tbody.appendChild(node("tr")).appendChild(empty);
+      }
+      shown.forEach(function (row) { tbody.appendChild(drawRow(row)); });
+      if (!pageSize) return;
+      pager.innerHTML = "";
+      var from = rows.length ? state.page * pageSize + 1 : 0;
+      pager.appendChild(node("span", "", from + "–" + Math.min(rows.length, (state.page + 1) * pageSize) + " de " + rows.length));
+      var nav = node("div", "row gap-2");
+      nav.appendChild(pagerButton("Anterior", state.page === 0, -1));
+      nav.appendChild(pagerButton("Próxima", state.page >= pages - 1, 1));
+      pager.appendChild(nav);
+    }
+
+    draw();
+    return {
+      setRows: function (rows) { state.rows = rows.slice(); draw(); },
+      rows: visibleRows
+    };
+  }
+
+  // kpis(el, [{label, value, format?, delta?, hint?}]) — KPI cards in a
+  // responsive grid; delta is a fraction (0.12 renders as ▲ 12%).
+  function kpis(target, items) {
+    var root = resolve(target);
+    root.innerHTML = "";
+    root.classList.add("shell-grid");
+    items.forEach(function (item) {
+      var card = node("div", "panel kpi");
+      card.appendChild(node("span", "kpi-label", item.label));
+      card.appendChild(node("span", "kpi-value", item.format ? coerceFormat(item.format)(item.value) : String(item.value)));
+      if (typeof item.delta === "number") {
+        var up = item.delta >= 0;
+        card.appendChild(node("span", "kpi-delta " + (up ? "up" : "down"), (up ? "▲ " : "▼ ") + fmt.pct(Math.abs(item.delta))));
+      }
+      if (item.hint) card.appendChild(node("span", "kpi-label", item.hint));
+      root.appendChild(card);
+    });
+  }
+
+  // badge(text, variant?) — a .badge node for table cells and lists;
+  // variant is "secondary" | "outline" | "destructive" (default: primary).
+  function badge(text, variant) {
+    var el = node("span", "badge", text);
+    if (variant) el.setAttribute("data-variant", variant);
+    return el;
+  }
+
+  // tabs(el) — wires one .tabs block: [role=tab] buttons inside
+  // [role=tablist], each with aria-controls naming its [role=tabpanel].
+  function tabs(target) {
+    var root = resolve(target);
+    var buttons = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+    function select(chosen) {
+      buttons.forEach(function (b) {
+        var on = b === chosen;
+        b.setAttribute("aria-selected", on ? "true" : "false");
+        b.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(b.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    buttons.forEach(function (b, i) {
+      b.addEventListener("click", function () { select(b); });
+      b.addEventListener("keydown", function (e) {
+        var step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        var next = buttons[(i + step + buttons.length) % buttons.length];
+        next.focus();
+        select(next);
+      });
+    });
+    select(buttons.filter(function (b) { return b.getAttribute("aria-selected") === "true"; })[0] || buttons[0]);
+  }
+
+  // toast(message, {type?: "success" | "error", title?, duration?}) — a
+  // .toast in a shared .toaster at the bottom of the page.
+  function toast(message, opts) {
+    opts = opts || {};
+    var toaster = document.querySelector(".toaster") || document.body.appendChild(node("div", "toaster"));
+    var item = node("div", "toast");
+    item.setAttribute("role", opts.type === "error" ? "alert" : "status");
+    item.setAttribute("aria-hidden", "true");
+    if (opts.type) item.setAttribute("data-type", opts.type);
+    var content = node("div", "toast-content");
+    var section = node("section");
+    if (opts.title) section.appendChild(node("h2", "", opts.title));
+    section.appendChild(node("p", "", message));
+    content.appendChild(section);
+    item.appendChild(content);
+    toaster.appendChild(item);
+    requestAnimationFrame(function () { item.setAttribute("aria-hidden", "false"); });
+    setTimeout(function () {
+      item.setAttribute("aria-hidden", "true");
+      setTimeout(function () { item.remove(); }, 400);
+    }, opts.duration || 3000);
+  }
+
+  // Dialogs are native <dialog class="dialog">: a [data-dialog-open="id"]
+  // anywhere opens one, a [data-dialog-close] inside closes it, and a click on
+  // its backdrop closes it too. Plain dialog.showModal()/close() still work.
+  document.addEventListener("click", function (e) {
+    var target = e.target;
+    if (!(target instanceof Element)) return;
+    var opener = target.closest("[data-dialog-open]");
+    if (opener) {
+      var dialog = document.getElementById(opener.getAttribute("data-dialog-open"));
+      if (dialog && dialog.showModal && !dialog.open) dialog.showModal();
+      return;
+    }
+    var closer = target.closest("[data-dialog-close]");
+    if (closer && closer.closest("dialog")) {
+      closer.closest("dialog").close();
+      return;
+    }
+    if (target.tagName === "DIALOG" && target.classList.contains("dialog") && target.open) target.close();
+  });
+
+  // store(key, fallback) — JSON state in localStorage that never throws (a
+  // private window or a full quota falls back to memory): {get, set, update}.
+  function store(key, fallback) {
+    var memory;
+    // Set while the last write did not reach localStorage: what is stored
+    // there is older than memory until a write goes through again.
+    var unsaved = false;
+    var initial = function () { return fallback === undefined ? undefined : JSON.parse(JSON.stringify(fallback)); };
+    function get() {
+      if (!unsaved) {
+        try {
+          var raw = localStorage.getItem(key);
+          if (raw != null) return JSON.parse(raw);
+        } catch (e) { /* storage unavailable: memory below */ }
+      }
+      return memory !== undefined ? memory : initial();
+    }
+    function set(value) {
+      memory = value;
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+        unsaved = false;
+      } catch (e) {
+        unsaved = true;
+      }
+      return value;
+    }
+    return { get: get, set: set, update: function (fn) { return set(fn(get())); } };
+  }
+
+  // mock — seeded random data, so a page asks for 90 days of numbers in one
+  // line instead of writing them out; the same seed gives the same data.
+  var FIRST = ["Ana", "Bruno", "Carla", "Diego", "Eduarda", "Felipe", "Gabriela", "Henrique", "Isabela", "João",
+    "Larissa", "Marcos", "Natália", "Otávio", "Paula", "Rafael", "Sofia", "Thiago", "Vanessa", "Lucas"];
+  var LAST = ["Silva", "Santos", "Oliveira", "Souza", "Pereira", "Costa", "Rodrigues", "Almeida", "Nascimento", "Lima",
+    "Araújo", "Fernandes", "Carvalho", "Gomes", "Martins", "Rocha", "Ribeiro", "Barbosa"];
+  var CITIES = ["São Paulo, SP", "Rio de Janeiro, RJ", "Belo Horizonte, MG", "Curitiba, PR", "Porto Alegre, RS",
+    "Salvador, BA", "Recife, PE", "Fortaleza, CE", "Brasília, DF", "Goiânia, GO", "Campinas, SP", "Florianópolis, SC",
+    "Manaus, AM", "Belém, PA", "Vitória, ES", "Natal, RN"];
+
+  function createMock(seed) {
+    var state = seed >>> 0;
+    function random() {
+      state = (state + 0x6d2b79f5) >>> 0;
+      var t = state;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+    function int(min, max) { return min + Math.floor(random() * (max - min + 1)); }
+    function pick(list) { return list[Math.floor(random() * list.length)]; }
+    var mock = {
+      seed: function (value) { state = value >>> 0; return mock; },
+      random: random,
+      int: int,
+      float: function (min, max, decimals) {
+        var factor = Math.pow(10, decimals == null ? 2 : decimals);
+        return Math.round((min + random() * (max - min)) * factor) / factor;
+      },
+      pick: pick,
+      chance: function (p) { return random() < p; },
+      name: function () { return pick(FIRST) + " " + pick(LAST); },
+      city: function () { return pick(CITIES); },
+      // series(n, {start, trend, noise, min, decimals}) — a walk: each value
+      // moves by trend (fraction per step) plus up to ±noise of itself.
+      series: function (n, opts) {
+        opts = opts || {};
+        var value = opts.start == null ? 100 : opts.start;
+        var factor = Math.pow(10, opts.decimals || 0);
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          out.push(Math.max(opts.min == null ? 0 : opts.min, Math.round(value * factor) / factor));
+          value = value * (1 + (opts.trend || 0)) * (1 + (random() * 2 - 1) * (opts.noise == null ? 0.08 : opts.noise));
+        }
+        return out;
+      },
+      // dates(n, {end?, step?: "day" | "week" | "month"}) — ISO dates
+      // (YYYY-MM-DD), oldest first, ending at end (default: today).
+      dates: function (n, opts) {
+        opts = opts || {};
+        var end = opts.end ? new Date(opts.end) : new Date();
+        var out = [];
+        for (var i = n - 1; i >= 0; i--) {
+          var d = new Date(end.getTime());
+          if (opts.step === "month") d.setMonth(d.getMonth() - i);
+          else d.setDate(d.getDate() - i * (opts.step === "week" ? 7 : 1));
+          out.push(d.toISOString().slice(0, 10));
+        }
+        return out;
+      },
+      // rows(n, spec) — n objects; each spec value is a function(i), a list
+      // to pick from, or a constant.
+      rows: function (n, spec) {
+        var out = [];
+        for (var i = 0; i < n; i++) {
+          var row = {};
+          for (var key in spec) {
+            var value = spec[key];
+            row[key] = typeof value === "function" ? value(i) : Array.isArray(value) ? pick(value) : value;
+          }
+          out.push(row);
+        }
+        return out;
+      }
+    };
+    return mock;
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+  window.skipUI = { table: table, kpis: kpis, badge: badge, tabs: tabs, toast: toast };
+  window.skipStore = store;
+  window.skipMock = createMock(20261022);
+})();
+
+</script>
+
+  <style>
+    :root {
+      --accent: #0B4F4A;
+      --accent-text: #0B4F4A;
+      --accent-contrast: #FFFFFF;
+      --color-terracotta: #B85C38;
+      --color-ochre: #D9A44B;
+      --bg: #FAF8F5;
+      --surface: #FFFFFF;
+      --text: #1A1A1A;
+      --text-muted: #4A4A4A;
+      --border: #E2DDD5;
+      --radius: 8px;
+      --font-serif: Georgia, 'Times New Roman', serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, .brand-title {
+      font-family: var(--font-serif);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Foco acessível WCAG 2.1 AA */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 3px solid var(--color-terracotta) !important;
+      outline-offset: 3px;
+    }
+
+    /* Link de atalho acessível */
+    .skip-link {
+      position: absolute;
+      top: -3rem;
+      left: 1rem;
+      background: var(--accent);
+      color: #FFFFFF;
+      padding: 0.75rem 1.25rem;
+      z-index: 9999;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Faixa de aviso discreta */
+    .dev-banner {
+      background-color: #2D3748;
+      color: #F7FAFC;
+      font-size: 0.8125rem;
+      text-align: center;
+      padding: 0.375rem 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Cabeçalho */
+    .site-header {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 0.875rem 1.25rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand-svg {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+    .brand-texts {
+      display: flex;
+      flex-direction: column;
+    }
+    .brand-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--accent);
+    }
+    .brand-sub {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      line-height: 1.25;
+      margin-top: 2px;
+    }
+
+    .main-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      padding: 0.25rem 0.125rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .main-nav a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--color-ochre);
+    }
+    .main-nav a[aria-current="page"] {
+      color: var(--accent);
+      font-weight: 700;
+      border-bottom-color: var(--accent);
+    }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-left: 1px solid var(--border);
+      padding-left: 1rem;
+    }
+    .lang-switcher a {
+      text-decoration: none;
+      color: var(--text-muted);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+    .lang-switcher a.active {
+      color: var(--accent);
+      background: #EBF3F2;
+    }
+    .lang-switcher a:hover:not(.active) {
+      color: var(--accent);
+    }
+
+    /* Menu mobile */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 0.6rem;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* Trilha de navegação */
+    .breadcrumbs {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 1.25rem 0 0.5rem;
+    }
+    .breadcrumbs a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero / Introdução da página */
+    .page-hero {
+      margin-bottom: 2rem;
+    }
+    .page-hero h1 {
+      font-size: 2.25rem;
+      line-height: 1.15;
+      margin: 0.5rem 0 0.25rem;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--color-terracotta);
+      font-family: var(--font-serif);
+      margin: 0 0 1.25rem;
+      font-weight: 600;
+    }
+    .intro-paragraph {
+      font-size: 1.05rem;
+      color: #2A2A2A;
+      max-width: 960px;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Indicadores numéricos */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .stat-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.25rem 1rem;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .stat-card:nth-child(2) { border-top-color: var(--color-terracotta); }
+    .stat-card:nth-child(3) { border-top-color: var(--color-ochre); }
+    .stat-card:nth-child(4) { border-top-color: var(--accent); }
+    .stat-number {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-label {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* Bloco de Status do Projeto */
+    .project-status-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .status-card-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .status-card-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background-color: var(--color-terracotta);
+      color: #FFFFFF;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 9999px;
+      line-height: 1.2;
+    }
+    .status-badge svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.5;
+    }
+    .status-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 0.35rem;
+      line-height: 1.35;
+    }
+    .status-card-sub {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Bloco Eixos Metodológicos */
+    .axes-preview-section {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .axes-preview-section h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+    .axes-preview-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin: 0 0 1rem;
+      line-height: 1.55;
+    }
+    .axes-list {
+      margin: 0 0 1.25rem;
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .axes-list li {
+      font-size: 0.9375rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .axes-list strong {
+      color: var(--accent);
+    }
+    .axes-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      padding-top: 0.85rem;
+      border-top: 1px dashed var(--border);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .axes-links a {
+      color: var(--color-terracotta);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .axes-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Painel de Filtro e Busca */
+    .filter-panel {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .filter-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .filter-label {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--text);
+    }
+    .search-input-wrapper {
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #FAFAFA;
+      box-sizing: border-box;
+      color: var(--text);
+      transition: border-color 0.15s, background-color 0.15s;
+    }
+    .search-input:focus {
+      background: #FFFFFF;
+      border-color: var(--accent);
+    }
+    .search-icon-svg {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.1rem;
+      height: 1.1rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .country-filters-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .country-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .country-btn {
+      background: #F4F2EE;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.85rem;
+      font-size: 0.875rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .country-btn:hover {
+      background: #EAE6DF;
+      border-color: #C8C2B7;
+    }
+    .country-btn[aria-pressed="true"] {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+    .country-btn .badge-count {
+      font-size: 0.75rem;
+      background: rgba(0,0,0,0.08);
+      padding: 0.1rem 0.4rem;
+      border-radius: 10px;
+    }
+    .country-btn[aria-pressed="true"] .badge-count {
+      background: rgba(255,255,255,0.25);
+      color: #FFFFFF;
+    }
+
+    .filter-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .filter-status-text {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .clear-filter-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--color-terracotta);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      transition: background-color 0.15s;
+    }
+    .clear-filter-btn:hover {
+      background: #FDF5F2;
+      border-color: var(--color-terracotta);
+    }
+
+    /* Seções por País */
+    .country-section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 5rem;
+    }
+    .country-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .country-header h2 {
+      margin: 0;
+      font-size: 1.75rem;
+      color: var(--accent);
+    }
+    .country-badge-tag {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Grid de Pesquisadores */
+    .researchers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* Card de Pesquisador */
+    .researcher-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .researcher-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(11, 79, 74, 0.08);
+      border-color: #92B4B1;
+    }
+    .researcher-card-top {
+      margin-bottom: 1rem;
+    }
+    .researcher-name {
+      margin: 0 0 0.4rem;
+      font-size: 1.2rem;
+      color: var(--accent);
+      line-height: 1.3;
+    }
+    .researcher-institution {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #333333;
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+    }
+    .researcher-meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .meta-pill {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: #F2EFEB;
+      color: #3C3C3C;
+      font-weight: 600;
+    }
+    .meta-pill.hours {
+      background: #E7EFEF;
+      color: var(--accent);
+    }
+    .researcher-bio {
+      font-size: 0.8875rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .researcher-card-bottom {
+      margin-top: 1.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.75rem;
+    }
+    .profile-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--accent);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      background: #F0F6F5;
+      border: 1px solid #D2E3E1;
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+    .profile-link:hover {
+      background: #DFEDE9;
+      border-color: var(--accent);
+    }
+    .profile-link svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Estado sem resultados */
+    .no-results-panel {
+      display: none;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: #FFFFFF;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      margin: 2rem 0;
+    }
+    .no-results-panel.visible {
+      display: block;
+    }
+
+    /* Blocos finais: Notas e Navegação */
+    .notes-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin: 3.5rem 0 2.5rem;
+    }
+    .note-box {
+      background: #FFFFFF;
+      border-left: 4px solid var(--accent);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .note-box.lgpd {
+      border-left-color: var(--color-terracotta);
+    }
+    .note-box h2 {
+      font-size: 1.1rem;
+      margin: 0 0 0.5rem;
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-weight: 700;
+    }
+
+    /* Navegação de continuidade */
+    .continuity-nav {
+      background: #EBF3F2;
+      border: 1px solid #CFE2E0;
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      margin: 2.5rem 0 4rem;
+      text-align: center;
+    }
+    .continuity-nav h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .continuity-nav p {
+      max-width: 650px;
+      margin: 0 auto 1.5rem;
+      color: var(--text);
+    }
+    .continuity-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .continuity-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: background-color 0.15s, color 0.15s;
+    }
+    .continuity-btn.primary {
+      background: var(--accent);
+      color: #FFFFFF;
+    }
+    .continuity-btn.primary:hover {
+      background: #083c38;
+    }
+    .continuity-btn.secondary {
+      background: #FFFFFF;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .continuity-btn.secondary:hover {
+      background: #F4F8F8;
+    }
+
+    /* Rodapé */
+    .site-footer {
+      background: #062E2B;
+      color: #E2E8F0;
+      padding: 3.5rem 1.25rem 2rem;
+      border-top: 4px solid var(--color-ochre);
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .footer-brand-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .footer-brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+    .footer-brand p {
+      font-size: 0.875rem;
+      color: #CBD5E1;
+      line-height: 1.5;
+      margin: 0;
+      max-width: 420px;
+    }
+    .footer-links-col h3 {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0 0 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .footer-links-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-links-col a {
+      color: #CBD5E1;
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+    .footer-links-col a:hover {
+      color: #FFFFFF;
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      border-top: 1px solid #144945;
+      padding-top: 1.5rem;
+      font-size: 0.8125rem;
+      color: #94A3B8;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+    .footer-bottom a {
+      color: #CBD5E1;
+    }
+
+    /* Acessibilidade para leitores de tela */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Responsividade */
+    @media (max-width: 860px) {
+      .menu-toggle {
+        display: block;
+      }
+      .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #FFFFFF;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        padding: 1rem 1.25rem;
+      }
+      .main-nav[data-open="true"] {
+        display: block;
+      }
+      .main-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .lang-switcher {
+        border-left: none;
+        padding-left: 0;
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--border);
+        width: 100%;
+      }
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .researchers-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .researcher-card:hover {
+        transform: none;
+      }
+    }
+
+    @media print {
+      .dev-banner, .site-header, .filter-panel, .continuity-nav, .lang-switcher {
+        display: none !important;
+      }
+      body {
+        background: #FFFFFF;
+        color: #000000;
+      }
+      .researcher-card {
+        page-break-inside: avoid;
+        border: 1px solid #CCCCCC;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Link de atalho acessível -->
+  <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
+
+  <!-- Faixa de aviso de desenvolvimento -->
+  <aside class="dev-banner" aria-label="Aviso de ambiente de homologação">
+    Versão de desenvolvimento — não indexada até o lançamento
+  </aside>
+
+  <!-- Cabeçalho Institucional -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="brand-group" aria-label="Página inicial da Rede Interseccional de Resiliência">
+        <!-- SVG Logotipo: nós conectados formando rede/teia de resiliência -->
+        <svg class="brand-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <circle cx="24" cy="8" r="4.5" fill="#0B4F4A" />
+          <circle cx="10" cy="20" r="4" fill="#0B4F4A" />
+          <circle cx="38" cy="20" r="4" fill="#0B4F4A" />
+          <circle cx="16" cy="38" r="4.5" fill="#B85C38" />
+          <circle cx="32" cy="38" r="4.5" fill="#0B4F4A" />
+          <circle cx="24" cy="24" r="5" fill="#D9A44B" />
+          <path d="M24 8L10 20M24 8L38 20M24 8L24 24M10 20L24 24M38 20L24 24M10 20L16 38M38 20L32 38M16 38L24 24M32 38L24 24M16 38L32 38" stroke="#0B4F4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div class="brand-texts">
+          <span class="brand-name">Rede Interseccional de Resiliência (<abbr title="Rede Interseccional de Resiliência na América Latina e Caribe">RIR ALC</abbr>)</span>
+          <span class="brand-sub">Ciência, gênero e raça na redução de riscos de desastres</span>
+        </div>
+      </a>
+
+      <button type="button" class="menu-toggle" id="btn-menu" aria-expanded="false" aria-controls="menu-principal" aria-label="Alternar navegação principal">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+
+      <nav class="main-nav" id="menu-principal" aria-label="Navegação principal">
+        <ul>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="index.html#eixos">Eixos metodológicos</a></li>
+          <li><a href="rede.html" aria-current="page">A Rede</a></li>
+          <li><a href="instituicoes.html">Instituições</a></li>
+          <li><a href="index.html#projeto">Projeto</a></li>
+          <li><a href="index.html#producao">Produção</a></li>
+          <li><a href="index.html#contato">Contato</a></li>
+          <li class="lang-switcher" role="group" aria-label="Seletor de idioma">
+            <a href="rede.html" class="active" aria-current="true" lang="pt-BR">PT</a>
+            <!-- TODO: publicar páginas en/ e es/ no lançamento -->
+            <a href="en/rede.html" lang="en">EN</a>
+            <a href="es/rede.html" lang="es">ES</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main id="conteudo" class="shell-container" style="max-width: 1200px; padding: 1.5rem 1.25rem 4rem; margin: 0 auto;">
+    
+    <!-- Trilha de navegação -->
+    <nav class="breadcrumbs" aria-label="Trilha de navegação">
+      <a href="index.html">Início</a> &rsaquo; <span>A Rede</span>
+    </nav>
+
+    <!-- Título Principal e Subtítulo -->
+    <header class="page-hero">
+      <h1>A Rede</h1>
+      <p class="hero-subtitle">Pesquisadores e instituições parceiras da Rede Interseccional de Resiliência</p>
+    </header>
+
+    <!-- Faixa de Indicadores -->
+    <section class="stats-bar" aria-label="Indicadores da composição da Rede">
+      <div class="stat-card">
+        <div class="stat-number">44</div>
+        <div class="stat-label">Pesquisadores e pesquisadoras</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">22</div>
+        <div class="stat-label">Instituições parceiras</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">9</div>
+        <div class="stat-label">Países</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Instituições internacionais</div>
+      </div>
+    </section>
+
+    <!-- Card de Destaque / Status do Primeiro Projeto da Rede -->
+    <section class="project-status-card" aria-labelledby="status-card-label">
+      <div class="status-card-header">
+        <span id="status-card-label" class="status-card-tag">Primeiro projeto da Rede</span>
+        <span class="status-badge" role="status">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" focusable="false">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Contemplado em outubro de 2026</span>
+        </span>
+      </div>
+      <p class="status-card-title">Projeto submetido ao CNPq em maio de 2026 — Processo 445280/2026-3</p>
+      <p class="status-card-sub">Chamada MCTI/CNPq nº 02/2026 — Programa PROSUL Pepe Mujica, Faixa B (Redes Temáticas de Pesquisa Emergentes).</p>
+    </section>
+
+    <!-- Parágrafo Introdutório Consolidado -->
+    <p class="intro-paragraph">
+      A RIR ALC reúne pesquisadoras e pesquisadores de Instituições Científicas e Tecnológicas, universidades, órgãos de governo, organizações da sociedade civil e empresas de engenharia. A composição combina monitoramento hidrometeorológico operacional, estatística sociodemográfica, engenharia estrutural e políticas de equidade. A listagem reproduz a Matriz de Pesquisadores e Instituições Parceiras (Anexo 1) da proposta aprovada na Chamada Pública MCTI/CNPq nº 02/2026 — Programa PROSUL Pepe Mujica, Faixa B, processo 445280/2026-3, contemplada em outubro de 2026.
+    </p>
+
+    <!-- Seção Eixos Metodológicos (Referência Cruzada) -->
+    <section class="axes-preview-section" aria-labelledby="titulo-eixos-metodologicos">
+      <h2 id="titulo-eixos-metodologicos">Eixos metodológicos</h2>
+      <p class="axes-preview-desc">Os cinco eixos que organizam a execução do projeto. Cada pesquisador abaixo atua em um ou mais deles; a distribuição por instituição está na página de instituições.</p>
+      <ol class="axes-list">
+        <li><strong>Harmonização e microdados</strong> — construção da base BATER-ALC e integração de microdados censitários do Brasil, Equador e Peru.</li>
+        <li><strong>Modelagem e dinâmica de risco</strong> — validação do modelo de previsão baseada em impactos em bacias piloto, integrando variáveis físicas e o índice SoVI-I ALC.</li>
+        <li><strong>Análise interseccional e RRD</strong> — aplicação do Índice de Inclusão Interseccional e de protocolos de gênero nos territórios críticos.</li>
+        <li><strong>Inovação e tecnologias sociais</strong> — implementação de alertas de previsão baseada em impactos no sistema SALVAR, com interface multilíngue e protocolos decoloniais.</li>
+        <li><strong>Extensão e governança regional</strong> — formação de multiplicadores territoriais e institucionalização da rede.</li>
+      </ol>
+      <div class="axes-links">
+        <a href="instituicoes.html">Ver a distribuição por instituição &rarr;</a>
+        <a href="index.html#eixos">Ver os eixos na página inicial &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Bloco de Filtros e Busca Acessíveis (Progressive Enhancement) -->
+    <section class="filter-panel" aria-labelledby="titulo-filtros">
+      <h2 id="titulo-filtros" class="sr-only">Filtros e busca na listagem da rede</h2>
+      
+      <div class="filter-form-group">
+        <label for="busca-pesquisadores" class="filter-label">Buscar na rede (nome, instituição ou área de expertise):</label>
+        <div class="search-input-wrapper">
+          <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input 
+            type="search" 
+            id="busca-pesquisadores" 
+            class="search-input" 
+            placeholder="Ex.: hidrologia, Cemaden, SoVI-I, geoprocessamento..." 
+            autocomplete="off">
+        </div>
+      </div>
+
+      <div>
+        <span id="label-filtros-pais" class="country-filters-label">Filtrar por país:</span>
+        <div class="country-buttons" role="group" aria-labelledby="label-filtros-pais">
+          <button type="button" class="country-btn" data-filter-country="todos" aria-pressed="true">
+            Todos <span class="badge-count">44</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="brasil" aria-pressed="false">
+            Brasil <span class="badge-count">23</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="argentina" aria-pressed="false">
+            Argentina <span class="badge-count">1</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="chile" aria-pressed="false">
+            Chile <span class="badge-count">5</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="colombia" aria-pressed="false">
+            Colômbia <span class="badge-count">8</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="costa-rica" aria-pressed="false">
+            Costa Rica <span class="badge-count">2</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="equador" aria-pressed="false">
+            Equador <span class="badge-count">2</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="panama" aria-pressed="false">
+            Panamá <span class="badge-count">1</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="peru" aria-pressed="false">
+            Peru <span class="badge-count">1</span>
+          </button>
+          <button type="button" class="country-btn" data-filter-country="uruguai" aria-pressed="false">
+            Uruguai <span class="badge-count">1</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <!-- Notificação acessível para tecnologias assistivas -->
+        <div id="status-live" role="status" aria-live="polite" class="filter-status-text">
+          Exibindo todos os 44 pesquisadores(as) da rede.
+        </div>
+        <button type="button" id="btn-limpar-filtros" class="clear-filter-btn">
+          Limpar filtros
+        </button>
+      </div>
+    </section>
+
+    <!-- Mensagem quando busca não encontra nenhum card -->
+    <div id="painel-sem-resultados" class="no-results-panel" role="alert" aria-hidden="true">
+      <h3 style="margin: 0 0 0.5rem; color: var(--color-terracotta);">Nenhum pesquisador encontrado</h3>
+      <p style="margin: 0; color: var(--text-muted);">Tente buscar por outro termo ou limpe os filtros para visualizar a totalidade da rede.</p>
+    </div>
+
+    <!-- SEÇÕES POR PAÍS -->
+
+    <!-- 1. BRASIL (23 pesquisadores - Bloco de Coordenação) -->
+    <section class="country-section" id="brasil" data-section-country="brasil">
+      <div class="country-header">
+        <h2>Brasil</h2>
+        <span class="country-badge-tag">(23 pesquisadores — Bloco de Coordenação)</span>
+      </div>
+      <div class="researchers-grid">
+        
+        <!-- 1 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Adriana Cuartas</h3>
+            <div class="researcher-institution">Cemaden/MCTI · Coordenação-Geral de Pesquisa e Desenvolvimento (CGPD)</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Titular em Hidrologia. Monitoramento e modelagem física de secas, inundações, deslizamentos e enxurradas; extração de microdados demográficos e ambientais e geoprocessamento em <abbr title="Sistema de Informação Geográfica">SIG</abbr> para o <abbr title="Índice de Vulnerabilidade Social Interseccional da América Latina e Caribe">SoVI-I ALC</abbr>.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0001-8993-5985" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Adriana Cuartas (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 2 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Allan Yu Iwama</h3>
+            <div class="researcher-institution">Cemaden/MCTI · CGPD</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisador Adjunto em Ciência Cidadã. Pesquisa-ação participativa e tecnologias sociais para adaptação climática; coordena o projeto CoAdapta Litoral e atua na análise de vulnerabilidades de populações tradicionais.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0003-1707-8392" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Allan Yu Iwama (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 3 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Ana Paula Martins do Amaral Cunha</h3>
+            <div class="researcher-institution">Cemaden/MCTI · Divisão de Relações Institucionais e Pesquisa</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado em Meteorologia</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Titular em Extremos Climáticos de Secas. Climatologia agrícola e índices de estresse de estiagem; articulação institucional e diplomacia científica da aliança transnacional.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-9924-6523" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Ana Paula Martins do Amaral Cunha (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 4 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Andrezza Mafer</h3>
+            <div class="researcher-institution">Cemaden/MCTI · Divisão de Operações e Monitoramento</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Tecnologista Sênior</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Especialista em gestão de bancos de dados de alerta. Plataformas integradas de visualização de riscos, redes interinstitucionais de dados e caracterização hidrológica comparativa de bacias andinas e costeiras.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/3558999164415375" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Andrezza Mafer (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 5 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="UFOPA">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Cintya Azambuja Martins</h3>
+            <div class="researcher-institution"><abbr title="Universidade Federal do Oeste do Pará">UFOPA</abbr> · Instituto de Engenharia e Geociências (IEG)</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Recursos Hídricos da Amazônia. Análise climática e modelagem de variáveis microclimáticas na Amazônia Oriental (Santarém/PA); monitoramento hidrológico associado à educação intercultural indígena.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://lattes.cnpq.br/6344891620719570" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Cintya Azambuja Martins (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="UNESPAR/CEPED-PR">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Danyelle Stringari</h3>
+            <div class="researcher-institution"><abbr title="Universidade Estadual do Paraná">UNESPAR</abbr>/<abbr title="Centro de Estudos e Pesquisas sobre Desastres do Paraná">CEPED-PR</abbr> · Coordenadoria Estadual da Defesa Civil</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 3h/sem</span>
+            </div>
+            <p class="researcher-bio">Diretora Acadêmica do <abbr title="Centro de Estudos e Pesquisas sobre Desastres do Paraná">CEPED/PR</abbr>. Gestão de redes de inovação em desastres (REDESASTRE e Lei Estadual 21.352/2023); mediação entre governos estaduais, universidade e Defesa Civil.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/6235127981805861" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Danyelle Stringari (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI / UNESP">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Felipe Augusto Santos</h3>
+            <div class="researcher-institution">Cemaden/MCTI · Programa Cemaden Educação / <abbr title="Universidade Estadual Paulista">UNESP</abbr></div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestrado</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisador Colaborador em Educação Preventiva de Riscos (ERRD). Dinâmicas participativas de letramento de riscos e de racismo ambiental, com oficinas pedagógicas em escolas periféricas.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/1658250368047614" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Felipe Augusto Santos (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Elisabete Weber Reckziegel</h3>
+            <div class="researcher-institution">Cemaden/MCTI · Coordenação-Geral de Operações e Modelagens (CGOM)</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado em Ciências (Geodinâmica)</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Especialista em riscos de movimentos de massa. Monitoramento operacional de perigos de deslizamento em encostas urbanas, integrando fatores deflagradores mecânicos a parâmetros sociais de vulnerabilidade.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/3280250811525994" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Elisabete Weber Reckziegel (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Gisele dos Santos Zepka Saraiva</h3>
+            <div class="researcher-institution">Cemaden/MCTI · CGOM</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Tecnologista Sênior em Extremos Meteorológicos</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Meteorologia sinótica e previsão operacional de tempestades severas. Extensão comunitária com metodologias participativas e validação de avisos com lideranças femininas.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/6226055129974273" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Gisele dos Santos Zepka Saraiva (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Graziela Scofield</h3>
+            <div class="researcher-institution">Cemaden/MCTI · CGOP / Sala de Situação</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado · Tecnologista Sênior em Extremos Hidrológicos</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Monitoramento e emissão de alertas hidrológicos em regime 24/7. Caracterização de bacias piloto e transição para alertas baseados em impacto demográfico e de gênero.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/8648556155554795" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Graziela Scofield (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="UNESP">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Leda Nardi</h3>
+            <div class="researcher-institution"><abbr title="Universidade Estadual Paulista">UNESP</abbr> · Programa de Pós-Graduação em Desastres Naturais</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestrado (Doutoranda)</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora em História de Desastres e Comunicação. Processos socio-históricos de construção de risco no Brasil e letramento intercultural com comunidades tradicionais.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/2979501883053251" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Leda Nardi (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Luciana R. Londe</h3>
+            <div class="researcher-institution">Cemaden/MCTI · CGPD</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado em Sensoriamento Remoto</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Titular em Comunicação de Risco e Sociedade. Percepção pública de risco, engajamento comunitário horizontal e avaliação social de avisos meteorológicos sob condições de vulnerabilidade e gênero.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-6494-0486" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Luciana R. Londe (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 13 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="ENAP">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Magali Zilca Dantas</h3>
+            <div class="researcher-institution"><abbr title="Escola Nacional de Administração Pública">ENAP</abbr> · Pesquisadora Associada / Discente</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestre (Candidata a Doutora em Políticas Públicas)</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Especialista em análise de políticas públicas e equidade; coautora do <abbr title="Índice de Inclusão Interseccional">Índice de Inclusão Interseccional (III)</abbr>. Análises documentais de leis, racismo ambiental e desigualdades socioespaciais de gênero.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/4640057018663796" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Magali Zilca Dantas (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 14 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="TJNS / UFRJ">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Pamela Mércia Pinto Gomes</h3>
+            <div class="researcher-institution">Instituto Todos Juntos Ninguém Sozinho (<abbr title="Todos Juntos Ninguém Sozinho">TJNS</abbr>) / <abbr title="Universidade Federal do Rio de Janeiro">UFRJ</abbr> · Direção Executiva</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Candidata a Mestre em Políticas Públicas e Direitos Humanos</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Mobilização social, resposta humanitária e adaptação climática em Petrópolis (Região Serrana); impacto de desastres sobre a saúde mental com recortes de gênero e raça.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/9810502689021007" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Pamela Mércia Pinto Gomes (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 15 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="UFRN">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Rebecca Luna Lucena</h3>
+            <div class="researcher-institution"><abbr title="Universidade Federal do Rio Grande do Norte">UFRN</abbr> · Departamento de Geografia</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora em Climatologia Física e Recursos Hídricos. Análise estatística de séries hidrometeorológicas e secas no semiárido (LAHICC/UFRN); modelagem em <abbr title="Sistema de Informação Geográfica">SIG</abbr> e mapeamento digital de vulnerabilidade social.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0003-4670-265X" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Rebecca Luna Lucena (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 16 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Regla Somoza</h3>
+            <div class="researcher-institution">Cemaden/MCTI · CGOP / Sala de Situação</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado · Tecnologista Sênior</span>
+              <span class="meta-pill hours">Dedicação: 10h/sem</span>
+            </div>
+            <p class="researcher-bio">Coordenadora-Geral e proponente da Rede Transnacional <abbr title="Rede Interseccional de Resiliência na América Latina e Caribe">RIR ALC</abbr>. Liderança estratégica, técnica e administrativa; desenvolveu a modelagem do Alerta INTERSEC, preside o Comitê Gestor Interinstitucional e coordena a transição para alertas <abbr title="Previsão Baseada em Impacto (Impact-based Forecasting)">IbF</abbr> no sistema SALVAR.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/1010059005093122" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Regla Somoza (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 17 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Rodrigo Silva da Conceição</h3>
+            <div class="researcher-institution">Cemaden/MCTI · CGOM / Sala de Situação</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado · Tecnologista Sênior</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Geógrafo em monitoramento operacional de desastres. Espacialização cartográfica e análise de dados de campo de ocorrências de enxurradas e movimentos de massa.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/6765553122333119" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Rodrigo Silva da Conceição (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 18 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="IBGE">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Rosinadja B. Morato</h3>
+            <div class="researcher-institution"><abbr title="Instituto Brasileiro de Geografia e Estatística">IBGE</abbr> · Superintendência Estadual em Sergipe</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora em Sociologia e Dados Geodemográficos. Processamento computacional em <abbr title="Sistema de Informação Geográfica">SIG</abbr> de bases demográficas nacionais (Censo 2022), cartografia do racismo ambiental e redes institucionais de dados.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-0160-8478" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Rosinadja B. Morato (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 19 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="UFRN">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Sara Fernandes Flor de Souza</h3>
+            <div class="researcher-institution"><abbr title="Universidade Federal do Rio Grande do Norte">UFRN</abbr> · CERES / Departamento de Geografia</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora em Geomorfologia e Educação Preventiva. Lidera o laboratório didático LADGEO/CERES; análises físicas de água e solos, mapeamento <abbr title="Sistema de Informação Geográfica">SIG</abbr> e oficinas de letramento climático em comunidades rurais sob seca.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0001-6829-3434" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Sara Fernandes Flor de Souza (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 20 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Silvia Saito</h3>
+            <div class="researcher-institution">Cemaden/MCTI · CGPD</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Titular em Vulnerabilidade Socioambiental. Modelagem teórica e territorial de riscos urbanos; governança administrativa da aliança RIR e estudos transnacionais comparados de gênero.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/6697221737762500" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Silvia Saito (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 21 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="UFPE">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Suzana Maria Gico Lima Montenegro</h3>
+            <div class="researcher-institution"><abbr title="Universidade Federal de Pernambuco">UFPE</abbr> · Departamento de Engenharia Civil e Ambiental</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 3h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Gestão de Recursos Hídricos. Hidrologia, segurança hídrica e adaptação climática; caracterização hidrológica avançada de bacias andinas e costeiras.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-2520-5761" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Suzana Maria Gico Lima Montenegro (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 22 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Ministério da Saúde">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Vanessa de Souza Hacon</h3>
+            <div class="researcher-institution">Ministério da Saúde · SVSA/DVSAT/CGClima</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 2h/sem</span>
+            </div>
+            <p class="researcher-bio">Assessora Técnica de Vigilância em Saúde Ambiental. Modelagem de indicadores e impactos climáticos na saúde pública; desenvolvimento e validação teórica do <abbr title="Índice de Inclusão Interseccional">Índice de Inclusão Interseccional (III)</abbr>.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="http://lattes.cnpq.br/4546171962465390" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Currículo Lattes de Vanessa de Souza Hacon (abre em nova aba)">
+              Currículo Lattes
+            </a>
+          </div>
+        </article>
+
+        <!-- 23 -->
+        <article class="researcher-card" data-pais="brasil" data-instituicao="Cemaden/MCTI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Viviana Aguilar-Muñoz</h3>
+            <div class="researcher-institution">Cemaden/MCTI · Divisão de Monitoramento e Alertas (CGOM)</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado · Tecnologista Pleno</span>
+              <span class="meta-pill hours">Dedicação: 10h/sem</span>
+            </div>
+            <p class="researcher-bio">Co-coordenadora Científica e Técnica Executiva da Rede RIR. Geoprocessamento e mineração de dados censitários; modelagem e mapeamento computacional do <abbr title="Índice de Vulnerabilidade Social Interseccional da América Latina e Caribe">SoVI-I ALC</abbr> com foco em vulnerabilidades de gênero.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-2899-8082" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Viviana Aguilar-Muñoz (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 2. ARGENTINA (1 pesquisadora) -->
+    <section class="country-section" id="argentina" data-section-country="argentina">
+      <div class="country-header">
+        <h2>Argentina</h2>
+        <span class="country-badge-tag">(1 pesquisadora)</span>
+      </div>
+      <div class="researchers-grid">
+        <!-- 24 -->
+        <article class="researcher-card" data-pais="argentina" data-instituicao="XUMEK">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">María Natalia Echegoyemberry</h3>
+            <div class="researcher-institution">XUMEK / Observatório de Justiça Sanitária e Climática · Direção</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestre (Candidata a PhD)</span>
+              <span class="meta-pill hours">Dedicação: 10h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora em Direitos Humanos e Justiça Climática. Lidera pesquisa comparativa de marcos legais de <abbr title="Redução de Riscos de Desastres">RRD</abbr> na América Latina e o levantamento de dados de raça e gênero na Argentina para subsidiar a validação regional do Índice III.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0001-9049-8233" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de María Natalia Echegoyemberry (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. CHILE (5 pesquisadores) -->
+    <section class="country-section" id="chile" data-section-country="chile">
+      <div class="country-header">
+        <h2>Chile</h2>
+        <span class="country-badge-tag">(5 pesquisadores)</span>
+      </div>
+      <div class="researchers-grid">
+        <!-- 25 -->
+        <article class="researcher-card" data-pais="chile" data-instituicao="UTEM">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Ana Isabel Huaico</h3>
+            <div class="researcher-institution"><abbr title="Universidad Tecnológica Metropolitana">UTEM</abbr> · PRISMA Lab: Riesgos, Sociedad y Medio Ambiente (DGC)</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 5h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Climatologia e <abbr title="Sistema de Informação Geográfica">SIG</abbr>. Modelagem estatística de extremos pluviométricos, identificação de perigos climáticos locais e mapeamento temático digital.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0001-7368-0455" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Ana Isabel Huaico (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 26 -->
+        <article class="researcher-card" data-pais="chile" data-instituicao="GRID Chile">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Claudia C. Becerra</h3>
+            <div class="researcher-institution">GRID Chile · Departamento de Educação e Gênero Interseccional</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestre</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Gestora de Gênero e Educação em <abbr title="Redução de Riscos de Desastres">RRD</abbr>. Tradução pedagógica de evidências científicas de risco para o ambiente escolar e comunitário; coautora da guia metodológica de gênero do <abbr title="Servicio Nacional de Prevención y Respuesta ante Desastres">SENAPRED</abbr> (2024).</p>
+          </div>
+          <!-- Sem identificador público no Anexo 1 -->
+        </article>
+
+        <!-- 27 -->
+        <article class="researcher-card" data-pais="chile" data-instituicao="UTEM">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Drielly Naamma Fonseca da Silva</h3>
+            <div class="researcher-institution"><abbr title="Universidad Tecnológica Metropolitana">UTEM</abbr> · Departamento de Indústria / Laboratório de Solos e Meio Ambiente</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Geodinâmica e Impacto Químico. Monitoramento físico e modelagem tridimensional de contaminação e transporte superficial de efluentes mineradores em bacias expostas a perigos climáticos.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-1374-8697" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Drielly Naamma Fonseca da Silva (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 28 -->
+        <article class="researcher-card" data-pais="chile" data-instituicao="UTEM">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Keyla Manuela Alencar da Silva Alves</h3>
+            <div class="researcher-institution"><abbr title="Universidad Tecnológica Metropolitana">UTEM</abbr> · Departamento de Indústria / Laboratório de Solos e Meio Ambiente</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Modelagem Física de Encostas. Simulação numérica 3D de deslizamentos, fluxos de sedimentos e dispersão de efluentes na Região do BioBío; análises multirrisco integradas.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0001-7635-2430" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Keyla Manuela Alencar da Silva Alves (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 29 -->
+        <article class="researcher-card" data-pais="chile" data-instituicao="UTEM">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Rayana Santos Araújo Palharini</h3>
+            <div class="researcher-institution"><abbr title="Universidad Tecnológica Metropolitana">UTEM</abbr> · PRISMA Lab: Riesgos, Sociedad y Medio Ambiente (DPR)</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 5h/sem</span>
+            </div>
+            <p class="researcher-bio">Líder de Coordenação Nacional e Investigação no Chile. Modelagem numérica de extremos de precipitação e estruturação de alertas em tempo real; articulação técnico-operacional dos eixos científicos no país.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0001-5503-8450" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Rayana Santos Araújo Palharini (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. COLÔMBIA (8 pesquisadores) -->
+    <section class="country-section" id="colombia" data-section-country="colombia">
+      <div class="country-header">
+        <h2>Colômbia</h2>
+        <span class="country-badge-tag">(8 pesquisadores)</span>
+      </div>
+      <div class="researchers-grid">
+        <!-- 30 -->
+        <article class="researcher-card" data-pais="colombia" data-instituicao="Universidad de Medellín">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Daniel López de Mesa Aguilar</h3>
+            <div class="researcher-institution">Universidad de Medellín · Facultad de Ingeniería</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestre (Candidato a PhD em Engenharia)</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisador Associado em Engenharia Hidráulica. Modelagem numérica hidrodinâmica de inundações andinas e costeiras; processamento estatístico de vazões históricas e integração de radar Doppler e estações físicas ao SALVAR.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-7577-5527" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Daniel López de Mesa Aguilar (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 31 -->
+        <article class="researcher-card" data-pais="colombia" data-instituicao="Universidad de San Buenaventura">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Diana Elizabeth Valencia Londoño</h3>
+            <div class="researcher-institution">Universidad de San Buenaventura · Facultad de Artes Integradas</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 8h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Planejamento Urbano e Resiliência. Mapeamento físico e espacialização de perigos por movimentos de massa em encostas urbanas; cartografia <abbr title="Sistema de Informação Geográfica">SIG</abbr> de vulnerabilidades desagregadas por gênero e raça.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-4542-4128" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Diana Elizabeth Valencia Londoño (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 32 -->
+        <article class="researcher-card" data-pais="colombia" data-instituicao="Pesquisadora independente / DNP">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Diana Patricia Mendoza Gonzalez</h3>
+            <div class="researcher-institution">Pesquisadora independente · Dirección de Ambiente y Desarrollo Sostenible (DNP)</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestrado</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Consultora em Políticas Ambientais. Processamento de dados territoriais e finanças públicas de adaptação climática; desenvolveu manuais nacionais de rotulagem orçamentária social para controle de investimentos em gênero e etnias em <abbr title="Redução de Riscos de Desastres">RRD</abbr>.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-9961-1025" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Diana Patricia Mendoza Gonzalez (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 33 -->
+        <article class="researcher-card" data-pais="colombia" data-instituicao="Pesquisadora independente">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Janet Barco</h3>
+            <div class="researcher-institution">Pesquisadora independente · Colômbia/EUA</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 3h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora em Hidrologia de Enchentes e Ciência de Dados. Modelagem hidrológica de bacias urbanas e rurais expostas a inundações (ex-assessora do SIATA); validação de modelos e métodos estatísticos de inteligência artificial.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0003-3919-0027" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Janet Barco (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 34 -->
+        <article class="researcher-card" data-pais="colombia" data-instituicao="Universidad de Medellín">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Johnny Alexander Vega Gutiérrez</h3>
+            <div class="researcher-institution">Universidad de Medellín · Facultad de Ingeniería</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestrado (Candidato a PhD em Engenharia)</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisador Associado em Geoprocessamento de Deslizamentos. Simulação mecânica probabilística de movimentos de encostas em bacias andinas e cartografias <abbr title="Sistema de Informação Geográfica">SIG</abbr> de vulnerabilidade física, raça e gênero.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-0662-7213" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Johnny Alexander Vega Gutiérrez (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 35 -->
+        <article class="researcher-card" data-pais="colombia" data-instituicao="Colegio Mayor de Antioquia">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Natalia María Posada Pérez</h3>
+            <div class="researcher-institution">Colegio Mayor de Antioquia · Facultad de Ciencias Sociales y Educación</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestre (Candidata a PhD)</span>
+              <span class="meta-pill hours">Dedicação: 6h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Resiliência Territorial. Modelagem qualitativa e espacial de bacias de abastecimento expostas a avalanches; habitabilidade e resiliência de grupos vulnerabilizados e deslocados por conflitos e desastres.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-1853-2377" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Natalia María Posada Pérez (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 36 -->
+        <article class="researcher-card" data-pais="colombia" data-instituicao="Universidad de Medellín">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Paula Andrea Valencia Londoño</h3>
+            <div class="researcher-institution">Universidad de Medellín · Facultad de Derecho</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 8h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Gestão Comunitária e Sociedade. Modelagem quantitativa de resiliência familiar (escala <abbr title="Family Resilience Assessment Scale">FRAS</abbr>) e modelos de Gestão de Desastres Baseada na Comunidade (<abbr title="Community-Based Disaster Management">CBDM</abbr>); coordena levantamentos de gênero e raça na Colômbia.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-1077-6959" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Paula Andrea Valencia Londoño (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 37 -->
+        <article class="researcher-card" data-pais="colombia" data-instituicao="OPI4">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Sara Andrea Giraldo Arias</h3>
+            <div class="researcher-institution"><abbr title="Oficina de Proyectos de Ingeniería S.A.S.">OPI4</abbr> · Oficina de Proyectos de Ingeniería S.A.S.</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestre</span>
+              <span class="meta-pill hours">Dedicação: 3h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Vulnerabilidade de Infraestrutura. Indicadores físicos de resistência estrutural e sistemas de bacias habitadas; desenho de soluções estruturais preventivas de proteção a populações infantis.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://www.linkedin.com/in/saragiraldoarias" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil LinkedIn de Sara Andrea Giraldo Arias (abre em nova aba)">
+              LinkedIn
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5. COSTA RICA (2 pesquisadoras) -->
+    <section class="country-section" id="costa-rica" data-section-country="costa-rica">
+      <div class="country-header">
+        <h2>Costa Rica</h2>
+        <span class="country-badge-tag">(2 pesquisadoras)</span>
+      </div>
+      <div class="researchers-grid">
+        <!-- 38 -->
+        <article class="researcher-card" data-pais="costa-rica" data-instituicao="CeNAT / LANBA">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Jazmín Calderón Quirós</h3>
+            <div class="researcher-institution"><abbr title="Centro Nacional de Alta Tecnología">CeNAT</abbr> · Laboratório Nacional de Bioeconomia e Ambiente (<abbr title="Laboratório Nacional de Bioeconomia e Ambiente">LANBA</abbr>)</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestrado</span>
+              <span class="meta-pill hours">Dedicação: 3h/sem</span>
+            </div>
+            <p class="researcher-bio">Especialista em Antropologia Climática e Mapas de Percepção. Metodologias qualitativas e etnográficas de campo; governança e equidade social na transição energética (ENERGYTRAN), gamificação comunitária (ACTIVA) e capacitação com etnias.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0001-8316-1835" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Jazmín Calderón Quirós (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 39 -->
+        <article class="researcher-card" data-pais="costa-rica" data-instituicao="CeNAT / LANBA">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Jeannette Arauz Muñoz</h3>
+            <div class="researcher-institution"><abbr title="Centro Nacional de Alta Tecnología">CeNAT</abbr> · <abbr title="Laboratório Nacional de Bioeconomia e Ambiente">LANBA</abbr></div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 3h/sem</span>
+            </div>
+            <p class="researcher-bio">Investigadora Associada e Ponto Focal de Climatologia Social. Ordenamento do território, mapas de risco comunitários e salvaguardas territoriais de comunidades indígenas (COPAGUAR e ACTIVA); gestão de dados de climatologia regional na plataforma PIACT.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-9867-6855" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Jeannette Arauz Muñoz (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. EQUADOR (2 pesquisadores) -->
+    <section class="country-section" id="equador" data-section-country="equador">
+      <div class="country-header">
+        <h2>Equador</h2>
+        <span class="country-badge-tag">(2 pesquisadores)</span>
+      </div>
+      <div class="researchers-grid">
+        <!-- 40 -->
+        <article class="researcher-card" data-pais="equador" data-instituicao="ESPOL">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Natividad García Troncoso</h3>
+            <div class="researcher-institution"><abbr title="Escuela Superior Politécnica del Litoral">ESPOL</abbr> · Facultad de Ciencias de la Tierra</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Doutorado</span>
+              <span class="meta-pill hours">Dedicação: 5h/sem</span>
+            </div>
+            <p class="researcher-bio">Investigadora em Desempenho e Vulnerabilidade Estrutural. Cálculo mecânico estrutural de edificações e infraestruturas públicas expostas a riscos geodinâmicos e sismos; lidera a articulação técnica de gênero nas capacitações do <abbr title="Grupo de Trabalho">GT</abbr> do Pacífico.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-1630-4274" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Natividad García Troncoso (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+
+        <!-- 41 -->
+        <article class="researcher-card" data-pais="equador" data-instituicao="ESPOL">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Ruth Elena Ayala Carabajo</h3>
+            <div class="researcher-institution"><abbr title="Escuela Superior Politécnica del Litoral">ESPOL</abbr> · Facultad de Ciencias de la Tierra</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestrado em SIG</span>
+              <span class="meta-pill hours">Dedicação: 5h/sem</span>
+            </div>
+            <p class="researcher-bio">Colaboradora Técnica em Geoprocessamento Hidrológico. Aplicação de <abbr title="Sistema de Informação Geográfica">SIG</abbr> para mapeamento automatizado de bacias andinas sob perigos naturais e suporte cartográfico a estudos de caso piloto.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://www.linkedin.com/in/ruthayala" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil LinkedIn de Ruth Elena Ayala Carabajo (abre em nova aba)">
+              LinkedIn
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. PANAMÁ (1 pesquisador) -->
+    <section class="country-section" id="panama" data-section-country="panama">
+      <div class="country-header">
+        <h2>Panamá</h2>
+        <span class="country-badge-tag">(1 pesquisador)</span>
+      </div>
+      <div class="researchers-grid">
+        <!-- 42 -->
+        <article class="researcher-card" data-pais="panama" data-instituicao="Universidad Tecnológica de Panamá">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Edgar Abdiel Cedeño Jimenez</h3>
+            <div class="researcher-institution"><abbr title="Universidad Tecnológica de Panamá">UTP</abbr> · Facultad de Ingeniería Civil</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Engenheiro Civil</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Co-investigador em Engenharia Estrutural de Infraestruturas Críticas. Desempenho mecânico e fragilidade de estruturas públicas expostas a chuvas tropicais intensas; caracterização de estruturas vulneráveis sob marcadores de raça e gênero no <abbr title="Grupo de Trabalho">GT</abbr> do Pacífico.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0009-0009-6849-3298" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Edgar Abdiel Cedeño Jimenez (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 8. PERU (1 pesquisadora) -->
+    <section class="country-section" id="peru" data-section-country="peru">
+      <div class="country-header">
+        <h2>Peru</h2>
+        <span class="country-badge-tag">(1 pesquisadora)</span>
+      </div>
+      <div class="researchers-grid">
+        <!-- 43 -->
+        <article class="researcher-card" data-pais="peru" data-instituicao="CISMID-UNI">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Erika Nora Flores Terreros</h3>
+            <div class="researcher-institution"><abbr title="Centro Peruano Japonês de Investigações Sísmicas e Mitigação de Desastres">CISMID-UNI</abbr> · Centro Peruano Japonês de Investigações Sísmicas e Mitigação de Desastres</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestrado</span>
+              <span class="meta-pill hours">Dedicação: 4h/sem</span>
+            </div>
+            <p class="researcher-bio">Pesquisadora Associada em Engenharia Sísmica e Vulnerabilidade. Mitigação estrutural de sismos e tsunamis (Projeto SATREPS) e algoritmos de simulação de evacuação peatonal baseados em agentes; modelagens de risco integrando as lentes do <abbr title="Grupo de Trabalho">GT</abbr> do Pacífico.</p>
+          </div>
+          <div class="researcher-card-bottom">
+            <a href="https://orcid.org/0000-0002-4111-9951" target="_blank" rel="noopener noreferrer" class="profile-link" aria-label="Perfil ORCID de Erika Nora Flores Terreros (abre em nova aba)">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+              ORCID
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 9. URUGUAI (1 pesquisadora) -->
+    <section class="country-section" id="uruguai" data-section-country="uruguai">
+      <div class="country-header">
+        <h2>Uruguai</h2>
+        <span class="country-badge-tag">(1 pesquisadora)</span>
+      </div>
+      <div class="researchers-grid">
+        <!-- 44 -->
+        <article class="researcher-card" data-pais="uruguai" data-instituicao="Udelar">
+          <div class="researcher-card-top">
+            <h3 class="researcher-name">Raquel Dinorah Lejtreger Goldstein</h3>
+            <div class="researcher-institution"><abbr title="Universidad de la República">Udelar</abbr> / Sociedad Colombiana GRD</div>
+            <div class="researcher-meta-pills">
+              <span class="meta-pill">Mestre</span>
+              <span class="meta-pill">Dedicação: não informada no Anexo 1</span>
+            </div>
+            <p class="researcher-bio">Investigadora Associada e ex-Vice-Ministra do Uruguai. Macroplanejamento urbano-territorial, políticas habitacionais preventivas e governança climática; lidera o desenvolvimento de redes e a capacitação de mulheres indígenas na prevenção de riscos.</p>
+          </div>
+          <!-- Sem identificador público no Anexo 1 -->
+        </article>
+      </div>
+    </section>
+
+    <!-- BLOCOS FINAIS -->
+
+    <!-- Notas Metodológica e LGPD -->
+    <section class="notes-section" aria-label="Notas informativas e legais">
+      <div class="note-box">
+        <h2>Nota metodológica</h2>
+        <p>A listagem reproduz fielmente a Matriz de Pesquisadores e Instituições Parceiras (Anexo 1) da proposta aprovada na Chamada Pública <abbr title="Ministério da Ciência, Tecnologia e Inovação">MCTI</abbr>/<abbr title="Conselho Nacional de Desenvolvimento Científico e Tecnológico">CNPq</abbr> nº 02/2026, com atuação articulada nos eixos metodológicos do projeto. Graus acadêmicos, unidades de vínculo e dedicação semanal são os informados no documento original. Campos ausentes no documento não foram arbitrariamente preenchidos. Correções e atualizações devem ser enviadas pelo canal de contato institucional.</p>
+      </div>
+      <div class="note-box lgpd">
+        <h2>Nota de conformidade <abbr title="Lei Geral de Proteção de Dados Pessoais">LGPD</abbr></h2>
+        <p>Os dados publicados nesta página são de estrita natureza acadêmico-profissional (nome civil/acadêmico, vínculo institucional, titulação e identificadores públicos de produção científica como ORCID e Currículo Lattes). Não são divulgados e-mails pessoais, telefones particulares ou dados sensíveis, em estrita observância à Lei nº 13.709/2018 (<abbr title="Lei Geral de Proteção de Dados">LGPD</abbr>).</p>
+      </div>
+    </section>
+
+    <!-- Navegação de Continuidade -->
+    <section class="continuity-nav" aria-label="Continuidade de navegação">
+      <h2>Conheça mais sobre a iniciativa</h2>
+      <p>Aprofunde-se na fundamentação científica da aliança transnacional ou conecte sua instituição às atividades de pesquisa e governança.</p>
+      <div class="continuity-buttons">
+        <a href="instituicoes.html" class="continuity-btn secondary">Ver as instituições parceiras</a>
+        <a href="index.html#projeto" class="continuity-btn primary">Conheça o projeto fundador</a>
+        <a href="index.html#contato" class="continuity-btn secondary">Participe da Rede</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rodapé Institucional -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-header">
+            <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <circle cx="24" cy="8" r="4.5" fill="#E2DDD5" />
+              <circle cx="10" cy="20" r="4" fill="#E2DDD5" />
+              <circle cx="38" cy="20" r="4" fill="#E2DDD5" />
+              <circle cx="16" cy="38" r="4.5" fill="#B85C38" />
+              <circle cx="32" cy="38" r="4.5" fill="#E2DDD5" />
+              <circle cx="24" cy="24" r="5" fill="#D9A44B" />
+              <path d="M24 8L10 20M24 8L38 20M24 8L24 24M10 20L24 24M38 20L24 24M10 20L16 38M38 20L32 38M16 38L24 24M32 38L24 24M16 38L32 38" stroke="#E2DDD5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="footer-brand-title">Rede Interseccional de Resiliência (<abbr title="Rede Interseccional de Resiliência na América Latina e Caribe">RIR ALC</abbr>)</span>
+          </div>
+          <p>Aliança científica transnacional para integração de ciência, gênero e raça na redução de riscos de desastres na América Latina e Caribe, liderada pelo <abbr title="Centro Nacional de Monitoramento e Alertas de Desastres Naturais">Cemaden</abbr>/<abbr title="Ministério da Ciência, Tecnologia e Inovação">MCTI</abbr>.</p>
+          <p style="font-size: 0.8125rem; color: #94A3B8;">Rede Interseccional de Resiliência — criada em maio de 2026</p>
+        </div>
+
+        <div class="footer-links-col">
+          <h3>Navegação</h3>
+          <ul>
+            <li><a href="index.html#sobre">Sobre o Projeto</a></li>
+            <li><a href="index.html#eixos">Eixos metodológicos</a></li>
+            <li><a href="rede.html">A Rede de Pesquisadores</a></li>
+            <li><a href="instituicoes.html">Instituições</a></li>
+            <li><a href="index.html#projeto">Projeto & Metodologia</a></li>
+            <li><a href="index.html#producao">Produção Científica</a></li>
+            <li><a href="index.html#contato">Contato Institucional</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h3>Idiomas & Legal</h3>
+          <ul>
+            <li><a href="rede.html">Português (Brasil)</a></li>
+            <!-- TODO: vincular páginas nos outros idiomas -->
+            <li><a href="en/rede.html">English</a></li>
+            <li><a href="es/rede.html">Español</a></li>
+            <li style="margin-top: 0.75rem;"><a href="privacidade.html">Política de Privacidade</a></li>
+            <!-- TODO: criar privacidade.html detalhando encarregado DPO e tratamento de dados institucionais -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          Conteúdo sob licença <a href="https://creativecommons.org/licenses/by/4.0/deed.pt_BR" target="_blank" rel="noopener noreferrer">Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)</a>.
+        </div>
+        <div>
+          Versão de desenvolvimento · 2026
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!--
+  TODO: Cloudflare Pages _headers recomendado para publicação em produção:
+  /*
+    X-Robots-Tag: noindex, nofollow
+    X-Content-Type-Options: nosniff
+    Referrer-Policy: strict-origin-when-cross-origin
+    Permissions-Policy: camera=(), microphone=(), geolocation=()
+  -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle menu mobile
+      const btnMenu = document.getElementById('btn-menu');
+      const menuPrincipal = document.getElementById('menu-principal');
+      if (btnMenu && menuPrincipal) {
+        btnMenu.addEventListener('click', () => {
+          const isOpen = menuPrincipal.getAttribute('data-open') === 'true';
+          menuPrincipal.setAttribute('data-open', !isOpen);
+          btnMenu.setAttribute('aria-expanded', !isOpen);
+        });
+      }
+
+      // Elementos do Filtro
+      const searchInput = document.getElementById('busca-pesquisadores');
+      const countryButtons = document.querySelectorAll('.country-btn');
+      const clearBtn = document.getElementById('btn-limpar-filtros');
+      const statusLive = document.getElementById('status-live');
+      const noResultsPanel = document.getElementById('painel-sem-resultados');
+      const cards = document.querySelectorAll('.researcher-card');
+      const countrySections = document.querySelectorAll('.country-section');
+
+      let currentCountry = 'todos';
+      let currentQuery = '';
+
+      function normalizeStr(text) {
+        return text
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      }
+
+      function updateFiltering() {
+        const queryNorm = normalizeStr(currentQuery.trim());
+        let visibleCount = 0;
+
+        // Itera sobre as seções de países
+        countrySections.forEach(section => {
+          const sectionCountry = section.getAttribute('data-section-country');
+          const isCountryMatch = (currentCountry === 'todos' || currentCountry === sectionCountry);
+          
+          let visibleInSection = 0;
+          const sectionCards = section.querySelectorAll('.researcher-card');
+
+          sectionCards.forEach(card => {
+            if (!isCountryMatch) {
+              card.style.display = 'none';
+              return;
+            }
+
+            if (!queryNorm) {
+              card.style.display = '';
+              visibleInSection++;
+              visibleCount++;
+              return;
+            }
+
+            const textContent = normalizeStr(card.textContent || '');
+            if (textContent.includes(queryNorm)) {
+              card.style.display = '';
+              visibleInSection++;
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Mostra ou esconde o container da seção por país se não houver cards visíveis nela
+          if (visibleInSection === 0) {
+            section.style.display = 'none';
+          } else {
+            section.style.display = '';
+          }
+        });
+
+        // Painel de sem resultados
+        if (visibleCount === 0) {
+          noResultsPanel.classList.add('visible');
+          noResultsPanel.setAttribute('aria-hidden', 'false');
+        } else {
+          noResultsPanel.classList.remove('visible');
+          noResultsPanel.setAttribute('aria-hidden', 'true');
+        }
+
+        // Atualização acessível da contagem (aria-live)
+        if (currentCountry === 'todos' && !queryNorm) {
+          statusLive.textContent = 'Exibindo todos os 44 pesquisadores(as) da rede.';
+        } else {
+          statusLive.textContent = `${visibleCount} pesquisador${visibleCount === 1 ? '' : 'es'}(as) exibido${visibleCount === 1 ? '' : 's'}.`;
+        }
+      }
+
+      // Eventos dos botões de país
+      countryButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          countryButtons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+          btn.setAttribute('aria-pressed', 'true');
+          currentCountry = btn.getAttribute('data-filter-country');
+          updateFiltering();
+        });
+      });
+
+      // Evento da busca textual com debounce simples
+      let searchTimeout = null;
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            currentQuery = e.target.value;
+            updateFiltering();
+          }, 150);
+        });
+      }
+
+      // Limpar filtros
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          currentCountry = 'todos';
+          currentQuery = '';
+          if (searchInput) searchInput.value = '';
+          countryButtons.forEach(b => {
+            b.setAttribute('aria-pressed', b.getAttribute('data-filter-country') === 'todos' ? 'true' : 'false');
+          });
+          updateFiltering();
+          if (searchInput) searchInput.focus();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
